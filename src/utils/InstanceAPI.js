@@ -32,6 +32,10 @@ class InstanceAPI {
         return response.data
     }
 
+    /**
+     * 
+     * @param {Number} phoneNumber 
+     */
     async checkWhatsapp(phoneNumber) {
         CommonUtils.validateInteger('phoneNumber', phoneNumber);
 
@@ -43,6 +47,11 @@ class InstanceAPI {
         return response.data
     }
 
+    /**
+     * 
+     * @param {String} chatId 
+     * @param {Number} phoneNumber 
+     */
     async getAvatar(chatId, phoneNumber) {
         CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber)
 

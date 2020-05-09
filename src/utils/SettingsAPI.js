@@ -14,6 +14,11 @@ class SettingsAPI {
         return response.data;
     }
 
+    /**
+     * 
+     * @param {String} countryInstance 
+     * @param {String} proxyInstance 
+     */
     async setSettings(countryInstance, proxyInstance) {
 
         const method = 'setSettings';
@@ -24,7 +29,10 @@ class SettingsAPI {
         const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
         return response.data;
     }
-
+    /**
+     * 
+     * @param {String} webhookUrl 
+     */
     async setWebhookUrl(webhookUrl) {
         
         const method = 'setWebhookUrl';

@@ -6,18 +6,24 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "node ./lib/test.js ",
-    "build": "rollup -c --environment BUILD:production"
+    "build": "rollup -c --environment BUILD:production",
+    "server": "node ./src/WebhookAPI.js"
   },
   "author": "Slonbook team",
   "keywords": [
-    "whats app",
-    "green-api"
+    "whatsapp",
+    "whatsapp-api",
+    "whatsapp-library",
+    "whatsapp-send-message",
+    "whatsapp-sender",
+    "whatsapp-message-sender"
   ],
   "license": "MIT",
   "devDependencies": {
     "dotenv": "8.2.0"
   },
   "dependencies": {
-    "axios": "0.19.2"
+    "axios": "0.19.2",
+    "express": "^4.17.1"
   }
 }

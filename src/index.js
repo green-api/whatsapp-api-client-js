@@ -2,26 +2,33 @@
 import RestAPI from './RestAPI.js';
 import commonUtils from './utils/CommonUtils.js'
 import configuration from './utils/configuration.js'
+import WebhookCallBackAPI from './WebhooksCallbackAPI.js'
 
-async function checkInitParams(params = {}) {
-    return new Promise((resolve, reject) => {
-        if (params.host) {
-            commonUtils.validateString("Host", params.host)
-        } else {
-            params.host = configuration.defaultHost
-        }
+function checkInitParams(params = {}) {
 
-        commonUtils.validateString("idInstance", params.idInstance)
-        commonUtils.validateString("apiTokenInstance", params.apiTokenInstance)
+    if (params.host) {
+        commonUtils.validateString("Host", params.host)
+    } else {
+        params.host = configuration.defaultHost
+    }
 
-        resolve(params)
-    })
+    commonUtils.validateString("idInstance", params.idInstance)
+    commonUtils.validateString("apiTokenInstance", params.apiTokenInstance)
+    
 }
 
-const restAPI = async (params = {}) => {
-    return checkInitParams(params).then((p) => {
-        return new RestAPI(p)
-    })
+const restAPI = (params = {}) => {
+    checkInitParams(params);
+    return new RestAPI(params)
 }
 
-export default restAPI;
+const webhookAPI = (express) => {
+    const api = new WebhookCallBackAPI(express);
+    api.init()
+    return api;
+}
+
+export default {
+    restAPI,
+    webhookAPI
+}

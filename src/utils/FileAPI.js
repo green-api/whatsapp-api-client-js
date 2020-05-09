@@ -7,12 +7,18 @@ class FileAPI {
     constructor(restApi) {
         this._restApi = restApi;
     }
-
-    async sendFileByUrl(chatId, phoneNumber, urlFile, fileName, caption) {
+    /**
+     * 
+     * @param {String} chatId 
+     * @param {Number} phoneNumber 
+     * @param {String} urlFile 
+     * @param {String} fileName 
+     * @param {String} caption Optional
+     */
+    async sendFileByUrl(chatId, phoneNumber, urlFile, fileName, caption = '') {
         CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
         CommonUtils.validateString('urlFile', urlFile);
         CommonUtils.validateString('filename', fileName);
-        CommonUtils.validateString('caption', caption);
 
         const method = 'sendFileByUrl';
         const postData = {
@@ -25,7 +31,10 @@ class FileAPI {
         const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
         return response.data;
     }
-
+    /**
+     * 
+     * @param {FormData} formData 
+     */
     async sendFileByUpload(formData) {
         const method = 'sendFileByUpload';
         const response = await axios({
@@ -36,7 +45,10 @@ class FileAPI {
         })
         return response.data; 
     }
-
+    /**
+     * 
+     * @param {String} messageId 
+     */
     async downloadFile(messageId) {
         CommonUtils.validateString('messageId', messageId);
 

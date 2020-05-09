@@ -7,7 +7,12 @@ class GroupAPI {
     constructor(restApi) {
         this._restApi = restApi;
     }
-
+    /**
+     * 
+     * @param {String} groupName 
+     * @param {Array} chatIds 
+     * @param {Array} phones 
+     */
     async createGroup(groupName, chatIds, phones) {
         CommonUtils.validateArray('chatIds', chatIds);
         CommonUtils.validateArray('phones', phones);
@@ -22,6 +27,12 @@ class GroupAPI {
         return response.data;
     }
 
+    /**
+     * 
+     * @param {String} groupId 
+     * @param {String} participantChatId 
+     * @param {Number} participantPhone 
+     */
     async addGroupParticipant(groupId, participantChatId, participantPhone) {
         CommonUtils.validateString(groupId);
         CommonUtils.validateChatIdPhoneNumber(participantChatId, participantPhone);
@@ -36,6 +47,10 @@ class GroupAPI {
         return response.data;
     }
 
+    /**
+     * 
+     * @param {String} groupId 
+     */
     async getGroupData(groupId) {
         CommonUtils.validateString(groupId);
 
@@ -47,6 +62,12 @@ class GroupAPI {
         return response.data;
     }
 
+    /**
+     * 
+     * @param {String} groupId 
+     * @param {String} participantChatId 
+     * @param {Number} participantPhone 
+     */
     async removeGroupParticipant(groupId, participantChatId, participantPhone) {
         CommonUtils.validateString(groupId);
         CommonUtils.validateChatIdPhoneNumber(participantChatId, participantPhone);
@@ -59,6 +80,11 @@ class GroupAPI {
         return response.data;
     }
 
+    /**
+     * 
+     * @param {String} groupId 
+     * @param {String} groupName 
+     */
     async updateGroupName(groupId, groupName) {
         CommonUtils.validateString(groupId);
         CommonUtils.validateString(groupName);
@@ -72,6 +98,12 @@ class GroupAPI {
         return response.data;
     }
 
+    /**
+     * 
+     * @param {String} groupId 
+     * @param {String} participantChatId 
+     * @param {Number} participantPhone 
+     */
     async setGroupAdmin(groupId, participantChatId, participantPhone) {
         CommonUtils.validateString(groupId);
 
@@ -85,6 +117,12 @@ class GroupAPI {
         return response.data;
     }
 
+    /**
+     * 
+     * @param {String} groupId 
+     * @param {String} participantChatId 
+     * @param {Number} participantPhone 
+     */
     async removeAdmin(groupId, participantChatId, participantPhone) {
         CommonUtils.validateString(groupId);
 
@@ -98,8 +136,12 @@ class GroupAPI {
         return response.data;
     }
 
+    /**
+     * 
+     * @param {String} groupId 
+     */
     async leaveGroup(groupId) {
-        CommonUtils.validateString(groupId );
+        CommonUtils.validateString(groupId);
 
         const method = 'removeAdmin';
         const postData = {
