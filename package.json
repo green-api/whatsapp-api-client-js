@@ -1,0 +1,23 @@
+{
+  "name": "green-api-sdk",
+  "version": "0.0.3",
+  "description": "Libarary to integrate with whats app https://green-api.com/",
+  "type": "module",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "node ./lib/test.js ",
+    "build": "rollup -c --environment BUILD:production"
+  },
+  "author": "Slonbook team",
+  "keywords": [
+    "whats app",
+    "green-api"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "dotenv": "8.2.0"
+  },
+  "dependencies": {
+    "axios": "0.19.2"
+  }
+}
