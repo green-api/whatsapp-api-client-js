@@ -16,11 +16,11 @@ class FileAPI {
 
         const method = 'sendFileByUrl';
         const postData = {
-            "chatId": chatId,
-            "phoneNumber": phoneNumber,
-            "urlFile": urlFile,
-            "fileName": fileName,
-            "caption": caption,
+            'chatId': chatId,
+            'phoneNumber': phoneNumber,
+            'urlFile': urlFile,
+            'fileName': fileName,
+            'caption': caption,
         }
         const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
         return response.data;

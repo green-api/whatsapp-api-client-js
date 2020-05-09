@@ -14,9 +14,9 @@ class MessageAPI {
 
         const method = 'sendMessage';
         const postData = {
-            "chatId": chatId,
-            "phoneNumber": phoneNumber,
-            "message": message,
+            'chatId': chatId,
+            'phoneNumber': phoneNumber,
+            'message': message,
         }
         const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
         return response.data

@@ -1,5 +1,5 @@
 {
-  "name": "green-api-sdk",
+  "name": "whatsapp-api-client",
   "version": "0.0.3",
   "description": "Libarary to integrate with whats app https://green-api.com/",
   "type": "module",

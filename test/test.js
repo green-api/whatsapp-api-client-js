@@ -8,7 +8,7 @@ import dotenv from "dotenv";
             idInstance: process.env.ID_INSTANCE,
             apiTokenInstance: process.env.API_TOKEN_INSTANCE
         })
-        let t1 = await sdk.file.downloadFile('3EB0E307F23198062295')
+        let t1 = await sdk.group.createGroup('myGroup', '', [79167266138])
         let t3 = "";
     } catch (error) {
       console.error(error);

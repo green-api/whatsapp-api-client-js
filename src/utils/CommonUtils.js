@@ -22,6 +22,11 @@ class CommonUtils {
             CommonUtils.validateString('phoneNumber', chatId)
         }
     }
+
+    static validateArray(name, val) {
+        if (!val || !Array.isArray(val))
+            throw new Error(`${name} must be an Array!`)
+    }
 }
 
 export default CommonUtils
