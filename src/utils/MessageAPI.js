@@ -1,6 +1,6 @@
 'use strict'
 import axios from 'axios';
-import CommonUtils from './CommonUtils.js'
+import CommonUtils, {Receiver} from './CommonUtils.js'
 
 class MessageAPI {
 
@@ -9,20 +9,18 @@ class MessageAPI {
     }
     /** Send text message to chat or phone. Method call adds message to sending queue
      * 
-     * @param {String} chatId - chat id using Whatsapp format (17633123456@c.us - for private messages). 
-     *  Mandatory if phoneNumber is empty
-     * @param {Number} phoneNumber - receiver phone number using international format whithout + sign.
-     * Mandatory if chatId is empty
+     * @param {String} receiver - chat id using Whatsapp format (like 17633123456@c.us - for private messages) or phone number as integer value
      * @param {String} message - text message
      */
-    async sendMessage (chatId, phoneNumber, message) {
-        CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
+    async sendMessage (receiver, message) {
+        const _receiver = new Receiver(receiver);
+        _receiver.validate();
         CommonUtils.validateString('message', message);
 
         const method = 'sendMessage';
         const postData = {
-            'chatId': chatId,
-            'phoneNumber': phoneNumber,
+            'chatId': _receiver.getChatId(),
+            'phoneNumber': _receiver.getPhoneNumber(),
             'message': message,
         }
         const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
@@ -31,15 +29,15 @@ class MessageAPI {
 
     /**
      * 
-     * @param {String} chatId 
-     * @param {Number} phoneNumber 
+     * @param {String} receiver - chat id using Whatsapp format (like 17633123456@c.us - for private messages) or phone number as integer value
      * @param {String} nameLocation 
      * @param {String} address 
      * @param {Number} latitude 
      * @param {Number} longitude 
      */
-    async sendLocation (chatId, phoneNumber, nameLocation, address, latitude, longitude) {
-        CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
+    async sendLocation (receiver, nameLocation, address, latitude, longitude) {
+        const _receiver = new Receiver(receiver);
+        _receiver.validate();
         CommonUtils.validateString('nameLocation', nameLocation);
         CommonUtils.validateString('address', address);
         CommonUtils.validateNumber('latitude', latitude);
@@ -47,8 +45,8 @@ class MessageAPI {
 
         const method = 'sendLocation';
         const postData = {
-            'chatId': chatId,
-            'phoneNumber': phoneNumber,
+            'chatId': _receiver.getChatId(),
+            'phoneNumber': _receiver.getPhoneNumber(),
             'nameLocation': nameLocation,
             'address': address,
             'latitude': latitude,
@@ -60,18 +58,18 @@ class MessageAPI {
 
     /**
      * 
-     * @param {String} chatId 
-     * @param {Number} phoneNumber 
+     * @param {String} receiver - chat id using Whatsapp format (like 17633123456@c.us - for private messages) or phone number as integer value
      * @param {Object} contact - object with one or more fields
      */
-    async sendContact (chatId, phoneNumber, contact) {
-        CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
+    async sendContact (receiver, contact) {
+        const _receiver = new Receiver(receiver);
+        _receiver.validate();
         CommonUtils.validateObject('contact', contact);
 
         const method = 'sendContact';
         const postData = {
-            'chatId': chatId,
-            'phoneNumber': phoneNumber,
+            'chatId': _receiver.getChatId(),
+            'phoneNumber': _receiver.getPhoneNumber(),
             'contact': contact,
         }
         const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
@@ -80,18 +78,18 @@ class MessageAPI {
 
     /**
      * 
-     * @param {String} chatId 
-     * @param {Number} phoneNumber 
+     * @param {String} receiver - chat id using Whatsapp format (like 17633123456@c.us - for private messages) or phone number as integer value
      * @param {String} urlLink
      */
-    async sendLink (chatId, phoneNumber, urlLink) {
-        CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
+    async sendLink (receiver, urlLink) {
+        const _receiver = new Receiver(receiver);
+        _receiver.validate();
         CommonUtils.validateString('urlLink', urlLink);
 
         const method = 'sendLink';
         const postData = {
-            'chatId': chatId,
-            'phoneNumber': phoneNumber,
+            'chatId': _receiver.getChatId(),
+            'phoneNumber': _receiver.getPhoneNumber(),
             'urlLink': urlLink,
         }
         const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
@@ -100,17 +98,16 @@ class MessageAPI {
 
     /**
      * 
-     * @param {String} chatId 
-     * @param {Number} phoneNumber 
+     * @param {String} receiver - chat id using Whatsapp format (like 17633123456@c.us - for private messages) or phone number as integer value
      * @param {String} idMessage 
      */
-    async readChat (chatId, phoneNumber, idMessage = null) {
-        CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
-
+    async readChat (receiver, idMessage = null) {
+        const _receiver = new Receiver(receiver);
+        _receiver.validate();
         const method = 'readChat';
         const postData = {
-            'chatId': chatId,
-            'phoneNumber': phoneNumber,
+            'chatId': _receiver.getChatId(),
+            'phoneNumber': _receiver.getPhoneNumber(),
             'idMessage': idMessage ,
         }
         const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);

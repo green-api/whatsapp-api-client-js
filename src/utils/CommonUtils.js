@@ -2,8 +2,11 @@
 
 class CommonUtils {
     static validateString (name, val) {
-        if (!val || Object.prototype.toString.call(val) !== '[object String]')
+        if (!val || !CommonUtils.isString(val) )
             throw new Error(`${name} must be a String!`)
+    }
+    static isString(val) {
+        return Object.prototype.toString.call(val) === '[object String]';
     }
     static validateInteger(name, val) {
         if(!Number.isInteger(val)) 
@@ -24,18 +27,34 @@ class CommonUtils {
         return `${params.host}/waInstance${params.idInstance}/${method}/${params.apiTokenInstance}`
     }
 
-    static validateChatIdPhoneNumber(chatId, phoneNumber) {
-        if (!chatId) {
-            CommonUtils.validateInteger('phoneNumber', phoneNumber)
-        }
-        if (!phoneNumber) {
-            CommonUtils.validateString('phoneNumber', chatId)
-        }
-    }
-
     static validateArray(name, val) {
         if (!val || !Array.isArray(val))
             throw new Error(`${name} must be an Array!`)
+    }
+
+}
+
+export class Receiver {
+    constructor(input) {
+        this._input = input;
+    }
+
+    validate() {
+        if (this.getChatId() == null && this.getPhoneNumber() == null) {
+            throw new Error('Receiver must be a String formatted like 00000000000@c.us or a String formatted like 00000000000-0000000008@g.us or integer')
+        }
+    }
+
+    getChatId() {
+        if (CommonUtils.isString(this._input) && this._input.indexOf('@') !== -1)
+            return this._input
+        return null;
+    }
+
+    getPhoneNumber() {
+        if (Number.isInteger(this._input))
+            return this._input
+        return null;
     }
 }
 

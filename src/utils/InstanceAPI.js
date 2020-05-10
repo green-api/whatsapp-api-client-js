@@ -49,16 +49,16 @@ class InstanceAPI {
 
     /**
      * 
-     * @param {String} chatId 
-     * @param {Number} phoneNumber 
+     * @param {String} receiver - chat id using Whatsapp format (like 17633123456@c.us - for private messages) or phone number as integer value
      */
-    async getAvatar(chatId, phoneNumber) {
-        CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber)
+    async getAvatar(receiver) {
+        const _receiver = new Receiver(receiver);
+        _receiver.validate();
 
         const method = 'getAvatar';
         const postData = {
-            'chatId': chatId,
-            'phoneNumber': phoneNumber,
+            'chatId': _receiver.getChatId(),
+            'phoneNumber': _receiver.getPhoneNumber(),
         }
         const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
         return response.data

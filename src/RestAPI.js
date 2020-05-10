@@ -22,6 +22,10 @@ class RestAPI {
         this.settings = new SettingsAPI(this);
         this.group = new GroupAPI(this);
     }
+
 }
+
+
+
 
 export default RestAPI;
