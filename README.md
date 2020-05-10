@@ -7,6 +7,10 @@ This library helps you easily create a javascript application with WhatsAPP usin
 ## Для русскоязычных
 Javascript библиотека для интеграции с мессенджером Whats APP через API сервиса [green-api.com](https://green-api.com). ЧТобы воспользоваться библиотекой нужно получить регистрационный токен и id инстанса через сервер.
 
+## API
+
+Документация к REST API находится по [ссылке](https://documenter.getpostman.com/view/11185176/Szme3xf1?version=latest#intro). Библиотека является оберткой к REST API, поэтому документация по ссылке выше применима и к самой библиотеке.
+
 ## Авторизация 
 
 Чтобы отправить сообщение или выполнить другой метод API, аккаунт WhatsApp в приложении теелфона должен быть в авторизованном состоянии. 
@@ -32,7 +36,7 @@ import whatsAppClient from 'whatsapp-api-client'
 })();
 ```
 
-или используюя callbacks
+или используя callbacks
 ``` js
 const whatsAppClient = require('whatsapp-api-client')
 
@@ -65,14 +69,43 @@ import whatsAppClient from 'whatsapp-api-client'
 
 ``` js
 import whatsAppClient from 'whatsapp-api-client'
+import express from "express";
 
 (async () => {
-    const app = express();
-    const webHookAPI = whatsAppClient.webhookAPI(app)
-    webHookAPI.createIncomingMessageReceivedHook((data) => {
-        console.log(`webhook data ${data}`)
-    })
-    app.listen(3000, () => console.log(`Started. App listening on port 3000!`));
+    try {
+
+        // Устанавливаем http url ссылку, куда будут отправляться вебхуки. 
+        // Ссылка должна иметь публичный адрес.
+        await restAPI.settings.setSettings({
+            webhookUrl: 'MY_HTTP_SERVER:3000/webhooks'
+        });
+
+        const app = express();
+        const webHookAPI = whatsAppClient.webhookAPI(app, '/webhooks')
+        // Подписываемся на событие получения вебхука при отправке сообщения
+        webHookAPI.createOutgoingMessageStatusHook((data) => {
+            console.log(`outgoingMessageStatus data ${data.toString()}`)
+        });
+        webHookAPI.createStateInstanceChangedHook((data) => {
+            console.log(`stateInstanceChanged data ${data.toString()}`)
+        });
+
+        // Запускаем веб сервер, имеющий публичный адрес
+        app.listen(3000, async () => {
+            console.log(`Started. App listening on port 3000!`)
+
+            const restAPI = whatsAppClient.restAPI(({
+                idInstance: MY_ID_INSTANCE,
+                apiTokenInstance: MY_API_TOKEN_INSTANCE
+            }));
+            // Отправляем тестовое сообщение, для того чтобы сработали события вебхуков
+            response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
+    
+        });
+    } catch (error) {
+        console.error(error);
+        process.exit(1);
+    }
 })();
 
 ```

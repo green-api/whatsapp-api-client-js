@@ -22,8 +22,8 @@ const restAPI = (params = {}) => {
     return new RestAPI(params)
 }
 
-const webhookAPI = (express) => {
-    const api = new WebhookCallBackAPI(express);
+const webhookAPI = (express, webhookRoutePath) => {
+    const api = new WebhookCallBackAPI(express, webhookRoutePath);
     api.init()
     return api;
 }

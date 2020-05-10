@@ -6,8 +6,18 @@ class CommonUtils {
             throw new Error(`${name} must be a String!`)
     }
     static validateInteger(name, val) {
-        if(!val || !Number.isInteger(val)) 
+        if(!Number.isInteger(val)) 
             throw new Error(`${name} must be an integer!`)
+    }
+
+    static validateNumber(name, val) {
+        if(!val || !Number(val)) 
+            throw new Error(`${name} must be a number!`)
+    }
+
+    static validateObject (name, val) {
+        if(!val || Object.prototype.toString.call(val) !== '[object Object]') 
+            throw new Error(`${name} must be an Object!`)
     }
 
     static generateMethodURL(params, method, messageId) {

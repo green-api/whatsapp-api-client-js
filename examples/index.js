@@ -33,16 +33,36 @@ restAPI.message.sendMessage(null, 79999999999, "hello world")
     const response = await restAPI.file.sendFileByUrl(null, 79999999999, 'https://avatars.mds.yandex.net/get-pdb/477388/77f64197-87d2-42cf-9305-14f49c65f1da/s375', 'horse.png', 'horse');
 })();
 
-// Receive webhook
+// Send message and receive webhook
 (async () => {
     try {
         dotenv.config()
+
+        await restAPI.settings.setSettings({
+            webhookUrl: 'MY_HTTP_SERVER:3000/webhooks'
+        });
+
         const app = express();
-        const webHookAPI = whatsAppClient.webhookAPI(app)
-        webHookAPI.createIncomingMessageReceivedHook((data) => {
-            console.log(`webhook data ${data}`)
-        })
-        app.listen(3000, () => console.log(`Started. App listening on port 3000!`));
+        const webHookAPI = whatsAppClient.webhookAPI(app, '/webhooks')
+
+        webHookAPI.createOutgoingMessageStatusHook((data) => {
+            console.log(`outgoingMessageStatus data ${data.toString()}`)
+        });
+        webHookAPI.createStateInstanceChangedHook((data) => {
+            console.log(`stateInstanceChanged data ${data.toString()}`)
+        });
+
+        app.listen(3000, async () => {
+            console.log(`Started. App listening on port 3000!`)
+
+            const restAPI = whatsAppClient.restAPI(({
+                idInstance: process.env.ID_INSTANCE,
+                apiTokenInstance: process.env.API_TOKEN_INSTANCE
+            }));
+    
+            response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
+    
+        });
     } catch (error) {
         console.error(error);
         process.exit(1);

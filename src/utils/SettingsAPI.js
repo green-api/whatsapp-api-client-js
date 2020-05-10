@@ -15,33 +15,29 @@ class SettingsAPI {
     }
 
     /**
+     * Change instance account settings. You can specify which settings to update. 
+     * Instance will be restarted as a result of method.
+     *
+     * @param {Object} settings - js object that consists of one or more props:
+     * countryInstance, webhookUrl, delaySendMessagesMilliseconds, markIncomingMessagesReaded,
+     * for example:
      * 
-     * @param {String} countryInstance 
-     * @param {String} proxyInstance 
-     */
-    async setSettings(countryInstance, proxyInstance) {
-
-        const method = 'setSettings';
-        const postData = {
-            'countryInstance': countryInstance,
-            'proxyInstance': proxyInstance,
-        }
-        const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
-        return response.data;
-    }
-    /**
+     * settings = {
+     *   countryInstance: "ru",
+     *   delaySendMessagesMilliseconds: 500
+     * }
      * 
-     * @param {String} webhookUrl 
      */
-    async setWebhookUrl(webhookUrl) {
+    async setSettings(settings) {
+        CommonUtils.validateObject("settings", settings)
         
-        const method = 'setWebhookUrl';
-        const postData = {
-            'webhookUrl ': webhookUrl,
-        }
+        const method = 'setSettings';
+        const postData = settings
         const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
         return response.data;
     }
+
+
 }
 
 export default SettingsAPI;

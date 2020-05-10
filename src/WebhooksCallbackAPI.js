@@ -3,30 +3,28 @@ import bodyParser from 'body-parser';
 
 class WebhooksCallbackAPI  {
 
-    constructor(express) {
-        this.app = express;
-        this.callbacks = new Map();
+    constructor(express, webhookRoutePath) {
+        this._app = express;
+        this._webhookRoutePath = webhookRoutePath;
+        this._callbacks = new Map();
     }
 
     init() {
-
-        this.app.use(bodyParser.json());
-        this.app.post('/webhooks', async (req, res) => {
-            
-            console.log(`Received webhook = ${eq.body}`);
-            const webhooks = req.body;
-        
-            for(current of webhooks) {
-                console.log(`Processing webhook = ${current.eventType}`);
-
-                const  type = current.eventType || null;
-
-                callback = this.callbacks.get(type)
-                if (callback)
-                    callback.call(this, req.body);
-            }
-        });
-
+        this._app.use(bodyParser.json());
+        this._app.post(this._webhookRoutePath, async (req, res) => {
+            console.log(`Received webhook ${req.body.typeWebhook}`);
+            const webhook = req.body;
+            const callback = this._callbacks.get(webhook.typeWebhook)
+            if (callback) {
+                console.log(`Found webhook callback`);
+                callback.call(this, webhook);
+                console.log(`Callback invoked successfully!`);
+            } else {
+                console.log(`Callback not found`);
+            };
+            console.log(`End`);
+            return res.send();
+        })
     }
     
     /**
@@ -34,7 +32,7 @@ class WebhooksCallbackAPI  {
      * @param {Function} callback function with single parameter data 
      */
     createStateInstanceChangedHook(callback) {
-        this.callbacks.set("stateInstanceChanged", callback)
+        this._callbacks.set("stateInstanceChanged", callback)
     }
 
     /**
@@ -42,7 +40,7 @@ class WebhooksCallbackAPI  {
      * @param {Function} callback function with single parameter data 
      */
     createOutgoingMessageStatusHook(callback) {
-        this.callbacks.set("outgoingMessageStatus", callback)
+        this._callbacks.set("outgoingMessageStatus", callback)
     }
 
     /**
@@ -50,7 +48,7 @@ class WebhooksCallbackAPI  {
      * @param {Function} callback function with single parameter data 
      */
     createIncomingMessageReceivedHook(callback) {
-        this.callbacks.set("incomingMessageReceived", callback)
+        this._callbacks.set("incomingMessageReceived", callback)
     }
 
     /**
@@ -58,7 +56,7 @@ class WebhooksCallbackAPI  {
      * @param {Function} callback function with single parameter data 
      */
     createDeviceInfoHook(callback) {
-        this.callbacks.set("deviceInfo", callback)
+        this._callbacks.set("deviceInfo", callback)
     }
 
 }
