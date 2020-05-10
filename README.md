@@ -41,7 +41,7 @@ const restAPI = whatsAppClient.restAPI(({
     apiTokenInstance: YOUR_API_TOKEN_INSTANCE
 }))
 
-restAPI.message.sendMessage(null, 79999999999, "hello world");
+restAPI.message.sendMessage(null, 79999999999, "hello world")
 .then((data) => {
     console.log(data);
 }) ;
@@ -64,6 +64,8 @@ import whatsAppClient from 'whatsapp-api-client'
 ### Пример использования вебхука
 
 ``` js
+import whatsAppClient from 'whatsapp-api-client'
+
 (async () => {
     const app = express();
     const webHookAPI = whatsAppClient.webhookAPI(app)
