@@ -117,10 +117,13 @@ class MessageAPI {
         return response.data
     }
 
+      /**
+     * Returns array of QueueMessage objects
+     */
     async showMessagesQueue() {
         const method = 'showMessagesQueue';
         const response = await axios.get(CommonUtils.generateMethodURL(this._restApi.params, method));
-        return response.data
+        return response.data.map((msg) => new QueueMessage(msg))
     }
 
     async clearMessagesQueue() {
@@ -129,16 +132,41 @@ class MessageAPI {
         return response.data
     }
 
+    /**
+     * Returns array of Message objects
+     */
     async lastIncomingMessages() {
         const method = 'lastIncomingMessages';
         const response = await axios.get(CommonUtils.generateMethodURL(this._restApi.params, method));
-        return response.data
+        return response.data.map((msg) => new Message(msg))
     }
 
+    /**
+     * Returns array of Message objects
+     */
     async lastOutgoingMessages() {
         const method = 'lastOutgoingMessages';
         const response = await axios.get(CommonUtils.generateMethodURL(this._restApi.params, method));
-        return response.data
+        return response.data.map((msg) => new Message(msg))
+    }
+}
+
+class Message {
+    constructor(data) {
+        this.chatId = data.chatId;
+        this.idMessage = data.idMessage;
+        this.statusMessage = data.statusMessage;
+        this.textMessage = data.textMessage;
+        this.timestamp = data.timestamp;
+        this.typeMessage = data.typeMessage;
+    }
+}
+
+class QueueMessage {
+    constructor(data) {
+        this.chatId = data.chatId;
+        this.fileName = data.fileName;
+        this.typeMessage = data.typeMessage;
     }
 }
 

@@ -82,12 +82,13 @@ import express from "express";
 
         const app = express();
         const webHookAPI = whatsAppClient.webhookAPI(app, '/webhooks')
-        // Подписываемся на событие получения вебхука при отправке сообщения
+        // Подписываемся на событие  вебхука при отправке сообщения
         webHookAPI.createOutgoingMessageStatusHook((data) => {
             console.log(`outgoingMessageStatus data ${data.toString()}`)
         });
-        webHookAPI.createStateInstanceChangedHook((data) => {
-            console.log(`stateInstanceChanged data ${data.toString()}`)
+        // Подписываемся на событие вебхука при получении сообщения
+        webHookAPI.createIncomingMessageReceivedHookText((data, idInstance, idMessage, sender, typeMessage, textMessage) => {
+            console.log(`IncomingMessageReceived data ${data.toString()}`)
         });
 
         // Запускаем веб сервер, имеющий публичный адрес
@@ -99,7 +100,7 @@ import express from "express";
                 apiTokenInstance: MY_API_TOKEN_INSTANCE
             }));
             // Отправляем тестовое сообщение, для того чтобы сработали события вебхуков
-            response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
+            const response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
     
         });
     } catch (error) {

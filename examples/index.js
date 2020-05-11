@@ -9,7 +9,7 @@ import express from "express";
         idInstance: process.env.ID_INSTANCE,
         apiTokenInstance: process.env.API_TOKEN_INSTANCE
     }))
-    const response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
+    const response = restAPI.message.sendMessage(null, 79999999999, "hello world");
 })();
 
 // Send Whatsapp message using callbacks
@@ -39,13 +39,13 @@ restAPI.message.sendMessage(null, 79999999999, "hello world")
         dotenv.config()
 
         await restAPI.settings.setSettings({
-            webhookUrl: 'MY_HTTP_SERVER:3000/webhooks'
+            webhookUrl: '/webhooks'
         });
 
         const app = express();
         const webHookAPI = whatsAppClient.webhookAPI(app, '/webhooks')
 
-        webHookAPI.createOutgoingMessageStatusHook((data) => {
+        webHookAPI.createIncomingMessageReceivedHookText((data, idInstance, idMessage, sender, typeMessage, textMessage) => {
             console.log(`outgoingMessageStatus data ${data.toString()}`)
         });
         webHookAPI.createStateInstanceChangedHook((data) => {
@@ -60,7 +60,7 @@ restAPI.message.sendMessage(null, 79999999999, "hello world")
                 apiTokenInstance: process.env.API_TOKEN_INSTANCE
             }));
     
-            response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
+            const response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
     
         });
     } catch (error) {
