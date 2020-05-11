@@ -30,18 +30,18 @@ class GroupAPI {
     /**
      * 
      * @param {String} groupId 
-     * @param {String} participantReceiver - chat id using Whatsapp format (like 17633123456@c.us - for private messages) or phone number as integer value
+     * @param {String} participantChatId 
+     * @param {Number} participantPhone 
      */
-    async addGroupParticipant(groupId, participantReceiver) {
+    async addGroupParticipant(groupId, participantChatId, participantPhone) {
         CommonUtils.validateString(groupId);
-        const _receiver = new Receiver(participantReceiver);
-        _receiver.validate();
+        CommonUtils.validateChatIdPhoneNumber(participantChatId, participantPhone);
 
         const method = 'addGroupParticipant';
         const postData = {
             'groupId': groupId,
-            'participantChatId': _receiver.getChatId(),
-            'participantPhone': _receiver.getPhoneNumber(),
+            'participantChatId': participantChatId,
+            'participantPhone': participantPhone,
         }
         const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
         return response.data;
@@ -65,18 +65,16 @@ class GroupAPI {
     /**
      * 
      * @param {String} groupId 
-     * @param {String} participantReceiver - chat id using Whatsapp format (like 17633123456@c.us - for private messages) or phone number as integer value
+     * @param {String} participantChatId 
+     * @param {Number} participantPhone 
      */
-    async removeGroupParticipant(groupId, participantReceiver) {
+    async removeGroupParticipant(groupId, participantChatId, participantPhone) {
         CommonUtils.validateString(groupId);
-        const _receiver = new Receiver(participantReceiver);
-        _receiver.validate();
+        CommonUtils.validateChatIdPhoneNumber(participantChatId, participantPhone);
 
         const method = 'removeGroupParticipant';
         const postData = {
             'groupId': groupId,
-            'participantChatId': _receiver.getChatId(),
-            'participantPhone': _receiver.getPhoneNumber(),
         }
         const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
         return response.data;
@@ -103,18 +101,17 @@ class GroupAPI {
     /**
      * 
      * @param {String} groupId 
-     * @param {String} participantReceiver - chat id using Whatsapp format (like 17633123456@c.us - for private messages) or phone number as integer value
+     * @param {String} participantChatId 
+     * @param {Number} participantPhone 
      */
-    async setGroupAdmin(groupId, participantReceiver) {
+    async setGroupAdmin(groupId, participantChatId, participantPhone) {
         CommonUtils.validateString(groupId);
-        const _receiver = new Receiver(participantReceiver);
-        _receiver.validate();
 
         const method = 'setGroupAdmin';
         const postData = {
             'groupId': groupId,
-            'participantChatId': _receiver.getChatId(),
-            'participantPhone': _receiver.getPhoneNumber(),
+            'participantChatId': participantChatId,
+            'participantPhone': participantPhone,
         }
         const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
         return response.data;
@@ -123,18 +120,17 @@ class GroupAPI {
     /**
      * 
      * @param {String} groupId 
-     * @param {String} participantReceiver - chat id using Whatsapp format (like 17633123456@c.us - for private messages) or phone number as integer value
+     * @param {String} participantChatId 
+     * @param {Number} participantPhone 
      */
-    async removeAdmin(groupId, participantReceiver) {
+    async removeAdmin(groupId, participantChatId, participantPhone) {
         CommonUtils.validateString(groupId);
-        const _receiver = new Receiver(participantReceiver);
-        _receiver.validate();
 
         const method = 'removeAdmin';
         const postData = {
             'groupId': groupId,
-            'participantChatId': _receiver.getChatId(),
-            'participantPhone': _receiver.getPhoneNumber(),
+            'participantChatId': participantChatId,
+            'participantPhone': participantPhone,
         }
         const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
         return response.data;

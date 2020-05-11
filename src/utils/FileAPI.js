@@ -1,6 +1,6 @@
 'use strict'
 import axios from 'axios';
-import CommonUtils, {Receiver} from './CommonUtils.js'
+import CommonUtils from './CommonUtils.js'
 
 class FileAPI {
 
@@ -9,21 +9,21 @@ class FileAPI {
     }
     /**
      * 
-     * @param {String} receiver - chat id using Whatsapp format (like 17633123456@c.us - for private messages) or phone number as integer value
+     * @param {String} chatId 
+     * @param {Number} phoneNumber 
      * @param {String} urlFile 
      * @param {String} fileName 
      * @param {String} caption Optional
      */
-    async sendFileByUrl(receiver, urlFile, fileName, caption = '') {
-        const _receiver = new Receiver(receiver);
-        _receiver.validate();
+    async sendFileByUrl(chatId, phoneNumber, urlFile, fileName, caption = '') {
+        CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
         CommonUtils.validateString('urlFile', urlFile);
         CommonUtils.validateString('filename', fileName);
 
         const method = 'sendFileByUrl';
         const postData = {
-            'chatId': _receiver.getChatId(),
-            'phoneNumber': _receiver.getPhoneNumber(),
+            'chatId': chatId,
+            'phoneNumber': phoneNumber,
             'urlFile': urlFile,
             'fileName': fileName,
             'caption': caption,

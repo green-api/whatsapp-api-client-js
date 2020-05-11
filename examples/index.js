@@ -9,7 +9,7 @@ import express from "express";
         idInstance: process.env.ID_INSTANCE,
         apiTokenInstance: process.env.API_TOKEN_INSTANCE
     }))
-    const response = await restAPI.message.sendMessage(79999999999, "hello world");
+    const response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
 })();
 
 // Send Whatsapp message using callbacks
@@ -18,7 +18,7 @@ const restAPI = whatsAppClient.restAPI(({
     idInstance: process.env.ID_INSTANCE,
     apiTokenInstance: process.env.API_TOKEN_INSTANCE
 }))
-restAPI.message.sendMessage('17633123456@c.us', "hello world")
+restAPI.message.sendMessage(null, 79999999999, "hello world")
 .then((data) => {
     console.log(data);
 }) ;
