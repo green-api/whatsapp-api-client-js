@@ -25,20 +25,7 @@ Javascript библиотека для интеграции с мессендж�
 ### Отправка сообщение на номер whats app
 
 ``` js
-import whatsAppClient from 'whatsapp-api-client'
-
-(async () => {
-    const restAPI = whatsAppClient.restAPI(({
-        idInstance: YOUR_ID_INSTANCE, 
-        apiTokenInstance: YOUR_API_TOKEN_INSTANCE
-    }))
-    const response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
-})();
-```
-
-или используя callbacks
-``` js
-const whatsAppClient = require('whatsapp-api-client')
+const whatsAppClient = require('@green-api/whatsapp-api-client')
 
 const restAPI = whatsAppClient.restAPI(({
     idInstance: YOUR_ID_INSTANCE,
@@ -51,10 +38,24 @@ restAPI.message.sendMessage(null, 79999999999, "hello world")
 }) ;
 
 ```
+Или можно воспользоваться синтаксисом ES6. Для того, чтобы этот синтаксис сработал в приложении на nodejs, нужно в package.json прописать ключ ``"type": "module"``. Далее все примеры будут на ES6 синтаксисе.
+
+``` js
+import whatsAppClient from '@green-api/whatsapp-api-client'
+
+(async () => {
+    const restAPI = whatsAppClient.restAPI(({
+        idInstance: YOUR_ID_INSTANCE, 
+        apiTokenInstance: YOUR_API_TOKEN_INSTANCE
+    }))
+    const response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
+})();
+```
+
 
 ### Отправка файла на номер whats app
 ``` js
-import whatsAppClient from 'whatsapp-api-client'
+import whatsAppClient from '@green-api/whatsapp-api-client'
 
 (async () => {
     const restAPI = whatsAppClient.restAPI(({
@@ -68,7 +69,7 @@ import whatsAppClient from 'whatsapp-api-client'
 ### Пример использования вебхука
 
 ``` js
-import whatsAppClient from 'whatsapp-api-client'
+import whatsAppClient from '@green-api/whatsapp-api-client'
 import express from "express";
 
 (async () => {

@@ -1,15 +1,28 @@
 {
-  "name": "whatsapp-api-client",
-  "version": "0.1.0",
+  "name": "@green-api/whatsapp-api-client",
+  "version": "0.1.1",
   "description": "Library to integrate with WhatsApp API. For details have look at https://green-api.com",
+  "license": "MIT",
   "type": "module",
-  "main": "lib/index.js",
+  "main": "lib/bundle.js",
+  "bugs": "https://github.com/green-api/whatsapp-api-client/issues",
+  "homepage": "https://github.com/green-api/whatsapp-api-client",
   "scripts": {
     "test": "node ./lib/test.js ",
     "build": "rollup -c --environment BUILD:production",
     "server": "node ./src/WebhookAPI.js"
   },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/green-api/whatsapp-api-client.git"
+  },
   "author": "Green API team",
+  "files": [
+    "bundle.js"
+  ],
   "keywords": [
     "whatsapp",
     "whatsapp-api",
@@ -18,12 +31,13 @@
     "whatsapp-sender",
     "whatsapp-message-sender"
   ],
-  "license": "MIT",
   "devDependencies": {
     "dotenv": "8.2.0"
   },
   "dependencies": {
     "axios": "0.19.2",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "lib": "^4.1.4",
+    "src": "^1.1.2"
   }
 }
