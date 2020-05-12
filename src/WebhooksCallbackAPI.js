@@ -1,5 +1,3 @@
-import express from 'express';
-import bodyParser from 'body-parser';
 
 class WebhooksCallbackAPI  {
 
@@ -10,7 +8,6 @@ class WebhooksCallbackAPI  {
     }
 
     init() {
-        this._app.use(bodyParser.json());
         this._app.post(this._webhookRoutePath, async (req, res, next) => {
             try {
                 console.log(`Received webhook ${req.body.typeWebhook}`);

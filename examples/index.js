@@ -1,6 +1,7 @@
 import whatsAppClient from '../src/index.js'
 import dotenv from "dotenv";
 import express from "express";
+import bodyParser from 'body-parser';
 
 // Send Whatsapp message
 (async () => {
@@ -43,6 +44,7 @@ restAPI.message.sendMessage(null, 79999999999, "hello world")
         });
 
         const app = express();
+        app.use(bodyParser.json());
         const webHookAPI = whatsAppClient.webhookAPI(app, '/webhooks')
 
         webHookAPI.createIncomingMessageReceivedHookText((data, idInstance, idMessage, sender, typeMessage, textMessage) => {
