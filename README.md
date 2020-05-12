@@ -1,6 +1,6 @@
 # whatsapp-api-client js library
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/green-api/whatsapp-api-client/blob/master/LICENSE)
-[![GitHub release](https://img.shields.io/github/release/green-api/whatsapp-api-client.svg)](https://github.com/green-api/whatsapp-api-client/releases)
+[![GitHub release](https://img.shields.io/github/v/release/green-api/whatsapp-api-client.svg)](https://github.com/green-api/whatsapp-api-client/releases)
 
 This library helps you easily create a javascript application with WhatsAPP using service [green-api.com](https://green-api.com). You need to get token and instance id  in order to use library. 
 
