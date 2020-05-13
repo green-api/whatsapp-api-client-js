@@ -2,38 +2,44 @@
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/green-api/whatsapp-api-client/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/v/release/green-api/whatsapp-api-client.svg)](https://github.com/green-api/whatsapp-api-client/releases)
 
-This library helps you easily create a javascript application with WhatsAPP using service [green-api.com](https://green-api.com). You need to get token and instance id first in order to use library. 
+This library helps you easily create a javascript application with WhatsAPP using service [green-api.com](https://green-api.com). You need to get ``ID_INSTANCE``and ``API_TOKEN_INSTANCE`` first in order to use this library. 
 
 ## Для русскоязычных
-Javascript библиотека для интеграции с мессенджером Whats APP через API сервиса [green-api.com](https://green-api.com). Чтобы воспользоваться библиотекой нужно получить регистрационный токен и id инстанса через сервер [green-api.com](https://green-api.com).
+Смотрите readme на русском [здесь](README_RUS.md)
 
 ## API
 
-Документация к REST API находится по [ссылке](https://green-api.com/documents/green-api.html#82fcbe04-233f-492d-baf1-098f340bc0dc). Библиотека является оберткой к REST API, поэтому документация по ссылке выше применима и к самой библиотеке.
+The API totally corresponds with [green-api.com REST API](https://green-api.com/documents/green-api.html#82fcbe04-233f-492d-baf1-098f340bc0dc) since the library wraps own methods as a https calls to the service. Therefore using docs from reference above is highly encouraged.
 
-## Установка
+## Requirements
 
-Билиотека работает как на node >=10, так и на современных версиях браузеров chrome, firefox и др. Для приложений на webpack и npm установка выполняется через команду:
+Library supports both browser and node js apps.  
+
+* Node js >= 10 for backend
+* Webpack for frontend  or any other package manager that can handle ``require`` or ``import`` module expressions
+
+## Installing
+For webpack and npm based apps:
 ```
 npm i @green-api/whatsapp-api-client
 ```
-Для чистого html js сайта либу можно скачать самостоятельно [отсюда](https://github.com/green-api/whatsapp-api-client/releases). И далее подключить ее в index.html
+For vanilla html-js website you need to download optimized sources manually [here](https://github.com/green-api/whatsapp-api-client/releases) and modify index.html:
 ``` html
 <script type="text/javascript" src="whatsapp-api-clientjs"></script>
 ```
 
-## Авторизация 
+## Authentification
 
-Чтобы отправить сообщение или выполнить другой метод API, аккаунт WhatsApp в приложении теелфона должен быть в авторизованном состоянии. 
+Sending WhatsApp message like any other call to the API requires account registered on [green-api.com](https://green-api.com) and authentication completed on mobile WhatsApp app. To register account you have to proceed here: [green-api.co/m#section-connect](https://green-api.com/#section-connect). After registering you wll get own unique pair of ID_INSTANCE and API_TOKEN_INSTANCE keys.
 
-Это можно сделать двумя способами:
-1. Через веб-интерфейс с помощью считывания QR кода по ссылке https://api.green-api.com/waInstance{{idInstance}}/{{apiTokenInstance}}, где ``idInstance`` и ``apiTokenInstance`` это параметры, полученные при регистрации на [green-api.com](https://green-api.com)
+WhatsApp mobile app authentication may be achived in thwo ways:
+1. Easiest way is using green-api web-interface via scanning QR (Barcode) code generated on https://api.green-api.com/waInstance{{ID_INSTANCE}}/{{API_TOKEN_INSTANCE}}, where ``ID_INSTANCE`` and ``API_TOKEN_INSTANCE`` are unique keys acquired on [green-api.com](https://green-api.com)
 
-2. Программно. Выполняется с помощью считывания QR кода через websocket отдельным методом API scanqrcode, который пока не реализован в библиотеке. Описание этого метода доступно по ссылке [ instance.scanqrcode (websocket)](https://documenter.getpostman.com/view/11185176/Szme3xf1?version=latest#048e8f7c-5bf1-4655-a719-c2d2ee78c676) 
+2. Invoking REST API method [instance.scanqrcode (websocket)](https://documenter.getpostman.com/view/11185176/Szme3xf1?version=latest#048e8f7c-5bf1-4655-a719-c2d2ee78c676) directly. You need to scan QR code from WhatsApp and send it via websocket by invoking this method. You need to invoke the instance.scanqrcode directly which means that the method is not implemented in the library now.
 
-## Примеры
+## Examples
 
-### Отправка сообщение на номер WhatsApp
+### Send WhatsApp message
 
 ``` js
 const whatsAppClient = require('@green-api/whatsapp-api-client')
@@ -49,7 +55,7 @@ restAPI.message.sendMessage(null, 79999999999, "hello world")
 }) ;
 
 ```
-Или можно воспользоваться синтаксисом ES6. Для того, чтобы этот синтаксис сработал в приложении на nodejs, нужно в package.json прописать ключ ``"type": "module"``. Далее все примеры будут на ES6 синтаксисе.
+Or use ES6 syntax. For node js app, you propably have to add in ``package.json`` property ``"type": "module"``. Notice that all examples below are ES6 based.
 
 ``` js
 import whatsAppClient from '@green-api/whatsapp-api-client'
@@ -63,7 +69,7 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
 })();
 ```
 
-### Отправка файла на номер WhatsApp
+### Send WhatsApp file
 ``` js
 import whatsAppClient from '@green-api/whatsapp-api-client'
 
@@ -76,9 +82,9 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
 })();
 ```
 
-### Пример использования вебхука
+### Send WhatsApp message and receive webhook
 
-Вебхуки работают только в node js с на базе express
+Webhooks are event-based callbacks invoked by green-api server as a responses to client API calls. Webhooks support node js and express based apps only.
 
 ``` js
 import whatsAppClient from '@green-api/whatsapp-api-client'
@@ -88,8 +94,8 @@ import bodyParser from 'body-parser';
 (async () => {
     try {
 
-        // Устанавливаем http url ссылку, куда будут отправляться вебхуки. 
-        // Ссылка должна иметь публичный адрес.
+        // Set http url, where webhooks are hosted. 
+        // Url must have public domain address.
         await restAPI.settings.setSettings({
             webhookUrl: 'MY_HTTP_SERVER:3000/webhooks'
         });
@@ -98,12 +104,12 @@ import bodyParser from 'body-parser';
         app.use(bodyParser.json());
         const webHookAPI = whatsAppClient.webhookAPI(app, '/webhooks')
 
-        // Подписываемся на событие вебхука при получении сообщения
+        // Subscribe to webhook happened when WhatsApp delivered a message
         webHookAPI.onIncomingMessageReceivedHookText((data, idInstance, idMessage, sender, typeMessage, textMessage) => {
             console.log(`outgoingMessageStatus data ${data.toString()}`)
         });
 
-        // Запускаем веб сервер, имеющий публичный адрес
+        // Run web server with public domain address
         app.listen(3000, async () => {
             console.log(`Started. App listening on port 3000!`)
 
@@ -111,7 +117,7 @@ import bodyParser from 'body-parser';
                 idInstance: MY_ID_INSTANCE,
                 apiTokenInstance: MY_API_TOKEN_INSTANCE
             }));
-            // Отправляем тестовое сообщение, для того чтобы сработали события вебхуков
+            // Send test message that triggers webhook
             const response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
     
         });
@@ -123,20 +129,20 @@ import bodyParser from 'body-parser';
 
 ```
 
-## Разворачивание окружения разработки
+## Deploying development environment
 
-Помощь в доработке и в исправлении ошибок приветствуется. Шаги для разворачивания:
+Any  help with development and bug fixing is appreciated. In order to deploy test-ready environment please make the steps:
 
-1. Склонируйте репозиторий через git clone
-2. Установите зависимости через npm install
-3. Для вебхуков добавьте express как новую зависимость через npm
-4. Создайте файл .env в рутовом каталоге и пропишите переменные окружения. Образец переменных в файле [env.example](env.example)
+1. Сlone repo with ``git clone``
+2. Install dependencies with ``npm install``
+3. Add webhooks as new dev express  via npm ``npm isntall express --save-dev``. Dont forget to delete it before making pull request
+4. Create .env file in root folder amd add environment variables using example file [env.example](env.example)
 
-## Сторонние продукты
+## Third-party libraries
 
-* [axios](https://github.com/axios/axios) - для http запросов
-* [express](https://www.npmjs.com/package/express) - сервер приложений для вебхуков
+* [axios](https://github.com/axios/axios) -  http requests
+* [express](https://www.npmjs.com/package/express) - app server for webhooks
 
-## Лицензия
+## License
 
-Лицензировано на условиях MIT. Смотрите файл [LICENSE](LICENSE)
+Licensed on MIT terms. For additional info have look at [LICENSE](LICENSE)
