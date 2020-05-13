@@ -1,0 +1,70 @@
+<!--EXAMPLE NOT FINISHED YET!-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <style>
+        .button {
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .button1 {
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+        }
+
+        .button1:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .button2 {
+            background-color: white;
+            color: black;
+            border: 2px solid #008CBA;
+        }
+
+        .button2:hover {
+            background-color: #008CBA;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>WhatsApp client browser example</h1>
+
+    <form>
+        <label for="apiTokenIsntance">API TOKEN:</label><br>
+        <input required type="text" id="apiTokenIsntance" name="apiTokenIsntance"><br>
+        <label for="idInstance">ID INSTANCE:</label><br>
+        <input required type="text" id="idInstance" name="idInstance">
+    </form>
+
+    <p>Press Send Message button to dispatch hello world to phone</p>
+
+    <button id="SendWhatsAppBtn" class="button button1">Send Message</button>
+
+    <script type="text/javascript" src="../lib/bundle.js"></script>
+    <script>
+        document.getElementById("SendWhatsAppBtn").addEventListener("click", function () {
+            console.log("OK!");
+        });
+    </script>
+
+</body>
+
+</html>

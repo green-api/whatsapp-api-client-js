@@ -1,15 +1,15 @@
-# whatsapp-api-client js library
+# whatsapp-api-client library for javascript
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/green-api/whatsapp-api-client/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/v/release/green-api/whatsapp-api-client.svg)](https://github.com/green-api/whatsapp-api-client/releases)
 
-This library helps you easily create a javascript application with WhatsAPP using service [green-api.com](https://green-api.com). You need to get token and instance id  in order to use library. 
+This library helps you easily create a javascript application with WhatsAPP using service [green-api.com](https://green-api.com). You need to get token and instance id first in order to use library. 
 
 ## Для русскоязычных
-Javascript библиотека для интеграции с мессенджером Whats APP через API сервиса [green-api.com](https://green-api.com). ЧТобы воспользоваться библиотекой нужно получить регистрационный токен и id инстанса через сервер.
+Javascript библиотека для интеграции с мессенджером Whats APP через API сервиса [green-api.com](https://green-api.com). Чтобы воспользоваться библиотекой нужно получить регистрационный токен и id инстанса через сервер [green-api.com](https://green-api.com).
 
 ## API
 
-Документация к REST API находится по [ссылке](https://documenter.getpostman.com/view/11185176/Szme3xf1?version=latest#intro). Библиотека является оберткой к REST API, поэтому документация по ссылке выше применима и к самой библиотеке.
+Документация к REST API находится по [ссылке](https://green-api.com/documents/green-api.html#82fcbe04-233f-492d-baf1-098f340bc0dc). Библиотека является оберткой к REST API, поэтому документация по ссылке выше применима и к самой библиотеке.
 
 ## Установка
 
@@ -22,8 +22,6 @@ npm i @green-api/whatsapp-api-client
 <script type="text/javascript" src="whatsapp-api-clientjs"></script>
 ```
 
-Внимание! Для браузерной версии библиотеки нужно разрешить в веб-сервере кроссдоменные запросы (Cross origin request), иначе библиотека не будет работать, т.к. библиотека бращается через https запросы к серверу [green-api.com](https://green-api.com)
-
 ## Авторизация 
 
 Чтобы отправить сообщение или выполнить другой метод API, аккаунт WhatsApp в приложении теелфона должен быть в авторизованном состоянии. 
@@ -35,7 +33,7 @@ npm i @green-api/whatsapp-api-client
 
 ## Примеры
 
-### Отправка сообщение на номер whats app
+### Отправка сообщение на номер WhatsApp
 
 ``` js
 const whatsAppClient = require('@green-api/whatsapp-api-client')
@@ -65,8 +63,7 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
 })();
 ```
 
-
-### Отправка файла на номер whats app
+### Отправка файла на номер WhatsApp
 ``` js
 import whatsAppClient from '@green-api/whatsapp-api-client'
 
@@ -80,6 +77,8 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
 ```
 
 ### Пример использования вебхука
+
+Вебхуки работают только в node js с на базе express
 
 ``` js
 import whatsAppClient from '@green-api/whatsapp-api-client'
@@ -98,13 +97,10 @@ import bodyParser from 'body-parser';
         const app = express();
         app.use(bodyParser.json());
         const webHookAPI = whatsAppClient.webhookAPI(app, '/webhooks')
-        // Подписываемся на событие  вебхука при отправке сообщения
-        webHookAPI.createOutgoingMessageStatusHook((data) => {
-            console.log(`outgoingMessageStatus data ${data.toString()}`)
-        });
+
         // Подписываемся на событие вебхука при получении сообщения
-        webHookAPI.createIncomingMessageReceivedHookText((data, idInstance, idMessage, sender, typeMessage, textMessage) => {
-            console.log(`IncomingMessageReceived data ${data.toString()}`)
+        webHookAPI.onIncomingMessageReceivedHookText((data, idInstance, idMessage, sender, typeMessage, textMessage) => {
+            console.log(`outgoingMessageStatus data ${data.toString()}`)
         });
 
         // Запускаем веб сервер, имеющий публичный адрес
@@ -126,6 +122,20 @@ import bodyParser from 'body-parser';
 })();
 
 ```
+
+## Разворачивание окружения разработки
+
+Помощь в доработке и в исправлении ошибок приветствуется. Шаги для разворачивания:
+
+1. Склонируйте репозиторий через git clone
+2. Установите зависимости через npm install
+3. Для вебхуков добавьте express как новую зависимость через npm
+4. Создайте файл .env в рутовом каталоге и пропишите переменные окружения. Образец переменных в файле [env.example](env.example)
+
+## Сторонние продукты
+
+* [axios](https://github.com/axios/axios) - для http запросов
+* [express](https://www.npmjs.com/package/express) - сервер приложений для вебхуков
 
 ## Лицензия
 

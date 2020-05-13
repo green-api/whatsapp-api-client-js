@@ -20,13 +20,12 @@ class WebhooksCallbackAPI  {
 
                 const callback = this._callbacks.get(webhookType)
                 if (callback) {
-                    console.log(`Found webhook callback`);
+                    // Found webhook callback;
                     callback.call(this, req.body);
-                    console.log(`Callback invoked successfully!`);
+                    // Callback invoked successfully;
                 } else {
-                    console.log(`Callback not found`);
+                    // Callback not found;
                 };
-                console.log(`End`);
                 return res.send();
             } catch (err) {
                 next(err); 
@@ -38,7 +37,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function 
      */
-    createStateInstanceChangedHook(callback) {
+    onStateInstanceChangedHook(callback) {
         this._callbacks.set("stateInstanceChanged", callback)
     }
 
@@ -46,7 +45,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function 
      */
-    createOutgoingMessageStatusHook(callback) {
+    onOutgoingMessageStatusHook(callback) {
         this._callbacks.set("outgoingMessageStatus", (data) => {
             callback.call(this, data, data.instanceData.idInstance, data.idMessage, data.status);
         })
@@ -56,7 +55,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function
      */
-    createIncomingMessageReceivedHookText(callback) {
+    onIncomingMessageReceivedHookText(callback) {
         this._callbacks.set("incomingMessageReceived_textMessage", (data) => {
             callback.call(this, data, data.instanceData.idInstance, data.idMessage, data.senderData.sender, data.messageData.typeMessage, 
                 data.messageData.textMessageData.textMessage);
@@ -67,7 +66,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function 
      */
-    createIncomingMessageReceivedHookFile(callback) {
+    onIncomingMessageReceivedHookFile(callback) {
         this._callbacks.set("incomingMessageReceived_imageMessage", (data) => {
             callback.call(this, data, data.instanceData.idInstance, data.idMessage, data.senderData.sender, data.messageData.typeMessage, 
                 data.messageData.downloadUrl);
@@ -78,7 +77,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function  
      */
-    createIncomingMessageReceivedHookLocation(callback) {
+    onIncomingMessageReceivedHookLocation(callback) {
         this._callbacks.set("incomingMessageReceived_locationMessage", (data) => {
             callback.call(this, data, data.instanceData.idInstance, data.idMessage, data.senderData.sender, data.messageData.typeMessage, 
                 data.messageData.locationMessageData.latitude, data.messageData.locationMessageData.longitude, data.messageData.locationMessageData.jpegThumbnail);
@@ -89,7 +88,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function  
      */
-    createIncomingMessageReceivedHookContact(callback) {
+    onIncomingMessageReceivedHookContact(callback) {
         this._callbacks.set("incomingMessageReceived_contactMessage", (data) => {
             callback.call(this, data, data.instanceData.idInstance, data.idMessage, data.senderData.sender, data.messageData.typeMessage, 
                 data.messageData.contactMessageData.displayName, data.messageData.contactMessageData.vcard);
@@ -100,7 +99,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function  
      */
-    createIncomingMessageReceivedHookExtendedText(callback) {
+    onIncomingMessageReceivedHookExtendedText(callback) {
         this._callbacks.set("incomingMessageReceived_extendedTextMessage", (data) => {
             callback.call(this, data, data.instanceData.idInstance, data.idMessage, data.senderData.sender, data.messageData.typeMessage, 
                 data.extendedTextMessageData);
@@ -111,7 +110,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function 
      */
-    createDeviceInfoHook(callback) {
+    onDeviceInfoHook(callback) {
         this._callbacks.set("deviceInfo", callback)
     }
 
