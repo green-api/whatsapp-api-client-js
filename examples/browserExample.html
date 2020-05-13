@@ -57,11 +57,18 @@
     <p>Press Send Message button to dispatch hello world to phone</p>
 
     <button id="SendWhatsAppBtn" class="button button1">Send Message</button>
-
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript" src="../lib/bundle.js"></script>
     <script>
         document.getElementById("SendWhatsAppBtn").addEventListener("click", function () {
-            console.log("OK!");
+            const restAPI = whatsAppClient.restAPI(({
+                idInstance: '48',
+                apiTokenInstance: '152b6ef1a029b846600e25e3476849df0dec381f6487c45462'
+            }))
+            restAPI.message.sendMessage(null, 79999999999, "hello world")
+            .then((data) => {
+                console.log(data);
+            });
         });
     </script>
 

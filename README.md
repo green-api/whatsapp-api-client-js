@@ -136,9 +136,9 @@ Any  help with development and bug fixing is appreciated. In order to deploy tes
 
 1. Сlone repo with ``git clone``
 2. Install dependencies with ``npm install``
-3. Add webhooks as new dev express  via npm ``npm isntall express --save-dev``. Dont forget to delete it before making pull request
-4. Create .env file in root folder amd add environment variables using example file [env.example](env.example)
-
+3. Install globally libraries ``rollup`` and ``browserfy`` for testing bundled builds.
+4. Add webhooks as new dev express  via npm ``npm isntall express --save-dev``. Dont forget to delete it before making pull request
+5. Create .env file in root folder amd add environment variables using example file [env.example](env.example)
 ## Third-party libraries
 
 * [axios](https://github.com/axios/axios) -  http requests
