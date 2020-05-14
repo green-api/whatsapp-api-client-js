@@ -8,7 +8,7 @@
 <script type="text/javascript" src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
 ```
 ## 2. Отправка сообщения в WhatsApp
-Чтобы отправить сообщение нужно получить регистрационный токен, id инстанса через сервер [green-api.com](https://green-api.com) и пройти авторизацию в теолефоне через QR код. В примере ``YOUR_ID_INSTANCE`` и ``YOUR_API_TOKEN_INSTANCE`` нужно заменить значения на свои
+Чтобы отправить сообщение нужно получить регистрационный токен и id инстанса через сервер [green-api.com](https://green-api.com), а также пройти авторизацию в телефоне через QR код. В примере значения ``YOUR_ID_INSTANCE`` и ``YOUR_API_TOKEN_INSTANCE`` нужно заменить на свои.
 
 ``` html
 <script src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>

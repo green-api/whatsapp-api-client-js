@@ -2,7 +2,7 @@
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/green-api/whatsapp-api-client/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/v/release/green-api/whatsapp-api-client.svg)](https://github.com/green-api/whatsapp-api-client/releases)
 
-Javascript библиотека для интеграции с мессенджером Whats APP через API сервиса [green-api.com](https://green-api.com). Чтобы воспользоваться библиотекой нужно получить регистрационный токен и id инстанса через сервер [green-api.com](https://green-api.com).
+Javascript библиотека для интеграции с мессенджером WhatsAPP через API сервиса [green-api.com](https://green-api.com). Чтобы воспользоваться библиотекой нужно получить регистрационный токен и id инстанса через сервер [green-api.com](https://green-api.com).
 
 ## API
 
@@ -14,14 +14,14 @@ Javascript библиотека для интеграции с мессендж�
 ```
 npm i @green-api/whatsapp-api-client
 ```
-Для чистого html js сайта либу можно скачать самостоятельно [отсюда](https://github.com/green-api/whatsapp-api-client/releases). И далее подключить ее в index.html
+Для чистого html js сайта либу можно подключить в index.html
 ``` html
 <script type="text/javascript" src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
 ```
 
 ## Авторизация 
 
-Чтобы отправить сообщение или выполнить другой метод API, аккаунт WhatsApp в приложении теелфона должен быть в авторизованном состоянии. 
+Чтобы отправить сообщение или выполнить другой метод API, аккаунт WhatsApp в приложении телефона должен быть в авторизованном состоянии. 
 
 Это можно сделать двумя способами:
 1. Через веб-интерфейс с помощью считывания QR кода по ссылке https://api.green-api.com/waInstance{{idInstance}}/{{apiTokenInstance}}, где ``idInstance`` и ``apiTokenInstance`` это параметры, полученные при регистрации на [green-api.com](https://green-api.com)
@@ -30,7 +30,7 @@ npm i @green-api/whatsapp-api-client
 
 ## Примеры
 
-### Отправка сообщение на номер WhatsApp
+### Отправка сообщения на номер WhatsApp
 Используя common js
 ``` js
 const whatsAppClient = require('@green-api/whatsapp-api-client')
@@ -76,6 +76,7 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
 })();
 ```
 Пример кода здесь: [SendWhatsAppMessage.js](examples/SendWhatsAppMessage.js)
+
 ### Отправка файла на номер WhatsApp
 ``` js
 import whatsAppClient from '@green-api/whatsapp-api-client'
@@ -89,6 +90,7 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
 })();
 ```
 Пример кода здесь: [SendWhatsAppFile.js](examples/SendWhatsAppFile.js)
+
 ### Пример использования вебхука
 
 Вебхуки работают только в node js с на базе express
@@ -136,13 +138,14 @@ import bodyParser from 'body-parser';
 
 ```
 Пример кода здесь: [ReceiveWebhook.js](examples/ReceiveWebhook.js)
+
 ## Разворачивание окружения разработки
 
 Помощь в доработке и в исправлении ошибок приветствуется. Шаги для разворачивания:
 
 1. Склонируйте репозиторий через git clone
 2. Установите зависимости через npm install
-3. Install globally libraries ``rollup`` for bundled builds.
+3. Установите глобально библиотеку ``rollup`` для сборки.
 4. Для вебхуков добавьте express как новую зависимость через npm
 5. Создайте файл .env в рутовом каталоге и пропишите переменные окружения. Образец переменных в файле [env.example](env.example)
 
