@@ -31,7 +31,7 @@ npm i @green-api/whatsapp-api-client
 ## Примеры
 
 ### Отправка сообщение на номер WhatsApp
-
+Используя common js
 ``` js
 const whatsAppClient = require('@green-api/whatsapp-api-client')
 
@@ -45,6 +45,22 @@ restAPI.message.sendMessage(null, 79999999999, "hello world")
     console.log(data);
 }) ;
 
+```
+или используя js script
+``` html
+<script src="https://unpkg.com/@green-api/whatsapp-api-client/umd/whats-app-client.min.js"></script>
+<script>
+    const restAPI = whatsAppClient.restAPI(({
+        idInstance: "YOUR_ID_INSTANCE",
+        apiTokenInstance: "YOUR_API_TOKEN_INSTANCE"
+    }))
+    restAPI.message.sendMessage(null, 79999999999, "hello world")
+    .then((data) => {
+        console.log(data);
+    }).catch((reason) =>{
+        console.error(reason);
+    });
+</script>
 ```
 Или можно воспользоваться синтаксисом ES6. Для того, чтобы этот синтаксис сработал в приложении на nodejs, нужно в package.json прописать ключ ``"type": "module"``. Далее все примеры будут на ES6 синтаксисе.
 

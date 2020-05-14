@@ -41,6 +41,7 @@ WhatsApp mobile app authentication may be achived in thwo ways:
 ## Examples
 
 ### Send WhatsApp message
+Use common javascript
 
 ``` js
 const whatsAppClient = require('@green-api/whatsapp-api-client')
@@ -56,20 +57,7 @@ restAPI.message.sendMessage(null, 79999999999, "hello world")
 }) ;
 
 ```
-Or use ES6 syntax. For node js app, you propably have to add in ``package.json`` property ``"type": "module"``. Notice that all examples below are ES6 based.
-
-``` js
-import whatsAppClient from '@green-api/whatsapp-api-client'
-
-(async () => {
-    const restAPI = whatsAppClient.restAPI(({
-        idInstance: YOUR_ID_INSTANCE, 
-        apiTokenInstance: YOUR_API_TOKEN_INSTANCE
-    }))
-    const response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
-})();
-```
-or use browser javascript
+or use browser js script
 ``` html
 <script src="https://unpkg.com/@green-api/whatsapp-api-client/umd/whats-app-client.min.js"></script>
 <script>
@@ -84,6 +72,19 @@ or use browser javascript
         console.error(reason);
     });
 </script>
+```
+Or use ES6 syntax. For node js app, you propably have to add in ``package.json`` property ``"type": "module"``. Notice that all examples below are ES6 based.
+
+``` js
+import whatsAppClient from '@green-api/whatsapp-api-client'
+
+(async () => {
+    const restAPI = whatsAppClient.restAPI(({
+        idInstance: YOUR_ID_INSTANCE, 
+        apiTokenInstance: YOUR_API_TOKEN_INSTANCE
+    }))
+    const response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
+})();
 ```
 
 ### Send WhatsApp file
