@@ -10,16 +10,12 @@ This library helps you easily create a javascript application with WhatsAPP usin
 
 ## API
 
-The API totally corresponds with [green-api.com REST API](https://green-api.com/documents/green-api.html#82fcbe04-233f-492d-baf1-098f340bc0dc) since the library wraps own methods as a https calls to the service. Therefore using docs from reference above is highly encouraged.
+The API corresponds with [REST API](https://green-api.com/documents/green-api.html#82fcbe04-233f-492d-baf1-098f340bc0dc) from green-api since the library wraps own methods as a https calls to the service. Therefore using docs from reference above is highly encouraged.
 
-## Requirements
-
-Library supports both browser and node js apps.  
-
-* Node js >= 10 for backend
-* Webpack for frontend  or any other package manager that can handle ``require`` or ``import`` module expressions
 
 ## Installing
+
+Library supports both browser environment without package managers and Node/Webpack apps with package manager that can handle ``require`` or ``import`` module expressions.
 For webpack and npm based apps:
 ```
 npm i @green-api/whatsapp-api-client
@@ -31,12 +27,12 @@ For vanilla html-js website  modify index.html:
 
 ## Authentification
 
-Sending WhatsApp message like any other call to the API requires account registered on [green-api.com](https://green-api.com) and authentication completed on mobile WhatsApp app. To register account you have to proceed here: [green-api.co/m#section-connect](https://green-api.com/#section-connect). After registering you wll get own unique pair of ID_INSTANCE and API_TOKEN_INSTANCE keys.
+Sending WhatsApp message like any other call to the API requires account registered on [green-api.com](https://green-api.com) and authentication completed on mobile WhatsApp app. To register account you have to proceed here: [green-api.com/#section-connect](https://green-api.com/#section-connect). After registering you wll get own unique pair of ID_INSTANCE and API_TOKEN_INSTANCE keys.
 
-WhatsApp mobile app authentication may be achived in thwo ways:
+WhatsApp mobile app authentication may be achived in two ways:
 1. Easiest way is using green-api web-interface via scanning QR (Barcode) code generated on https://api.green-api.com/waInstance{{ID_INSTANCE}}/{{API_TOKEN_INSTANCE}}, where ``ID_INSTANCE`` and ``API_TOKEN_INSTANCE`` are unique keys acquired on [green-api.com](https://green-api.com)
 
-2. Invoking REST API method [instance.scanqrcode (websocket)](https://documenter.getpostman.com/view/11185176/Szme3xf1?version=latest#048e8f7c-5bf1-4655-a719-c2d2ee78c676) directly. You need to scan QR code from WhatsApp and send it via websocket by invoking this method. You need to invoke the instance.scanqrcode directly which means that the method is not implemented in the library now.
+2. Invoking REST API method [instance.scanqrcode (websocket)](https://green-api.com/documents/green-api.html#82fcbe04-233f-492d-baf1-098f340bc0dc) directly. You need to scan QR code from WhatsApp and send it via websocket by invoking this method. You need to invoke the instance.scanqrcode directly which means that the method is not implemented in the library now.
 
 ## Examples
 
@@ -86,7 +82,6 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
     const response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
 })();
 ```
-Code example is here: [SendWhatsAppMessage.js](examples/SendWhatsAppMessage.js)
 
 ### Send WhatsApp file
 ``` js
@@ -100,7 +95,6 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
     const response = await restAPI.file.sendFileByUrl(null, 79999999999, 'https://avatars.mds.yandex.net/get-pdb/477388/77f64197-87d2-42cf-9305-14f49c65f1da/s375', 'horse.png', 'horse');
 })();
 ```
-Code example is here: [SendWhatsAppFile.js](examples/SendWhatsAppFile.js)
 
 ### Send WhatsApp message and receive webhook
 
@@ -148,7 +142,6 @@ import bodyParser from 'body-parser';
 })();
 
 ```
-Code example is here: [ReceiveWebhook.js](examples/ReceiveWebhook.js)
 ## Deploying development environment
 
 Any  help with development and bug fixing is appreciated. In order to deploy test-ready environment please make the steps:
@@ -157,7 +150,7 @@ Any  help with development and bug fixing is appreciated. In order to deploy tes
 2. Install dependencies with ``npm install``
 3. Install globally libraries ``rollup`` for bundled builds.
 4. Add webhooks as new dev express  via npm ``npm isntall express --save-dev``. Dont forget to delete it before making pull request
-5. Create .env file in root folder amd add environment variables using example file [env.example](env.example)
+5. Create .env file in root folder and add environment variables using example file [env.example](env.example)
 
 ## Build
 Compile browser and node|webpack versions with single command:

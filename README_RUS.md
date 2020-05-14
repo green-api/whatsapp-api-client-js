@@ -26,7 +26,7 @@ npm i @green-api/whatsapp-api-client
 Это можно сделать двумя способами:
 1. Через веб-интерфейс с помощью считывания QR кода по ссылке https://api.green-api.com/waInstance{{idInstance}}/{{apiTokenInstance}}, где ``idInstance`` и ``apiTokenInstance`` это параметры, полученные при регистрации на [green-api.com](https://green-api.com)
 
-2. Программно. Выполняется с помощью считывания QR кода через websocket отдельным методом API scanqrcode, который пока не реализован в библиотеке. Описание этого метода доступно по ссылке [ instance.scanqrcode (websocket)](https://documenter.getpostman.com/view/11185176/Szme3xf1?version=latest#048e8f7c-5bf1-4655-a719-c2d2ee78c676) 
+2. Программно. Выполняется с помощью считывания QR кода через websocket отдельным методом API scanqrcode, который пока не реализован в библиотеке. Описание этого метода доступно по ссылке [ instance.scanqrcode (websocket)](https://green-api.com/documents/green-api.html#82fcbe04-233f-492d-baf1-098f340bc0dc) 
 
 ## Примеры
 
@@ -75,7 +75,6 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
     const response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
 })();
 ```
-Пример кода здесь: [SendWhatsAppMessage.js](examples/SendWhatsAppMessage.js)
 
 ### Отправка файла на номер WhatsApp
 ``` js
@@ -89,7 +88,6 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
     const response = await restAPI.file.sendFileByUrl(null, 79999999999, 'https://avatars.mds.yandex.net/get-pdb/477388/77f64197-87d2-42cf-9305-14f49c65f1da/s375', 'horse.png', 'horse');
 })();
 ```
-Пример кода здесь: [SendWhatsAppFile.js](examples/SendWhatsAppFile.js)
 
 ### Пример использования вебхука
 
@@ -137,7 +135,6 @@ import bodyParser from 'body-parser';
 })();
 
 ```
-Пример кода здесь: [ReceiveWebhook.js](examples/ReceiveWebhook.js)
 
 ## Разворачивание окружения разработки
 
