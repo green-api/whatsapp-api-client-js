@@ -24,9 +24,9 @@ For webpack and npm based apps:
 ```
 npm i @green-api/whatsapp-api-client
 ```
-For vanilla html-js website you need to download optimized sources manually [here](https://github.com/green-api/whatsapp-api-client/releases) and modify index.html:
+For vanilla html-js website  modify index.html:
 ``` html
-<script type="text/javascript" src="whatsapp-api-clientjs"></script>
+<script src="https://unpkg.com/@green-api/whatsapp-api-client/umd/whats-app-client.min.js"></script>
 ```
 
 ## Authentification
@@ -68,6 +68,22 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
     }))
     const response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
 })();
+```
+or use browser javascript
+``` html
+<script src="https://unpkg.com/@green-api/whatsapp-api-client/umd/whats-app-client.min.js"></script>
+<script>
+    const restAPI = whatsAppClient.restAPI(({
+        idInstance: "YOUR_ID_INSTANCE",
+        apiTokenInstance: "YOUR_API_TOKEN_INSTANCE"
+    }))
+    restAPI.message.sendMessage(null, 79999999999, "hello world")
+    .then((data) => {
+        console.log(data);
+    }).catch((reason) =>{
+        console.error(reason);
+    });
+</script>
 ```
 
 ### Send WhatsApp file
@@ -136,9 +152,16 @@ Any  help with development and bug fixing is appreciated. In order to deploy tes
 
 1. Сlone repo with ``git clone``
 2. Install dependencies with ``npm install``
-3. Install globally libraries ``rollup`` and ``browserfy`` for testing bundled builds.
+3. Install globally libraries ``rollup`` for bundled builds.
 4. Add webhooks as new dev express  via npm ``npm isntall express --save-dev``. Dont forget to delete it before making pull request
 5. Create .env file in root folder amd add environment variables using example file [env.example](env.example)
+
+## Build
+Compile browser and node|webpack versions with single command:
+```
+npm run build
+```
+
 ## Third-party libraries
 
 * [axios](https://github.com/axios/axios) -  http requests
