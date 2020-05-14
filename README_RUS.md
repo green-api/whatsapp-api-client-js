@@ -48,7 +48,7 @@ restAPI.message.sendMessage(null, 79999999999, "hello world")
 ```
 или используя js script
 ``` html
-<script src="https://unpkg.com/@green-api/whatsapp-api-client/umd/whats-app-client.min.js"></script>
+<script src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
 <script>
     const restAPI = whatsAppClient.restAPI(({
         idInstance: "YOUR_ID_INSTANCE",

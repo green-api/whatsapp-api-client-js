@@ -22,8 +22,7 @@
   "author": "Green API team",
   "files": [
     "bundle.js",
-     "whats-app-client.min.js",
-     "umd"
+     "whats-app-client.min.js"
   ],
   "keywords": [
     "whatsapp",

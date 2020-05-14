@@ -8,7 +8,7 @@ module.exports = {
     input: 'src/index.js',
     output: [
         {
-            file: 'lib/whats-app-client.min.js',
+            file: 'lib/whatsapp-api-client.min.js',
             format: 'umd',
             exports: 'default',
             name: 'whatsAppClient',
@@ -19,18 +19,6 @@ module.exports = {
                 terser()
             ]
         },
-        {
-            file: 'umd/whats-app-client.min.js',
-            format: 'umd',
-            exports: 'default',
-            name: 'whatsAppClient',
-            globals: {
-                'axios': 'axios'
-            },
-            plugins: [
-                terser()
-            ]
-        }
     ],
     plugins: [
         progress({
