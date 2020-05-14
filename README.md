@@ -26,7 +26,7 @@ npm i @green-api/whatsapp-api-client
 ```
 For vanilla html-js website  modify index.html:
 ``` html
-<script src="https://unpkg.com/@green-api/whatsapp-api-client/umd/whats-app-client.min.js"></script>
+<script src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
 ```
 
 ## Authentification
