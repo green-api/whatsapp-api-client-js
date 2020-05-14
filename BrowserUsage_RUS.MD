@@ -5,7 +5,7 @@
 ## 1. Установка
 Добавить скрипт в html файл:
 ``` html
-<script type="text/javascript" src="whatsapp-api-clientjs"></script>
+<script type="text/javascript" src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
 ```
 ## 2. Отправка сообщения в WhatsApp
 Чтобы отправить сообщение нужно получить регистрационный токен, id инстанса через сервер [green-api.com](https://green-api.com) и пройти авторизацию в теолефоне через QR код. В примере ``YOUR_ID_INSTANCE`` и ``YOUR_API_TOKEN_INSTANCE`` нужно заменить значения на свои

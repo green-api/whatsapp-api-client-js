@@ -16,7 +16,7 @@ npm i @green-api/whatsapp-api-client
 ```
 Для чистого html js сайта либу можно скачать самостоятельно [отсюда](https://github.com/green-api/whatsapp-api-client/releases). И далее подключить ее в index.html
 ``` html
-<script type="text/javascript" src="whatsapp-api-clientjs"></script>
+<script type="text/javascript" src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
 ```
 
 ## Авторизация 
