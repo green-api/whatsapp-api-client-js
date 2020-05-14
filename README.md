@@ -86,6 +86,7 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
     const response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
 })();
 ```
+Code example is here: [SendWhatsAppMessage.js](examples/SendWhatsAppMessage.js)
 
 ### Send WhatsApp file
 ``` js
@@ -99,6 +100,7 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
     const response = await restAPI.file.sendFileByUrl(null, 79999999999, 'https://avatars.mds.yandex.net/get-pdb/477388/77f64197-87d2-42cf-9305-14f49c65f1da/s375', 'horse.png', 'horse');
 })();
 ```
+Code example is here: [SendWhatsAppFile.js](examples/SendWhatsAppFile.js)
 
 ### Send WhatsApp message and receive webhook
 
@@ -146,7 +148,7 @@ import bodyParser from 'body-parser';
 })();
 
 ```
-
+Code example is here: [ReceiveWebhook.js](examples/ReceiveWebhook.js)
 ## Deploying development environment
 
 Any  help with development and bug fixing is appreciated. In order to deploy test-ready environment please make the steps:

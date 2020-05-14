@@ -75,7 +75,7 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
     const response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
 })();
 ```
-
+Пример кода здесь: [SendWhatsAppMessage.js](examples/SendWhatsAppMessage.js)
 ### Отправка файла на номер WhatsApp
 ``` js
 import whatsAppClient from '@green-api/whatsapp-api-client'
@@ -88,7 +88,7 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
     const response = await restAPI.file.sendFileByUrl(null, 79999999999, 'https://avatars.mds.yandex.net/get-pdb/477388/77f64197-87d2-42cf-9305-14f49c65f1da/s375', 'horse.png', 'horse');
 })();
 ```
-
+Пример кода здесь: [SendWhatsAppFile.js](examples/SendWhatsAppFile.js)
 ### Пример использования вебхука
 
 Вебхуки работают только в node js с на базе express
@@ -135,7 +135,7 @@ import bodyParser from 'body-parser';
 })();
 
 ```
-
+Пример кода здесь: [ReceiveWebhook.js](examples/ReceiveWebhook.js)
 ## Разворачивание окружения разработки
 
 Помощь в доработке и в исправлении ошибок приветствуется. Шаги для разворачивания:
