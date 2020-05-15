@@ -8,5 +8,5 @@ import dotenv from "dotenv";
         idInstance: process.env.ID_INSTANCE,
         apiTokenInstance: process.env.API_TOKEN_INSTANCE
     }))
-    const response = restAPI.message.sendMessage(null, 79999999999, "hello world");
+    const response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
 })();

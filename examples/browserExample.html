@@ -1,4 +1,3 @@
-<!--EXAMPLE NOT FINISHED YET!-->
 <!DOCTYPE html>
 <html>
 
@@ -70,7 +69,7 @@
                 restAPI.message.sendMessage(null, 79999999999, "hello world")
                 .then((data) => {
                     console.log(data);
-                    document.getElementById("resultText").innerHTML = "Message was sent successfully. Data: " + data;
+                    document.getElementById("resultText").innerHTML = "Message was sent successfully. Message id: " + data.idMessage;
                 }).catch((reason) =>{
                     console.error(reason);
                     document.getElementById("resultText").innerHTML = "Message was not sent. Reason: " + reason + ". See logs for details";

@@ -55,7 +55,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function
      */
-    onIncomingMessageReceivedHookText(callback) {
+    onIncomingMessageHookText(callback) {
         this._callbacks.set("incomingMessageReceived_textMessage", (data) => {
             callback.call(this, data, data.instanceData.idInstance, data.idMessage, data.senderData.sender, data.messageData.typeMessage, 
                 data.messageData.textMessageData.textMessage);
@@ -66,7 +66,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function 
      */
-    onIncomingMessageReceivedHookFile(callback) {
+    onIncomingMessageHookFile(callback) {
         this._callbacks.set("incomingMessageReceived_imageMessage", (data) => {
             callback.call(this, data, data.instanceData.idInstance, data.idMessage, data.senderData.sender, data.messageData.typeMessage, 
                 data.messageData.downloadUrl);
@@ -77,7 +77,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function  
      */
-    onIncomingMessageReceivedHookLocation(callback) {
+    onIncomingMessageHookLocation(callback) {
         this._callbacks.set("incomingMessageReceived_locationMessage", (data) => {
             callback.call(this, data, data.instanceData.idInstance, data.idMessage, data.senderData.sender, data.messageData.typeMessage, 
                 data.messageData.locationMessageData.latitude, data.messageData.locationMessageData.longitude, data.messageData.locationMessageData.jpegThumbnail);
@@ -88,7 +88,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function  
      */
-    onIncomingMessageReceivedHookContact(callback) {
+    onIncomingMessageHookContact(callback) {
         this._callbacks.set("incomingMessageReceived_contactMessage", (data) => {
             callback.call(this, data, data.instanceData.idInstance, data.idMessage, data.senderData.sender, data.messageData.typeMessage, 
                 data.messageData.contactMessageData.displayName, data.messageData.contactMessageData.vcard);
@@ -99,7 +99,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function  
      */
-    onIncomingMessageReceivedHookExtendedText(callback) {
+    onIncomingMessageHookExtendedText(callback) {
         this._callbacks.set("incomingMessageReceived_extendedTextMessage", (data) => {
             callback.call(this, data, data.instanceData.idInstance, data.idMessage, data.senderData.sender, data.messageData.typeMessage, 
                 data.extendedTextMessageData);

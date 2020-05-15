@@ -16,8 +16,8 @@ import bodyParser from 'body-parser';
         app.use(bodyParser.json());
         const webHookAPI = whatsAppClient.webhookAPI(app, '/webhooks')
 
-        webHookAPI.onIncomingMessageReceivedHookText((data, idInstance, idMessage, sender, typeMessage, textMessage) => {
-            console.log(`outgoingMessageStatus data ${data.toString()}`)
+        webHookAPI.onIncomingMessageHookText((data, idInstance, idMessage, sender, typeMessage, textMessage) => {
+            console.log(`outgoingMessage data ${data.toString()}`)
         });
 
         app.listen(3000, async () => {

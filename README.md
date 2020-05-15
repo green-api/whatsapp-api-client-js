@@ -119,7 +119,7 @@ import bodyParser from 'body-parser';
         const webHookAPI = whatsAppClient.webhookAPI(app, '/webhooks')
 
         // Subscribe to webhook happened when WhatsApp delivered a message
-        webHookAPI.onIncomingMessageReceivedHookText((data, idInstance, idMessage, sender, typeMessage, textMessage) => {
+        webHookAPI.onIncomingMessageHookText((data, idInstance, idMessage, sender, typeMessage, textMessage) => {
             console.log(`outgoingMessageStatus data ${data.toString()}`)
         });
 
