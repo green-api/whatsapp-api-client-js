@@ -47,12 +47,17 @@
     <h1>WhatsApp client browser example</h1>
 
     <form>
-        <label for="apiTokenIsntance">API TOKEN:</label><br>
+        <label for="idInstance">Id Instance:</label><br>
+        <input required type="text" id="idInstance" name="idInstance"><br>
+        <label for="apiTokenIsntance">API Token:</label><br>
         <input required type="text" id="apiTokenIsntance" name="apiTokenIsntance"><br>
-        <label for="idInstance">ID INSTANCE:</label><br>
-        <input required type="text" id="idInstance" name="idInstance">
+        <label for="phoneNumber">Phone Number:</label><br>
+        <input required type="tel" id="phoneNumber" name="phoneNumber" value="79999999999"><br>
+        <label for="messageText">Message:</label><br>
+        <input required type="text" id="messageText" name="messageText" value="Hello world!"><br>
     </form>
 
+    <p>To get API Token and ID Instance please visit <a href="https://green-api.com/#section-connect">green-api.com</a></p>
     <p>Press Send Message button to dispatch hello world to phone</p>
     <p style="color:blue" id="resultText"></p>
 
@@ -62,11 +67,11 @@
         document.getElementById("SendWhatsAppBtn").addEventListener("click", function () {
             try {
                 const restAPI = whatsAppClient.restAPI(({
-                    idInstance: document.getElementById("apiTokenIsntance").value,
-                    apiTokenInstance: document.getElementById("idInstance").value
+                    idInstance: document.getElementById("idInstance").value,
+                    apiTokenInstance: document.getElementById("apiTokenIsntance").value
                 }))
 
-                restAPI.message.sendMessage(null, 79999999999, "hello world")
+                restAPI.message.sendMessage(null, Number.parseInt(document.getElementById("phoneNumber").value), document.getElementById("messageText").value)
                 .then((data) => {
                     console.log(data);
                     document.getElementById("resultText").innerHTML = "Message was sent successfully. Message id: " + data.idMessage;

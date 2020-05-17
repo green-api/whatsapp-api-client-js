@@ -10,7 +10,7 @@ This library helps you easily create a javascript application with WhatsAPP usin
 
 ## API
 
-The API corresponds with [REST API](https://green-api.com/documents/green-api.html#82fcbe04-233f-492d-baf1-098f340bc0dc) from green-api since the library wraps own methods as a https calls to the service. Therefore using docs from reference above is highly encouraged.
+The API corresponds with [REST API](https://green-api.com/documents/green-api.html#82fcbe04-233f-492d-baf1-098f340bc0dc) from green-api since the library wraps own methods as https calls to the service. Therefore using docs from reference above is highly encouraged.
 
 
 ## Installing
@@ -98,7 +98,7 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
 
 ### Send WhatsApp message and receive webhook
 
-Webhooks are event-based callbacks invoked by green-api server as a responses to client API calls. Webhooks support node js and express based apps only.
+Webhooks are event-based callbacks invoked by green-api server as responses to client API calls. Webhooks support node js and express based apps only.
 
 ``` js
 import whatsAppClient from '@green-api/whatsapp-api-client'
