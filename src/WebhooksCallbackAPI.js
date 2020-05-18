@@ -37,7 +37,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function 
      */
-    onStateInstanceChangedHook(callback) {
+    onStateInstanceHook(callback) {
         this._callbacks.set("stateInstanceChanged", callback)
     }
 
@@ -45,7 +45,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function 
      */
-    onOutgoingMessageStatusHook(callback) {
+    onOutgoingMessageStatus(callback) {
         this._callbacks.set("outgoingMessageStatus", (data) => {
             callback.call(this, data, data.instanceData.idInstance, data.idMessage, data.status);
         })
@@ -55,7 +55,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function
      */
-    onIncomingMessageHookText(callback) {
+    onIncomingMessageText(callback) {
         this._callbacks.set("incomingMessageReceived_textMessage", (data) => {
             callback.call(this, data, data.instanceData.idInstance, data.idMessage, data.senderData.sender, data.messageData.typeMessage, 
                 data.messageData.textMessageData.textMessage);
@@ -66,7 +66,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function 
      */
-    onIncomingMessageHookFile(callback) {
+    onIncomingMessageFile(callback) {
         this._callbacks.set("incomingMessageReceived_imageMessage", (data) => {
             callback.call(this, data, data.instanceData.idInstance, data.idMessage, data.senderData.sender, data.messageData.typeMessage, 
                 data.messageData.downloadUrl);
@@ -77,7 +77,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function  
      */
-    onIncomingMessageHookLocation(callback) {
+    onIncomingMessageLocation(callback) {
         this._callbacks.set("incomingMessageReceived_locationMessage", (data) => {
             callback.call(this, data, data.instanceData.idInstance, data.idMessage, data.senderData.sender, data.messageData.typeMessage, 
                 data.messageData.locationMessageData.latitude, data.messageData.locationMessageData.longitude, data.messageData.locationMessageData.jpegThumbnail);
@@ -88,7 +88,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function  
      */
-    onIncomingMessageHookContact(callback) {
+    onIncomingMessageContact(callback) {
         this._callbacks.set("incomingMessageReceived_contactMessage", (data) => {
             callback.call(this, data, data.instanceData.idInstance, data.idMessage, data.senderData.sender, data.messageData.typeMessage, 
                 data.messageData.contactMessageData.displayName, data.messageData.contactMessageData.vcard);
@@ -99,7 +99,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function  
      */
-    onIncomingMessageHookExtendedText(callback) {
+    onIncomingMessageExtendedText(callback) {
         this._callbacks.set("incomingMessageReceived_extendedTextMessage", (data) => {
             callback.call(this, data, data.instanceData.idInstance, data.idMessage, data.senderData.sender, data.messageData.typeMessage, 
                 data.extendedTextMessageData);
@@ -110,7 +110,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function 
      */
-    onDeviceInfoHook(callback) {
+    onDeviceInfo(callback) {
         this._callbacks.set("deviceInfo", callback)
     }
 
