@@ -37,7 +37,7 @@ class WebhooksCallbackAPI  {
      * 
      * @param {Function} callback function 
      */
-    onStateInstanceHook(callback) {
+    onStateInstance(callback) {
         this._callbacks.set("stateInstanceChanged", callback)
     }
 
