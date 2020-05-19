@@ -4,8 +4,8 @@ import CommonUtils from './CommonUtils.js'
 
 class MessageAPI {
 
-    constructor(restApi) {
-        this._restApi = restApi;
+    constructor(greenAPI) {
+        this._greenAPI = greenAPI;
     }
     /** Send text message to chat or phone. Method call adds message to sending queue
      * 
@@ -25,7 +25,7 @@ class MessageAPI {
             'phoneNumber': phoneNumber,
             'message': message,
         }
-        const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
+        const response = await axios.post(CommonUtils.generateMethodURL(this._greenAPI.params, method), postData);
         return response.data
     }
 
@@ -54,7 +54,7 @@ class MessageAPI {
             'latitude': latitude,
             'longitude': longitude,
         }
-        const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
+        const response = await axios.post(CommonUtils.generateMethodURL(this._greenAPI.params, method), postData);
         return response.data
     }
 
@@ -74,7 +74,7 @@ class MessageAPI {
             'phoneNumber': phoneNumber,
             'contact': contact,
         }
-        const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
+        const response = await axios.post(CommonUtils.generateMethodURL(this._greenAPI.params, method), postData);
         return response.data
     }
 
@@ -94,7 +94,7 @@ class MessageAPI {
             'phoneNumber': phoneNumber,
             'urlLink': urlLink,
         }
-        const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
+        const response = await axios.post(CommonUtils.generateMethodURL(this._greenAPI.params, method), postData);
         return response.data
     }
 
@@ -113,7 +113,7 @@ class MessageAPI {
             'phoneNumber': phoneNumber,
             'idMessage': idMessage ,
         }
-        const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
+        const response = await axios.post(CommonUtils.generateMethodURL(this._greenAPI.params, method), postData);
         return response.data
     }
 
@@ -122,13 +122,13 @@ class MessageAPI {
      */
     async showMessagesQueue() {
         const method = 'showMessagesQueue';
-        const response = await axios.get(CommonUtils.generateMethodURL(this._restApi.params, method));
+        const response = await axios.get(CommonUtils.generateMethodURL(this._greenAPI.params, method));
         return response.data.map((msg) => new QueueMessage(msg))
     }
 
     async clearMessagesQueue() {
         const method = 'clearMessagesQueue';
-        const response = await axios.get(CommonUtils.generateMethodURL(this._restApi.params, method));
+        const response = await axios.get(CommonUtils.generateMethodURL(this._greenAPI.params, method));
         return response.data
     }
 
@@ -137,7 +137,7 @@ class MessageAPI {
      */
     async lastIncomingMessages() {
         const method = 'lastIncomingMessages';
-        const response = await axios.get(CommonUtils.generateMethodURL(this._restApi.params, method));
+        const response = await axios.get(CommonUtils.generateMethodURL(this._greenAPI.params, method));
         return response.data.map((msg) => new Message(msg))
     }
 
@@ -146,7 +146,7 @@ class MessageAPI {
      */
     async lastOutgoingMessages() {
         const method = 'lastOutgoingMessages';
-        const response = await axios.get(CommonUtils.generateMethodURL(this._restApi.params, method));
+        const response = await axios.get(CommonUtils.generateMethodURL(this._greenAPI.params, method));
         return response.data.map((msg) => new Message(msg))
     }
 }

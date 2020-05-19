@@ -4,8 +4,8 @@ import CommonUtils from './CommonUtils.js'
 
 class GroupAPI {
 
-    constructor(restApi) {
-        this._restApi = restApi;
+    constructor(greenAPI) {
+        this._greenAPI = greenAPI;
     }
     /**
      * 
@@ -23,7 +23,7 @@ class GroupAPI {
             'chatIds': chatIds,
             'phones': phones,
         }
-        const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
+        const response = await axios.post(CommonUtils.generateMethodURL(this._greenAPI.params, method), postData);
         return response.data;
     }
 
@@ -43,7 +43,7 @@ class GroupAPI {
             'participantChatId': participantChatId,
             'participantPhone': participantPhone,
         }
-        const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
+        const response = await axios.post(CommonUtils.generateMethodURL(this._greenAPI.params, method), postData);
         return response.data;
     }
 
@@ -58,7 +58,7 @@ class GroupAPI {
         const postData = {
             'groupId': groupId,
         }
-        const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
+        const response = await axios.post(CommonUtils.generateMethodURL(this._greenAPI.params, method), postData);
         return response.data;
     }
 
@@ -76,7 +76,7 @@ class GroupAPI {
         const postData = {
             'groupId': groupId,
         }
-        const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
+        const response = await axios.post(CommonUtils.generateMethodURL(this._greenAPI.params, method), postData);
         return response.data;
     }
 
@@ -94,7 +94,7 @@ class GroupAPI {
             'groupId': groupId,
             'groupName': groupName,
         }
-        const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
+        const response = await axios.post(CommonUtils.generateMethodURL(this._greenAPI.params, method), postData);
         return response.data;
     }
 
@@ -113,7 +113,7 @@ class GroupAPI {
             'participantChatId': participantChatId,
             'participantPhone': participantPhone,
         }
-        const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
+        const response = await axios.post(CommonUtils.generateMethodURL(this._greenAPI.params, method), postData);
         return response.data;
     }
 
@@ -132,7 +132,7 @@ class GroupAPI {
             'participantChatId': participantChatId,
             'participantPhone': participantPhone,
         }
-        const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
+        const response = await axios.post(CommonUtils.generateMethodURL(this._greenAPI.params, method), postData);
         return response.data;
     }
 
@@ -147,7 +147,7 @@ class GroupAPI {
         const postData = {
             'groupId': groupId,
         }
-        const response = await axios.post(CommonUtils.generateMethodURL(this._restApi.params, method), postData);
+        const response = await axios.post(CommonUtils.generateMethodURL(this._greenAPI.params, method), postData);
         return response.data;
     }
 
