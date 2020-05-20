@@ -4,31 +4,31 @@ import CommonUtils from './CommonUtils.js'
 
 class InstanceAPI {
 
-    constructor(greenAPI) {
-        this._greenAPI = greenAPI;
+    constructor(restAPI) {
+        this._restAPI = restAPI;
     }
 
     async logout() {
         const method = 'logout';
-        const response = await axios.get(CommonUtils.generateMethodURL(this._greenAPI.params, method));
+        const response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method));
         return response.data
     }
 
     async reboot() {
         const method = 'reboot';
-        const response = await axios.get(CommonUtils.generateMethodURL(this._greenAPI.params, method));
+        const response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method));
         return response.data
     }
 
     async getStateInstance() {
         const method = 'getStateInstance';
-        const response = await axios.get(CommonUtils.generateMethodURL(this._greenAPI.params, method));
+        const response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method));
         return response.data
     }
 
     async getDeviceInfo() {
         const method = 'getDeviceInfo';
-        const response = await axios.get(CommonUtils.generateMethodURL(this._greenAPI.params, method));
+        const response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method));
         return response.data
     }
 
@@ -43,7 +43,7 @@ class InstanceAPI {
         const postData = {
             'phoneNumber': phoneNumber,
         }
-        const response = await axios.post(CommonUtils.generateMethodURL(this._greenAPI.params, method), postData);
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data
     }
 
@@ -60,13 +60,13 @@ class InstanceAPI {
             'chatId': chatId,
             'phoneNumber': phoneNumber,
         }
-        const response = await axios.post(CommonUtils.generateMethodURL(this._greenAPI.params, method), postData);
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data
     }
 
     async getContacts() {
         const method = 'getContacts';
-        const response = await axios.get(CommonUtils.generateMethodURL(this._greenAPI.params, method));
+        const response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method));
         return response.data
     }
 

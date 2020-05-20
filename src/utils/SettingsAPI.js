@@ -4,13 +4,13 @@ import CommonUtils from './CommonUtils.js'
 
 class SettingsAPI {
 
-    constructor(greenAPI) {
-        this._greenAPI = greenAPI;
+    constructor(restAPI) {
+        this._restAPI = restAPI;
     }
 
     async getSettings() {
         const method = 'getSettings';
-        const response = await axios.get(CommonUtils.generateMethodURL(this._greenAPI.params, method));
+        const response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method));
         return response.data;
     }
 
@@ -33,7 +33,7 @@ class SettingsAPI {
         
         const method = 'setSettings';
         const postData = settings
-        const response = await axios.post(CommonUtils.generateMethodURL(this._greenAPI.params, method), postData);
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data;
     }
 
