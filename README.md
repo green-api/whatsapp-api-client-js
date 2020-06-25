@@ -3,9 +3,9 @@
 [![GitHub release](https://img.shields.io/github/v/release/green-api/whatsapp-api-client.svg)](https://github.com/green-api/whatsapp-api-client/releases)
 [![npm version](https://badge.fury.io/js/%40green-api%2Fwhatsapp-api-client.svg)](https://www.npmjs.com/package/@green-api/whatsapp-api-client)
 
-This library helps you easily create a javascript application with WhatsAPP using service [green-api.com](https://green-api.com). You need to get ``ID_INSTANCE``and ``API_TOKEN_INSTANCE`` first in order to use this library. 
+This library helps you easily create a javascript application for WhatsApp API using service [green-api.com](https://green-api.com). You need to get ``ID_INSTANCE``and ``API_TOKEN_INSTANCE`` first in order to use this library. 
 
-## Для русскоязычных
+## Документация на русском языке
 Смотрите readme на русском [здесь](README_RUS.md)
 
 ## API
