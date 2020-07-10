@@ -2,11 +2,11 @@
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/green-api/whatsapp-api-client/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/v/release/green-api/whatsapp-api-client.svg)](https://github.com/green-api/whatsapp-api-client/releases)
 
-Javascript библиотека для интеграции с мессенджером WhatsAPP через API сервиса [green-api.com](https://green-api.com). Чтобы воспользоваться библиотекой нужно получить регистрационный токен и id инстанса через сервер [green-api.com](https://green-api.com).
+Javascript библиотека для интеграции с мессенджером WhatsAPP через API сервиса [green-api.com](https://green-api.com). Чтобы воспользоваться библиотекой нужно получить регистрационный токен и id аккаунта в [личном кабинете](https://cabinet.green-api.com).
 
 ## API
 
-Документация к REST API находится по [ссылке](https://green-api.com/documents/green-api.html#82fcbe04-233f-492d-baf1-098f340bc0dc). Библиотека является оберткой к REST API, поэтому документация по ссылке выше применима и к самой библиотеке.
+Документация к REST API находится по [ссылке](https://green-api.com/docs/api/). Библиотека является оберткой к REST API, поэтому документация по ссылке выше применима и к самой библиотеке.
 
 ## Установка
 
@@ -21,12 +21,7 @@ npm i @green-api/whatsapp-api-client
 
 ## Авторизация 
 
-Чтобы отправить сообщение или выполнить другой метод API, аккаунт WhatsApp в приложении телефона должен быть в авторизованном состоянии. 
-
-Это можно сделать двумя способами:
-1. Через веб-интерфейс с помощью считывания QR кода по ссылке https://api.green-api.com/waInstance{{idInstance}}/{{apiTokenInstance}}, где ``idInstance`` и ``apiTokenInstance`` это параметры, полученные при регистрации на [green-api.com](https://green-api.com)
-
-2. Программно. Выполняется с помощью считывания QR кода через websocket отдельным методом API scanqrcode, который пока не реализован в библиотеке. Описание этого метода доступно по ссылке [ instance.scanqrcode (websocket)](https://green-api.com/documents/green-api.html#82fcbe04-233f-492d-baf1-098f340bc0dc) 
+Чтобы отправить сообщение или выполнить другой метод Green-API, аккаунт WhatsApp в приложении телефона должен быть в авторизованном состоянии. Для авторизации аккаунта перейдите в [личный кабинет](https://cabinet.green-api.com) и сканируйте QR-код с использованием прилоения WhatsApp.
 
 ## Примеры
 
@@ -143,8 +138,8 @@ import bodyParser from 'body-parser';
 1. Склонируйте репозиторий через git clone
 2. Установите зависимости через npm install
 3. Установите глобально библиотеку ``rollup`` для сборки.
-4. Для вебхуков добавьте express как новую зависимость через npm
-5. Создайте файл .env в рутовом каталоге и пропишите переменные окружения. Образец переменных в файле [env.example](env.example)
+4. Для вебхуков добавьте `express` как новую зависимость через npm
+5. Создайте файл `.env` в рутовом каталоге и пропишите переменные окружения. Образец переменных в файле [env.example](env.example)
 
 ## Сборка
 Скомпилировать как browser, так и node/webpack версии либы можно одной командой
