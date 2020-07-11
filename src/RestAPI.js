@@ -5,6 +5,7 @@ import FileAPI from './utils/FileAPI.js'
 import InstanceAPI from './utils/InstanceAPI.js';
 import SettingsAPI from './utils/SettingsAPI.js';
 import GroupAPI from './utils/GroupAPI.js';
+import WebhookServiceAPI from './utils/WebhookServiceAPI.js';
 
 class RestAPI {
 
@@ -21,6 +22,7 @@ class RestAPI {
         this.instance = new InstanceAPI(this);
         this.settings = new SettingsAPI(this);
         this.group = new GroupAPI(this);
+        this.webhookService = new WebhookServiceAPI(this);
     }
 }
 

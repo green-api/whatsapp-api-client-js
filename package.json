@@ -4,6 +4,7 @@
   "description": "Library to integrate with WhatsApp API. For details have look at https://green-api.com",
   "license": "MIT",
   "main": "lib/bundle.js",
+  "type": "module",
   "bugs": "https://github.com/green-api/whatsapp-api-client/issues",
   "homepage": "https://github.com/green-api/whatsapp-api-client",
   "scripts": {

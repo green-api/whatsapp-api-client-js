@@ -18,25 +18,14 @@
             cursor: pointer;
         }
 
-        .button1 {
+        .buttonGreen {
             background-color: white;
             color: black;
             border: 2px solid #4CAF50;
         }
 
-        .button1:hover {
+        .buttonGreen:hover {
             background-color: #4CAF50;
-            color: white;
-        }
-
-        .button2 {
-            background-color: white;
-            color: black;
-            border: 2px solid #008CBA;
-        }
-
-        .button2:hover {
-            background-color: #008CBA;
             color: white;
         }
     </style>
@@ -61,7 +50,8 @@
     <p>Press Send Message button to dispatch hello world to phone</p>
     <p style="color:blue" id="resultText"></p>
 
-    <button id="SendWhatsAppBtn" class="button button1">Send Message</button>
+    <button id="SendWhatsAppBtn" class="button buttonGreen">Send Message</button>
+    <button id="ReceiveWhatsAppBtn" class="button buttonGreen">Receive message</button>
     <script type="text/javascript" src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
     <script>
         document.getElementById("SendWhatsAppBtn").addEventListener("click", function () {
@@ -82,6 +72,35 @@
             } catch (reason) {
                 console.error(reason);
                 document.getElementById("resultText").innerHTML = "Message was not sent. Reason: " + reason + " See logs for details";
+            }
+        });
+
+        document.getElementById("ReceiveWhatsAppBtn").addEventListener("click", function () {
+            try {
+                const restAPI = whatsAppClient.restAPI(({
+                    idInstance: document.getElementById("idInstance").value,
+                    apiTokenInstance: document.getElementById("apiTokenIsntance").value
+                }))
+
+                restAPI.message.webhookService.receiveMessage()
+                .then((data) => {
+                    console.log(data);
+                    if (data.deliveryTag) {
+                        restAPI.message.webhookService.confirmMessage(data.deliveryTag)
+                        .then(() => {
+                            document.getElementById("resultText").innerHTML = "Message was received successfully. Message text: " + data.messageData.textMessageData.textMessage;
+                        }).catch(reason => {
+                            console.error(reason);
+                            document.getElementById("resultText").innerHTML = "Message was not confirmed. Reason: " + reason + ". See logs for details";
+                        })
+                    }
+                }).catch((reason) =>{
+                    console.error(reason);
+                    document.getElementById("resultText").innerHTML = "Message was not received. Reason: " + reason + ". See logs for details";
+                });
+            } catch (reason) {
+                console.error(reason);
+                document.getElementById("resultText").innerHTML = "Message was not received. Reason: " + reason + " See logs for details";
             }
         });
     </script>
