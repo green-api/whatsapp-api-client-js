@@ -71,6 +71,35 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
 })();
 ```
 
+### Отправка соообщения на номер WhatsApp его получение через webhook service REST API
+
+``` js
+import whatsAppClient from '@green-api/whatsapp-api-client'
+
+(async () => {
+
+    const restAPI = whatsAppClient.restAPI(({
+        idInstance: YOUR_ID_INSTANCE, 
+        apiTokenInstance: YOUR_API_TOKEN_INSTANCE
+    }))
+
+    try {
+        // Send WhatsApp message
+        const respSendMessage = await restAPI.message.sendMessage(null, 79167266138, "hello world");
+
+        // Receive WhatsApp message. Method waits for 20 sec and returns empty string if there were no sent messages
+        const respReceiveMessage = await restAPI.webhookService.receiveMessage(); 
+
+        if (respReceiveMessage.deliveryTag) {
+            // Confirm WhatsApp message. Each received message must be confirmed to be able to consume next message
+            const respConfirmMessage = await restAPI.webhookService.confirmMessage(respReceiveMessage.deliveryTag);
+        }
+    } catch (ex) {
+        console.error(ex.toString())
+    }
+})();
+```
+
 ### Отправка файла на номер WhatsApp
 ``` js
 import whatsAppClient from '@green-api/whatsapp-api-client'

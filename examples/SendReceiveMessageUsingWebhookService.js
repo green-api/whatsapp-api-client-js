@@ -1,7 +1,6 @@
 import whatsAppClient from '../src/index.js'
 import dotenv from "dotenv";
 
-// Send WhatsApp message
 (async () => {
     dotenv.config()
 
@@ -11,13 +10,14 @@ import dotenv from "dotenv";
     }))
 
     try {
+        // Send WhatsApp message
         const respSendMessage = await restAPI.message.sendMessage(null, 79167266138, "hello world");
 
-        // method waits for 20 sec if there were no sent messages
+        // Receive WhatsApp message. Method waits for 20 sec and returns empty string if there were no sent messages
         const respReceiveMessage = await restAPI.webhookService.receiveMessage(); 
 
         if (respReceiveMessage.deliveryTag) {
-            // each received message must be confirmed to be able to consume next message
+            // Confirm WhatsApp message. Each received message must be confirmed to be able to consume next message
             const respConfirmMessage = await restAPI.webhookService.confirmMessage(respReceiveMessage.deliveryTag);
         }
     } catch (ex) {
