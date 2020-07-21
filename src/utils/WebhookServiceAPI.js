@@ -9,20 +9,20 @@ class WebhookServiceAPI {
     }
 
     async receiveMessage() {
-        const method = 'receiveWebhook';
+        const method = 'receiveNotification';
         const response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method));
         return response.data
     }
 
     /**
      * 
-     * @param {Number} deliveryTag 
+     * @param {Number} receiptId 
      */
-    async confirmMessage(deliveryTag) {
-        CommonUtils.validateInteger('deliveryTag', deliveryTag);
+    async confirmMessage(receiptId) {
+        CommonUtils.validateInteger('receiptId', receiptId);
 
-        const method = 'deleteWebhook';
-        const response = await axios.delete(`${CommonUtils.generateMethodURL(this._restAPI.params, method)}/${deliveryTag}`);
+        const method = 'deleteNotification';
+        const response = await axios.delete(`${CommonUtils.generateMethodURL(this._restAPI.params, method)}/${receiptId}`);
         return response.data
     }
 

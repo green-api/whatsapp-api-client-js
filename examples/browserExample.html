@@ -85,8 +85,8 @@
                 restAPI.message.webhookService.receiveMessage()
                 .then((data) => {
                     console.log(data);
-                    if (data.deliveryTag) {
-                        restAPI.message.webhookService.confirmMessage(data.deliveryTag)
+                    if (data.receiptId) {
+                        restAPI.message.webhookService.confirmMessage(data.receiptId)
                         .then(() => {
                             document.getElementById("resultText").innerHTML = "Message was received successfully. Message text: " + data.messageData.textMessageData.textMessage;
                         }).catch(reason => {
