@@ -8,7 +8,7 @@ class WebhookServiceAPI {
         this._restAPI = restAPI;
     }
 
-    async receiveMessage() {
+    async receiveNotification() {
         const method = 'receiveNotification';
         const response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method));
         return response.data
@@ -18,7 +18,7 @@ class WebhookServiceAPI {
      * 
      * @param {Number} receiptId 
      */
-    async confirmMessage(receiptId) {
+    async deleteNotification(receiptId) {
         CommonUtils.validateInteger('receiptId', receiptId);
 
         const method = 'deleteNotification';

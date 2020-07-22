@@ -96,11 +96,11 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
         const respSendMessage = await restAPI.message.sendMessage(null, 79167266138, "hello world");
 
         // Receive WhatsApp message. Method waits for 20 sec and returns empty string if there were no sent messages
-        const respReceiveMessage = await restAPI.webhookService.receiveMessage(); 
+        const respReceiveMessage = await restAPI.webhookService.receiveNotification(); 
 
         if (respReceiveMessage.receiptId) {
                 // Confirm WhatsApp message. Each received message must be confirmed to be able to consume next message
-            const respConfirmMessage = await restAPI.webhookService.confirmMessage(respReceiveMessage.receiptId);
+            const respConfirmMessage = await restAPI.webhookService.deleteNotification(respReceiveMessage.receiptId);
         }
     } catch (ex) {
         console.error(ex.toString())
