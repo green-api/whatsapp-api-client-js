@@ -80,6 +80,35 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
 })();
 ```
 
+### Send WhatsApp message and receive it using webhook service REST API
+
+``` js
+import whatsAppClient from '@green-api/whatsapp-api-client'
+
+(async () => {
+    const restAPI = whatsAppClient.restAPI(({
+        idInstance: YOUR_ID_INSTANCE, 
+        apiTokenInstance: YOUR_API_TOKEN_INSTANCE
+    }))
+
+    try {
+        // Send WhatsApp message
+        const respSendMessage = await restAPI.message.sendMessage(null, 79167266138, "hello world");
+
+        // Receive WhatsApp message. Method waits for 20 sec and returns empty string if there were no sent messages
+        const respReceiveMessage = await restAPI.webhookService.receiveMessage(); 
+
+        if (respReceiveMessage.receiptId) {
+                // Confirm WhatsApp message. Each received message must be confirmed to be able to consume next message
+            const respConfirmMessage = await restAPI.webhookService.confirmMessage(respReceiveMessage.receiptId);
+        }
+    } catch (ex) {
+        console.error(ex.toString())
+    }
+})();
+```
+
+
 ### Send WhatsApp file
 ``` js
 import whatsAppClient from '@green-api/whatsapp-api-client'
@@ -148,6 +177,7 @@ Any  help with development and bug fixing is appreciated. In order to deploy tes
 3. Install globally libraries ``rollup`` for bundled builds.
 4. Add webhooks as new dev express  via npm ``npm isntall express --save-dev``. Dont forget to delete it before making pull request
 5. Create .env file in root folder and add environment variables using example file [env.example](env.example)
+6. Add ```"type": "module"``` to the package.json
 
 ## Build
 Compile browser and node|webpack versions with single command:

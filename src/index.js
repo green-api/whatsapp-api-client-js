@@ -7,7 +7,7 @@ import WebhookCallBackAPI from './WebhooksCallbackAPI.js'
 function checkInitParams(params = {}) {
 
     if (params.host) {
-        commonUtils.validateString("Host", params.host)
+        commonUtils.validateString("host", params.host)
     } else {
         params.host = configuration.defaultHost
     }
