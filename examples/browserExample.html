@@ -82,11 +82,11 @@
                     apiTokenInstance: document.getElementById("apiTokenIsntance").value
                 }))
 
-                restAPI.message.webhookService.receiveMessage()
+                restAPI.message.webhookService.receiveNotification()
                 .then((data) => {
                     console.log(data);
                     if (data.receiptId) {
-                        restAPI.message.webhookService.confirmMessage(data.receiptId)
+                        restAPI.message.webhookService.deleteNotification(data.receiptId)
                         .then(() => {
                             document.getElementById("resultText").innerHTML = "Message was received successfully. Message text: " + data.messageData.textMessageData.textMessage;
                         }).catch(reason => {
