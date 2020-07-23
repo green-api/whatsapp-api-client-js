@@ -8,6 +8,12 @@ class InstanceAPI {
         this._restAPI = restAPI;
     }
 
+    async qr() {
+        const method = 'qr';
+        const response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method));
+        return response.data
+    }
+
     async logout() {
         const method = 'logout';
         const response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method));

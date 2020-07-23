@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <style>
+        .button {
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .buttonGreen {
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+        }
+
+        .buttonGreen:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>WhatsApp client browser example</h1>
+
+    <form>
+        <label for="idInstance">Id Instance:</label><br>
+        <input required type="text" id="idInstance" name="idInstance"><br>
+        <label for="apiTokenIsntance">API Token:</label><br>
+        <input required type="text" id="apiTokenIsntance" name="apiTokenIsntance"><br>
+        <label for="phoneNumber">Phone Number:</label><br>
+        <input required type="tel" id="phoneNumber" name="phoneNumber" value=""><br>
+        <label for="messageText">Message:</label><br>
+        <input required type="text" id="messageText" name="messageText" value="Hello world!"><br>
+    </form>
+
+    <p>To get API Token and ID Instance please visit <a href="https://green-api.com/#section-connect">green-api.com</a></p>
+    <p>Press Send Message button to dispatch hello world to phone</p>
+    <p style="color:blue" id="resultText"></p>
+
+    <button id="SendWhatsAppBtn" class="button buttonGreen">Send Message</button>
+    <button id="ReceiveWhatsAppBtn" class="button buttonGreen">Receive message</button>
+    <script type="text/javascript" src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
+    <script>
+        document.getElementById("SendWhatsAppBtn").addEventListener("click", function () {
+            try {
+                const restAPI = whatsAppClient.restAPI(({
+                    idInstance: document.getElementById("idInstance").value,
+                    apiTokenInstance: document.getElementById("apiTokenIsntance").value
+                }))
+
+                restAPI.message.sendMessage(null, Number.parseInt(document.getElementById("phoneNumber").value), document.getElementById("messageText").value)
+                .then((data) => {
+                    console.log(data);
+                    document.getElementById("resultText").innerHTML = "Message was sent successfully. Message id: " + data.idMessage;
+                }).catch((reason) =>{
+                    console.error(reason);
+                    document.getElementById("resultText").innerHTML = "Message was not sent. Reason: " + reason + ". See logs for details";
+                });
+            } catch (reason) {
+                console.error(reason);
+                document.getElementById("resultText").innerHTML = "Message was not sent. Reason: " + reason + " See logs for details";
+            }
+        });
+
+        document.getElementById("ReceiveWhatsAppBtn").addEventListener("click", function () {
+            try {
+                const restAPI = whatsAppClient.restAPI(({
+                    idInstance: document.getElementById("idInstance").value,
+                    apiTokenInstance: document.getElementById("apiTokenIsntance").value
+                }))
+
+                restAPI.message.webhookService.receiveNotification()
+                .then((data) => {
+                    console.log(data);
+                    if (data.receiptId) {
+                        restAPI.message.webhookService.deleteNotification(data.receiptId)
+                        .then(() => {
+                            document.getElementById("resultText").innerHTML = "Message was received successfully. Message text: " + data.messageData.textMessageData.textMessage;
+                        }).catch(reason => {
+                            console.error(reason);
+                            document.getElementById("resultText").innerHTML = "Message was not confirmed. Reason: " + reason + ". See logs for details";
+                        })
+                    }
+                }).catch((reason) =>{
+                    console.error(reason);
+                    document.getElementById("resultText").innerHTML = "Message was not received. Reason: " + reason + ". See logs for details";
+                });
+            } catch (reason) {
+                console.error(reason);
+                document.getElementById("resultText").innerHTML = "Message was not received. Reason: " + reason + " See logs for details";
+            }
+        });
+    </script>
+
+</body>
+
+</html>
