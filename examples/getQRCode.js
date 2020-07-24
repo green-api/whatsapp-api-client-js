@@ -8,6 +8,7 @@ import dotenv from "dotenv";
         idInstance: process.env.ID_INSTANCE,
         apiTokenInstance: process.env.API_TOKEN_INSTANCE
     }))
+    
     const response = await restAPI.instance.qr();
     let t1 = "";
 })();
