@@ -23,11 +23,13 @@ import dotenv from "dotenv";
                 await restAPI.webhookService.deleteNotification(response.receiptId);
             } else if (webhookBody.typeWebhook === 'stateInstanceChanged') { 
                 console.log('stateInstanceChanged')
-                console.log(webhookBody.instanceData.wid)
+                console.log(`stateInstance=${webhookBody.stateInstance}`)
             } else if (webhookBody.typeWebhook === 'outgoingMessageStatus') { 
                 console.log('outgoingMessageStatus')
+                console.log(`status=${webhookBody.status}`)
             } else if (webhookBody.typeWebhook === 'deviceInfo') { 
                 console.log('deviceInfo')
+                console.log(`status=${webhookBody.deviceData}`)
             }
         }
     } catch (ex) {
