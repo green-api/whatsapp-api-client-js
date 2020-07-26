@@ -52,42 +52,42 @@
     <script type="text/javascript" src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
     <script>
         var intervalId = null
+        const qrCodeElement = document.getElementById("img-qr-code")
+        const qrTempalte = qrCodeElement.getAttribute('src');
         
         document.getElementById("getQrBtn").addEventListener("click", function () {
             try {
                 isAuthed();
-                const restAPI = whatsAppClient.restAPI(({
-                    idInstance: document.getElementById("idInstance").value,
-                    apiTokenInstance: document.getElementById("apiTokenIsntance").value
-                }))
-
-                restAPI.instance.qr()
-                .then((data) => {
-                    console.log(data);
-                    clearInterval(intervalId)
-                    updateQRCode(data);
-                    intervalId = setInterval(updateQRCode, 5000, data);
-                }).catch((reason) => {
-                    console.error(reason);
-                    document.getElementById("resultText").innerHTML = reason + ". See logs for details";
-                });
+                clearInterval(intervalId)
+                updateQRCode()
+                intervalId = setInterval(updateQRCode, 5000);
+                
             } catch (reason) {
                 console.error(reason);
                 document.getElementById("resultText").innerHTML = reason + ". See logs for details";
             }
         });
 
-        function updateQRCode(data) {
-            document.getElementById("resultText").innerHTML = "";
-            const msgData = JSON.parse(data)
-            if (msgData.type === 'qrCode') {
-                let qrCodeElement = document.getElementById("img-qr-code")
-                qrCodeElement.hidden = false;
-                qrCodeElement.setAttribute('src',  qrCodeElement.getAttribute('src').replace("%QR_DATA%", msgData.message))
-            } else {
-                qrCodeElement.hidden = false;
-                document.getElementById("resultText").innerHTML = msgData.message
-            }
+        function updateQRCode() {
+            const restAPI = whatsAppClient.restAPI(({
+                idInstance: document.getElementById("idInstance").value,
+                apiTokenInstance: document.getElementById("apiTokenIsntance").value
+            }))
+            restAPI.instance.qr()
+                .then((data) => {
+                    console.log(data);
+                    document.getElementById("resultText").innerHTML = "";
+                    if (data.type === 'qrCode') {
+                        qrCodeElement.hidden = false;
+                        qrCodeElement.setAttribute('src', qrTempalte.replace("%QR_DATA%", data.message))
+                    } else {
+                        qrCodeElement.hidden = false;
+                        document.getElementById("resultText").innerHTML = data.message
+                    }
+                }).catch((reason) => {
+                    console.error(reason);
+                    document.getElementById("resultText").innerHTML = reason + ". See logs for details";
+                });
         }
 
         function isAuthed() {
