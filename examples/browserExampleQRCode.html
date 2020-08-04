@@ -81,7 +81,9 @@
                         qrCodeElement.hidden = false;
                         qrCodeElement.setAttribute('src', qrTempalte.replace("%QR_DATA%", data.message))
                     } else {
-                        qrCodeElement.hidden = false;
+                        qrCodeElement.hidden = true;
+                        clearInterval(intervalId)
+                        isAuthed();
                         document.getElementById("resultText").innerHTML = data.message
                     }
                 }).catch((reason) => {
