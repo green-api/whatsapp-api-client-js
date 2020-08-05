@@ -1,10 +1,9 @@
 {
   "name": "@green-api/whatsapp-api-client",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Library to integrate with WhatsApp API. For details have look at https://green-api.com",
   "license": "MIT",
   "main": "lib/bundle.js",
-  "type": "module",
   "bugs": "https://github.com/green-api/whatsapp-api-client/issues",
   "homepage": "https://github.com/green-api/whatsapp-api-client",
   "scripts": {
@@ -23,7 +22,7 @@
   "author": "Green API team",
   "files": [
     "bundle.js",
-     "whatsapp-api-client.min.js"
+    "whatsapp-api-client.min.js"
   ],
   "keywords": [
     "whatsapp",

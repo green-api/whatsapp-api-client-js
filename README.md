@@ -40,8 +40,8 @@ Use common javascript
 const whatsAppClient = require('@green-api/whatsapp-api-client')
 
 const restAPI = whatsAppClient.restAPI(({
-    idInstance: YOUR_ID_INSTANCE,
-    apiTokenInstance: YOUR_API_TOKEN_INSTANCE
+    idInstance: "YOUR_ID_INSTANCE",
+    apiTokenInstance: "YOUR_API_TOKEN_INSTANCE"
 }))
 
 restAPI.message.sendMessage(null, 79999999999, "hello world")
@@ -73,8 +73,8 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
 
 (async () => {
     const restAPI = whatsAppClient.restAPI(({
-        idInstance: YOUR_ID_INSTANCE, 
-        apiTokenInstance: YOUR_API_TOKEN_INSTANCE
+        idInstance: "YOUR_ID_INSTANCE", 
+        apiTokenInstance: "YOUR_API_TOKEN_INSTANCE"
     }))
     const response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
 })();
@@ -88,8 +88,8 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
 (async () => {
 
     let restAPI = whatsAppClient.restAPI(({
-        idInstance: process.env.ID_INSTANCE,
-        apiTokenInstance: process.env.API_TOKEN_INSTANCE
+        idInstance: "YOUR_ID_INSTANCE",
+        apiTokenInstance: "YOUR_API_TOKEN_INSTANCE"
     }))
 
     try {
@@ -127,8 +127,8 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
 
 (async () => {
     const restAPI = whatsAppClient.restAPI(({
-        idInstance: YOUR_ID_INSTANCE,
-        apiTokenInstance: YOUR_API_TOKEN_INSTANCE
+        idInstance: "YOUR_ID_INSTANCE",
+        apiTokenInstance: "YOUR_API_TOKEN_INSTANCE"
     }))
     const response = await restAPI.file.sendFileByUrl(null, 79999999999, 'https://avatars.mds.yandex.net/get-pdb/477388/77f64197-87d2-42cf-9305-14f49c65f1da/s375', 'horse.png', 'horse');
 })();
