@@ -47,6 +47,7 @@
     <p>Press button to get qr code</p>
     <div style="display:grid; width: 20%">
         <button id="getQrBtn" class="button buttonGreen">Get QR</button>
+        <button style="display: none" hidden id="logoutQrBtn" class="button buttonGreen">Logout</button>
         <img hidden id="img-qr-code" alt="QR-Code" class="sb-qr-wizard-qr-code" aria-hidden="false" src="data:image/png;base64,%QR_DATA%" style="">
     </div>
     <script type="text/javascript" src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
@@ -62,6 +63,27 @@
                 updateQRCode()
                 intervalId = setInterval(updateQRCode, 5000);
                 
+            } catch (reason) {
+                console.error(reason);
+                document.getElementById("resultText").innerHTML = reason + ". See logs for details";
+            }
+        });
+
+        document.getElementById("logoutQrBtn").addEventListener("click", function () {
+            try {
+                const restAPI = whatsAppClient.restAPI(({
+                    idInstance: document.getElementById("idInstance").value,
+                    apiTokenInstance: document.getElementById("apiTokenIsntance").value
+                }))
+                
+                restAPI.instance.logout()
+                    .then((data) => {
+                        document.getElementById("resultText").innerHTML = "isLogout=" + data.isLogout
+                        isAuthed();
+                    }).catch((reason) => {
+                        console.error(reason);
+                        document.getElementById("resultText").innerHTML = reason + ". See logs for details";
+                    });
             } catch (reason) {
                 console.error(reason);
                 document.getElementById("resultText").innerHTML = reason + ". See logs for details";
@@ -99,6 +121,16 @@
                 }))
             restAPI.instance.getStateInstance().then(data => {
                 document.getElementById("statusText").innerHTML = data.stateInstance;
+                
+                if (data.stateInstance === 'authorized') {
+                    document.getElementById("getQrBtn").style.display = "none"
+                    document.getElementById("logoutQrBtn").style.display = "block"
+                } else {
+                    document.getElementById("getQrBtn").style.display = "block"
+                    document.getElementById("logoutQrBtn").style.display = "none"
+                }
+                 
+                
             })
         }
     </script>
