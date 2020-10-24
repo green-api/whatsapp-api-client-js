@@ -1,5 +1,7 @@
 'use strict'
 
+import * as fs from 'fs'
+
 class CommonUtils {
     static validateString (name, val) {
         if (!val || Object.prototype.toString.call(val) !== '[object String]')
@@ -36,6 +38,11 @@ class CommonUtils {
     static validateArray(name, val) {
         if (!val || !Array.isArray(val))
             throw new Error(`${name} must be an Array!`)
+    }
+
+    static validatePath (name, val) {
+        if (!val || !fs.existsSync(val))
+            throw new Error(`${name} not found!`)
     }
 }
 

@@ -5,8 +5,7 @@ import dotenv from "dotenv";
 (async () => {
     dotenv.config()
     const restAPI = whatsAppClient.restAPI(({
-        idInstance: process.env.ID_INSTANCE,
-        apiTokenInstance: process.env.API_TOKEN_INSTANCE
+        credentialsPath: "examples\\credentials"
     }))
     try {
         const response = await restAPI.message.sendMessage(null, 79167266138, "hello world");

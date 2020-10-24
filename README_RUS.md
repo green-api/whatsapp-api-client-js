@@ -71,6 +71,20 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
 })();
 ```
 
+### ТИСпользование credentials файла для ключей `ID_INSTANCE` или `API_TOKEN_INSTANCE`
+
+Вы можете сохранить Ваши авторизационные данные отдельно от кода.. Библиотека позволяет создать  файл с произвольным именем и местом в следующем формате: 
+```
+API_TOKEN_INSTANCE = "MY_API_TOKEN_INSTANCE"
+ID_INSTANCE = "MY_ID_INSTANCE"
+```
+А затем Вы можете передать ключи как показано в коде ниже:
+``` js
+const restAPI = whatsAppClient.restAPI(({
+    credentialsPath: "examples\\credentials"
+}))
+```
+
 ### Получение уведомления через webhook service REST API
 
 ``` js

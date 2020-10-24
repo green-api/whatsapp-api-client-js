@@ -80,6 +80,20 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
 })();
 ```
 
+### Using credentials file for `ID_INSTANCE` and `API_TOKEN_INSTANCE` keys
+
+You might want to store yours credentials separatedly from code. The library allow you to create a text file with preferred name and location with the format: 
+```
+API_TOKEN_INSTANCE = "MY_API_TOKEN_INSTANCE"
+ID_INSTANCE = "MY_ID_INSTANCE"
+```
+And then pass this file as described below:
+``` js
+const restAPI = whatsAppClient.restAPI(({
+    credentialsPath: "examples\\credentials"
+}))
+```
+
 ### Receive notifications using webhook service REST API
 
 ``` js

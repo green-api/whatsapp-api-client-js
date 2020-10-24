@@ -11,9 +11,12 @@ function checkInitParams(params = {}) {
     } else {
         params.host = configuration.defaultHost
     }
-
-    commonUtils.validateString("idInstance", params.idInstance)
-    commonUtils.validateString("apiTokenInstance", params.apiTokenInstance)
+    if (params.credentialsPath) {
+        commonUtils.validatePath("credentialsPath", params.credentialsPath)
+    } else {
+        commonUtils.validateString("idInstance", params.idInstance)
+        commonUtils.validateString("apiTokenInstance", params.apiTokenInstance)
+    }
     
 }
 

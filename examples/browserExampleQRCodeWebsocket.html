@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <style>
+        .button {
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .buttonGreen {
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+        }
+
+        .buttonGreen:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>WhatsApp client browser example</h1>
+
+    <form>
+        <label for="idInstance">Id Instance:</label><br>
+        <input required type="text" id="idInstance" name="idInstance"><br>
+        <label for="apiTokenIsntance">API Token:</label><br>
+        <input required type="text" id="apiTokenIsntance" name="apiTokenIsntance"><br>
+    </form>
+
+    <p style="color:blue" id="statusText"></p>
+    <p style="color:blue" id="resultText"></p>
+    <p>Press button to get qr code</p>
+    <div style="display:grid; width: 20%">
+        <button id="getQrBtn" class="button buttonGreen">Get QR</button>
+        <button style="display: none" hidden id="logoutQrBtn" class="button buttonGreen">Logout</button>
+        <img hidden id="img-qr-code" alt="QR-Code" class="sb-qr-wizard-qr-code" aria-hidden="false" src="data:image/png;base64,%QR_DATA%" style="">
+    </div>
+    <script type="text/javascript" src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
+    <script>
+        var intervalId = null
+        const qrCodeElement = document.getElementById("img-qr-code")
+        const qrTempalte = qrCodeElement.getAttribute('src');
+        
+        document.getElementById("getQrBtn").addEventListener("click", function () {
+            try {
+                isAuthed();
+                clearInterval(intervalId)
+                updateQRCode()
+                intervalId = setInterval(updateQRCode, 5000);
+                
+            } catch (reason) {
+                console.error(reason);
+                document.getElementById("resultText").innerHTML = reason + ". See logs for details";
+            }
+        });
+
+        document.getElementById("logoutQrBtn").addEventListener("click", function () {
+            try {
+                const restAPI = whatsAppClient.restAPI(({
+                    idInstance: document.getElementById("idInstance").value,
+                    apiTokenInstance: document.getElementById("apiTokenIsntance").value
+                }))
+                
+                restAPI.instance.logout()
+                    .then((data) => {
+                        document.getElementById("resultText").innerHTML = "isLogout=" + data.isLogout
+                        isAuthed();
+                    }).catch((reason) => {
+                        console.error(reason);
+                        document.getElementById("resultText").innerHTML = reason + ". See logs for details";
+                    });
+            } catch (reason) {
+                console.error(reason);
+                document.getElementById("resultText").innerHTML = reason + ". See logs for details";
+            }
+        });
+
+        function updateQRCode() {
+
+            const ws = new WebSocket(`wss://api.green-api.com/waInstance${document.getElementById("idInstance").value}/scanqrcode/${document.getElementById("apiTokenIsntance").value}`);
+
+            ws.on('open', () => {
+                console.log("websocket is open")
+            });
+
+            ws.on('message', (response) => {
+                const data = JSON.parse(response)
+                console.log(data);
+                document.getElementById("resultText").innerHTML = "";
+                if (data.type === 'qrCode') {
+                    qrCodeElement.hidden = false;
+                    qrCodeElement.setAttribute('src', qrTempalte.replace("%QR_DATA%", data.message))
+                } else {
+                    qrCodeElement.hidden = true;
+                    clearInterval(intervalId)
+                    isAuthed();
+                    document.getElementById("resultText").innerHTML = data.message
+                }
+            });
+
+            ws.on('error', (response) => {
+                console.error(reason);
+                document.getElementById("resultText").innerHTML = reason + ". See logs for details";
+            });
+
+            ws.on('close', () => {
+                console.log(`websocket closed`)
+            });
+        }
+
+        function isAuthed() {
+            const restAPI = whatsAppClient.restAPI(({
+                    idInstance: document.getElementById("idInstance").value,
+                    apiTokenInstance: document.getElementById("apiTokenIsntance").value
+                }))
+            restAPI.instance.getStateInstance().then(data => {
+                document.getElementById("statusText").innerHTML = data.stateInstance;
+                
+                if (data.stateInstance === 'authorized') {
+                    document.getElementById("getQrBtn").style.display = "none"
+                    document.getElementById("logoutQrBtn").style.display = "block"
+                } else {
+                    document.getElementById("getQrBtn").style.display = "block"
+                    document.getElementById("logoutQrBtn").style.display = "none"
+                }
+                 
+                
+            })
+        }
+    </script>
+
+</body>
+
+</html>

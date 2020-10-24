@@ -6,16 +6,35 @@ import InstanceAPI from './utils/InstanceAPI.js';
 import SettingsAPI from './utils/SettingsAPI.js';
 import GroupAPI from './utils/GroupAPI.js';
 import WebhookServiceAPI from './utils/WebhookServiceAPI.js';
+import * as fs from 'fs'
+import { notStrictEqual } from 'assert';
 
 class RestAPI {
 
     constructor (params) {
+        
         this.params = {
             host: '',
             idInstance: '',
             apiTokenInstance: '',
+            credentialsPath: null,
         };
+
         Object.assign(this.params, params);
+
+        if (params.credentialsPath) {
+            fs.readFileSync(params.credentialsPath)
+            .toString('utf8')
+            .split('\n')
+            .map(item => item.split(" ").join("")) // replaceAll equivualent
+            .forEach(item => {
+                if (item.startsWith('API_TOKEN_INSTANCE=')) {
+                    this.params.apiTokenInstance = item.replace('API_TOKEN_INSTANCE=', '').trim()
+                } else if (item.startsWith('ID_INSTANCE=')) {
+                    this.params.idInstance = item.replace('ID_INSTANCE=', '').trim()
+                }
+            })
+        }
 
         this.message = new MessageAPI(this);
         this.file = new FileAPI(this);
