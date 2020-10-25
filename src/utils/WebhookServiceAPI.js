@@ -54,6 +54,10 @@ class WebhookServiceAPI {
         this._jobScheduler.reschedule()
     }
 
+    async stopReceivingNotifications() {
+        this._jobScheduler.unschedule();
+    }
+
     onReceivingMessageText(callback)
     {
         this._callbacks.set(this.callbackTypes.onReceivingMessageText, callback)

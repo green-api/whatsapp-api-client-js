@@ -3,6 +3,7 @@ class ReceiveNotificationsJob {
 
     timerId;
     intervalSec; 
+    needInterrupt = false
 
     constructor(webhookServiceApi) {
         this.webhookServiceApi = webhookServiceApi;
@@ -47,7 +48,9 @@ class ReceiveNotificationsJob {
         } catch (ex) {
             console.error(ex.toString());
         }
-        this.timerId = setInterval(this.run, this.intervalSec * 1000);
+        if (!this.needInterrupt) {
+            this.timerId = setInterval(this.run, this.intervalSec * 1000);
+        }
     }
 
     callCallback(webhookType, body) {

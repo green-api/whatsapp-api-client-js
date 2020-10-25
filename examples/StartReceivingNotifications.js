@@ -12,6 +12,8 @@ import dotenv from "dotenv";
         await restAPI.webhookService.startReceivingNotifications()
         restAPI.webhookService.onReceivingMessageText((body) => {
             console.log(body)
+            restAPI.webhookService.stopReceivingNotifications();
+            console.log("Notifications is about to stop in 20 sec...")
         })
         restAPI.webhookService.onReceivingDeviceStatus((body) => {
             console.log(body)

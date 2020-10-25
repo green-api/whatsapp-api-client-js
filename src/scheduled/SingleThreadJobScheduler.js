@@ -7,6 +7,7 @@ class SingleThreadJobScheduler {
 
     reschedule() {
         this.jobs.forEach(job => {
+            job.needInterrupt = false;
             clearInterval(job.timerId)
             job.timerId = setInterval(job.run, job.intervalSec * 1000);
         })
@@ -14,6 +15,7 @@ class SingleThreadJobScheduler {
     
     unschedule() {
         this.jobs.forEach(job => {
+            job.needInterrupt = true;
             clearInterval(job.timerId)
         })
     }

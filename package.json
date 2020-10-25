@@ -1,6 +1,6 @@
 {
   "name": "@green-api/whatsapp-api-client",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "Library to integrate with WhatsApp API. For details have look at https://green-api.com",
   "license": "MIT",
   "main": "lib/bundle.js",
