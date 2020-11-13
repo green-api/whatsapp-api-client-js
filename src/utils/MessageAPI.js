@@ -20,11 +20,14 @@ class MessageAPI {
         CommonUtils.validateString('message', message);
 
         const method = 'sendMessage';
+        
         const postData = {
-            'chatId': chatId,
-            'phoneNumber': phoneNumber,
             'message': message,
         }
+
+        this.addChadIdParam(postData, chatId)
+        this.addPhoneParam(postData, phoneNumber)
+
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data
     }
@@ -46,14 +49,17 @@ class MessageAPI {
         CommonUtils.validateNumber('longitude', longitude);
 
         const method = 'sendLocation';
+
         const postData = {
-            'chatId': chatId,
-            'phoneNumber': phoneNumber,
             'nameLocation': nameLocation,
             'address': address,
             'latitude': latitude,
             'longitude': longitude,
         }
+
+        this.addChadIdParam(postData, chatId)
+        this.addPhoneParam(postData, phoneNumber)
+
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data
     }
@@ -69,11 +75,14 @@ class MessageAPI {
         CommonUtils.validateObject('contact', contact);
 
         const method = 'sendContact';
+
         const postData = {
-            'chatId': chatId,
-            'phoneNumber': phoneNumber,
             'contact': contact,
         }
+
+        this.addChadIdParam(postData, chatId)
+        this.addPhoneParam(postData, phoneNumber)
+
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data
     }
@@ -89,11 +98,14 @@ class MessageAPI {
         CommonUtils.validateString('urlLink', urlLink);
 
         const method = 'sendLink';
+
         const postData = {
-            'chatId': chatId,
-            'phoneNumber': phoneNumber,
             'urlLink': urlLink,
         }
+
+        this.addChadIdParam(postData, chatId)
+        this.addPhoneParam(postData, phoneNumber)
+
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data
     }
@@ -108,11 +120,14 @@ class MessageAPI {
         CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
 
         const method = 'readChat';
+
         const postData = {
-            'chatId': chatId,
-            'phoneNumber': phoneNumber,
             'idMessage': idMessage ,
         }
+
+        this.addChadIdParam(postData, chatId)
+        this.addPhoneParam(postData, phoneNumber)
+
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data
     }
@@ -148,6 +163,18 @@ class MessageAPI {
         const method = 'lastOutgoingMessages';
         const response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method));
         return response.data.map((msg) => new Message(msg))
+    }
+
+    addChadIdParam(postData, chatId) {
+        if (chatId) {
+            postData.chatId = chatId
+        } 
+    }
+
+    addPhoneParam(postData, phoneNumber) {
+        if (phoneNumber) {
+            postData.phoneNumber = phoneNumber
+        }
     }
 }
 

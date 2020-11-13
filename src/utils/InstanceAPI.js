@@ -63,9 +63,11 @@ class InstanceAPI {
 
         const method = 'getAvatar';
         const postData = {
-            'chatId': chatId,
-            'phoneNumber': phoneNumber,
         }
+
+        this.addChadIdParam(postData, chatId)
+        this.addPhoneParam(postData, phoneNumber)
+
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data
     }
@@ -74,6 +76,18 @@ class InstanceAPI {
         const method = 'getContacts';
         const response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method));
         return response.data
+    }
+
+    addChadIdParam(postData, chatId) {
+        if (chatId) {
+            postData.chatId = chatId
+        } 
+    }
+
+    addPhoneParam(postData, phoneNumber) {
+        if (phoneNumber) {
+            postData.phoneNumber = phoneNumber
+        }
     }
 
 }

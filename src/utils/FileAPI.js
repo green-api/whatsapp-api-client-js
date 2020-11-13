@@ -22,12 +22,14 @@ class FileAPI {
 
         const method = 'sendFileByUrl';
         const postData = {
-            'chatId': chatId,
-            'phoneNumber': phoneNumber,
             'urlFile': urlFile,
             'fileName': fileName,
             'caption': caption,
         }
+
+        this.addChadIdParam(postData, chatId)
+        this.addPhoneParam(postData, phoneNumber)
+
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data;
     }
@@ -56,6 +58,18 @@ class FileAPI {
         const url = `${this._restAPI.params.host}/waInstance${this._restAPI.params.idInstance}/${method}/${messageId}`
         const response = await axios.get(url);
         return response.data;
+    }
+
+    addChadIdParam(postData, chatId) {
+        if (chatId) {
+            postData.chatId = chatId
+        } 
+    }
+
+    addPhoneParam(postData, phoneNumber) {
+        if (phoneNumber) {
+            postData.phoneNumber = phoneNumber
+        }
     }
 }
 
