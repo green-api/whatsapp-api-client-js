@@ -1,8 +1,6 @@
-const whatsAppClient = require('@green-api/whatsapp-api-client')
-const dotenv = require("dotenv");
+import whatsAppClient from '@green-api/whatsapp-api-client'
 
 // Send WhatsApp message using callbacks
-dotenv.config()
 const restAPI = whatsAppClient.restAPI(({
     idInstance: process.env.ID_INSTANCE,
     apiTokenInstance: process.env.API_TOKEN_INSTANCE

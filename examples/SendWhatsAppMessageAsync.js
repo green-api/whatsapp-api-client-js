@@ -1,9 +1,7 @@
-import whatsAppClient from '../src/index.js'
-import dotenv from "dotenv";
+import whatsAppClient from '@green-api/whatsapp-api-client'
 
 // Send WhatsApp message
 (async () => {
-    dotenv.config()
     const restAPI = whatsAppClient.restAPI(({
         credentialsPath: "examples\\credentials"
     }))

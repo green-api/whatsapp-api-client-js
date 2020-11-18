@@ -1,8 +1,6 @@
-import whatsAppClient from '../src/index.js'
-import dotenv from "dotenv";
+import whatsAppClient from '@green-api/whatsapp-api-client'
 
 (async () => {
-    dotenv.config()
 
     let restAPI = whatsAppClient.restAPI(({
         idInstance: process.env.ID_INSTANCE,

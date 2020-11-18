@@ -10,7 +10,7 @@ This library helps you easily create a javascript application to connect the Wha
 
 ## API
 
-The API corresponds with [REST API](https://green-api.com/docs/api/) from green-api since the library wraps own methods as https calls to the service. Therefore using these [docs](https://green-api.com/docs/) is highly encouraged.
+The API corresponds with [REST API](https://green-api.com/docs/api/) from green-api since the library wraps own methods as https calls to the service. Therefore using these [docs](https://green-api.com/docs/) is highly encouraged. 
 
 
 ## Installing
@@ -32,6 +32,8 @@ Sending WhatsApp message like any other call to the API requires account registe
 WhatsApp mobile app authentication may be achived by using [control panel](https://cabinet.green-api.com). You need to scan QR-code generated within the control panel.
 
 ## Examples
+
+
 
 ### Send WhatsApp message
 Use common javascript
@@ -188,6 +190,9 @@ import bodyParser from 'body-parser';
 })();
 
 ```
+
+There's some cool [examples too](examples/).
+
 ## Deploying development environment
 
 Any  help with development and bug fixing is appreciated. In order to deploy test-ready environment please make the steps:

@@ -1,6 +1,6 @@
 {
   "name": "@green-api/whatsapp-api-client",
-  "version": "0.3.11",
+  "version": "0.3.13",
   "description": "Library to integrate with WhatsApp API. For details have look at https://green-api.com",
   "license": "MIT",
   "main": "lib/bundle.js",
@@ -10,7 +10,9 @@
     "buildBrowser": "rollup --config rollup.config.browser.js --environment BUILD:production",
     "buildNode": "rollup --config rollup.config.node.js --environment BUILD:production",
     "build": "npm run buildBrowser && npm run buildNode",
-    "server": "node ./src/WebhookAPI.js"
+    "server": "node ./src/WebhookAPI.js",
+    "link": "npm link",
+    "install": "npm link @green-api/whatsapp-api-client"
   },
   "engines": {
     "node": ">=10.0.0"
@@ -42,6 +44,5 @@
   },
   "dependencies": {
     "axios": "0.19.2"
-  },
-  "type": "module"
+  }
 }

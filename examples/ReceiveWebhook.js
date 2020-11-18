@@ -1,12 +1,10 @@
-import whatsAppClient from '../src/index.js'
-import dotenv from "dotenv";
+import whatsAppClient from '@green-api/whatsapp-api-client'
 import express from "express";
 import bodyParser from 'body-parser';
 
 // Send message and receive webhook
 (async () => {
     try {
-        dotenv.config()
 
         await restAPI.settings.setSettings({
             webhookUrl: '/webhooks'
