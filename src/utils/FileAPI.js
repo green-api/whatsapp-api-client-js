@@ -43,7 +43,7 @@ class FileAPI {
             method: 'post',
             url: CommonUtils.generateMethodURL(this._restAPI.params, method),
             data: formData,
-            headers: {'Content-Type': 'multipart/form-data'}
+            ... formData.getHeaders()
         })
         return response.data; 
     }

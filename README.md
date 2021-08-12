@@ -209,6 +209,10 @@ Compile browser and node|webpack versions with single command:
 ```
 npm run build
 ```
+Publish to npm if you have access
+```
+npm publish
+```
 
 ## Third-party libraries
 
