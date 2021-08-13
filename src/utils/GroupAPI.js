@@ -88,7 +88,7 @@ class GroupAPI {
      */
     async updateGroupName(groupId, groupName) {
         CommonUtils.validateString('groupId', groupId);
-        CommonUtils.validateString(groupName);
+        CommonUtils.validateString('groupName', groupName);
 
         const method = 'updateGroupName';
         const postData = {

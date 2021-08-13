@@ -31,7 +31,7 @@ class CommonUtils {
             CommonUtils.validateInteger('phoneNumber', phoneNumber)
         }
         if (!phoneNumber) {
-            CommonUtils.validateString('phoneNumber', chatId)
+            CommonUtils.validateString('chatId', chatId)
         }
     }
 
