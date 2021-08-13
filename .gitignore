@@ -1,6 +1,6 @@
 .vscode/
 node_modules
-lib
+
 
 **/*.DS_Store
 env

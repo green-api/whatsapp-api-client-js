@@ -10,8 +10,7 @@
     "buildBrowser": "rollup --config rollup.config.browser.js --environment BUILD:production",
     "buildNode": "rollup --config rollup.config.node.js --environment BUILD:production",
     "build": "npm run buildBrowser && npm run buildNode",
-    "server": "node ./src/WebhookAPI.js",
-    "preinstall": "npm install --ignore-scripts && npm run build"
+    "server": "node ./src/WebhookAPI.js"
   },
   "engines": {
     "node": ">=10.0.0"
@@ -42,6 +41,7 @@
     "rollup-plugin-terser": "^7.0.2"
   },
   "dependencies": {
-    "axios": "0.21.1"
+    "axios": "0.21.1",
+    "fs": "0.0.1-security"
   }
 }
