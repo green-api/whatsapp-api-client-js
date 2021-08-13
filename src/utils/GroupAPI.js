@@ -76,7 +76,9 @@ class GroupAPI {
         const method = 'removeGroupParticipant';
         const postData = {
             'groupId': groupId,
-        }
+            'participantChatId': participantChatId,
+            'participantPhone': participantPhone,
+        };
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data;
     }
