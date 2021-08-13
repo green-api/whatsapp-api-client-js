@@ -7,7 +7,6 @@ import SettingsAPI from './utils/SettingsAPI.js';
 import GroupAPI from './utils/GroupAPI.js';
 import WebhookServiceAPI from './utils/WebhookServiceAPI.js';
 import * as fs from 'fs'
-import { notStrictEqual } from 'assert';
 
 class RestAPI {
 

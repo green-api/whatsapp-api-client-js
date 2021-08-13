@@ -1,8 +1,7 @@
 .vscode/
 node_modules
-lib
 
-.*
-!/.gitignore
+
+**/*.DS_Store
 env
 examples/credentials
