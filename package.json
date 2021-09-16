@@ -41,7 +41,7 @@
     "rollup-plugin-terser": "^7.0.2"
   },
   "dependencies": {
-    "axios": "0.21.1",
+    "axios": "0.21.2",
     "fs": "0.0.1-security"
   }
 }
