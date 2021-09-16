@@ -14,6 +14,7 @@ class GroupAPI {
      * @param {Array} phones 
      */
     async createGroup(groupName, chatIds, phones) {
+        CommonUtils.validateString('groupName', groupName);
         CommonUtils.validateArray('chatIds', chatIds);
         CommonUtils.validateArray('phones', phones);
 
@@ -34,7 +35,7 @@ class GroupAPI {
      * @param {Number} participantPhone 
      */
     async addGroupParticipant(groupId, participantChatId, participantPhone) {
-        CommonUtils.validateString(groupId);
+        CommonUtils.validateString('groupId', groupId);
         CommonUtils.validateChatIdPhoneNumber(participantChatId, participantPhone);
 
         const method = 'addGroupParticipant';
@@ -52,7 +53,7 @@ class GroupAPI {
      * @param {String} groupId 
      */
     async getGroupData(groupId) {
-        CommonUtils.validateString(groupId);
+        CommonUtils.validateString('groupId', groupId);
 
         const method = 'getGroupData';
         const postData = {
@@ -69,13 +70,15 @@ class GroupAPI {
      * @param {Number} participantPhone 
      */
     async removeGroupParticipant(groupId, participantChatId, participantPhone) {
-        CommonUtils.validateString(groupId);
+        CommonUtils.validateString('groupId', groupId);
         CommonUtils.validateChatIdPhoneNumber(participantChatId, participantPhone);
 
         const method = 'removeGroupParticipant';
         const postData = {
             'groupId': groupId,
-        }
+            'participantChatId': participantChatId,
+            'participantPhone': participantPhone,
+        };
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data;
     }
@@ -86,8 +89,8 @@ class GroupAPI {
      * @param {String} groupName 
      */
     async updateGroupName(groupId, groupName) {
-        CommonUtils.validateString(groupId);
-        CommonUtils.validateString(groupName);
+        CommonUtils.validateString('groupId', groupId);
+        CommonUtils.validateString('groupName', groupName);
 
         const method = 'updateGroupName';
         const postData = {
@@ -105,7 +108,7 @@ class GroupAPI {
      * @param {Number} participantPhone 
      */
     async setGroupAdmin(groupId, participantChatId, participantPhone) {
-        CommonUtils.validateString(groupId);
+        CommonUtils.validateString('groupId', groupId);
 
         const method = 'setGroupAdmin';
         const postData = {
@@ -124,7 +127,7 @@ class GroupAPI {
      * @param {Number} participantPhone 
      */
     async removeAdmin(groupId, participantChatId, participantPhone) {
-        CommonUtils.validateString(groupId);
+        CommonUtils.validateString('groupId', groupId);
 
         const method = 'removeAdmin';
         const postData = {
@@ -141,7 +144,7 @@ class GroupAPI {
      * @param {String} groupId 
      */
     async leaveGroup(groupId) {
-        CommonUtils.validateString(groupId);
+        CommonUtils.validateString('groupId', groupId);
 
         const method = 'removeAdmin';
         const postData = {
