@@ -1,4 +1,5 @@
 # whatsapp-api-client library for javascript
+* [![build](https://github.com/green-api/whatsapp-api-client/workflows/build_library/badge.svg)](https://github.com/green-api/whatsapp-api-client/actions/workflows/build_library.yml)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/green-api/whatsapp-api-client/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/v/release/green-api/whatsapp-api-client.svg)](https://github.com/green-api/whatsapp-api-client/releases)
 [![npm version](https://badge.fury.io/js/%40green-api%2Fwhatsapp-api-client.svg)](https://www.npmjs.com/package/@green-api/whatsapp-api-client)
