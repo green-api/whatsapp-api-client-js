@@ -36,6 +36,7 @@ jobs:
         run: |
             cd whatsapp-api-client
             npm install
+            npm install -g rollup
       # Building nodejs and browser libraries
       - 
         name: Building the docs ru...
