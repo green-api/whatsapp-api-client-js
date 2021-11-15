@@ -31,5 +31,5 @@ module.exports = {
     }),
     pluginJson(),
   ],
-  external: ["fs", "axios"],
+  external: ["fs"],
 };
