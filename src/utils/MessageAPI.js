@@ -28,7 +28,9 @@ class MessageAPI {
         this.addChadIdParam(postData, chatId)
         this.addPhoneParam(postData, phoneNumber)
 
-        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData, {
+            headers:{'Access-Control-Allow-Origin': '*'}
+        });
         return response.data
     }
 
@@ -173,7 +175,7 @@ class MessageAPI {
 
     addPhoneParam(postData, phoneNumber) {
         if (phoneNumber) {
-            postData.phoneNumber = phoneNumber
+            postData.chatId = `${phoneNumber}@c.us`
         }
     }
 }
