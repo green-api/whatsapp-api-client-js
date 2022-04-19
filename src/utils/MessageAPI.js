@@ -28,9 +28,7 @@ class MessageAPI {
         this.addChadIdParam(postData, chatId)
         this.addPhoneParam(postData, phoneNumber)
 
-        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData, {
-            headers:{'Access-Control-Allow-Origin': '*'}
-        });
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data
     }
 

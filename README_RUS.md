@@ -20,6 +20,27 @@ npm i @green-api/whatsapp-api-client
 <script type="text/javascript" src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
 ```
 
+## ИМпорт 
+
+Есть несколько способов импортировать библиотеку в проект
+
+Используя классический javascript 
+```
+const whatsAppClient = require("@green-api/whatsapp-api-client");
+```
+Используя ES6 javascript 
+```
+import whatsAppClient from "@green-api/whatsapp-api-client";
+```
+Используя typescript 
+```
+import * as whatsAppClient from "@green-api/whatsapp-api-client";
+```
+Используя браузерный javascript 
+```
+<script src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
+```
+
 ## Авторизация 
 
 Чтобы отправить сообщение или выполнить другой метод Green-API, аккаунт WhatsApp в приложении телефона должен быть в авторизованном состоянии. Для авторизации аккаунта перейдите в [личный кабинет](https://cabinet.green-api.com) и сканируйте QR-код с использованием прилоения WhatsApp.

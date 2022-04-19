@@ -60,8 +60,7 @@
                     idInstance: document.getElementById("idInstance").value,
                     apiTokenInstance: document.getElementById("apiTokenIsntance").value
                 }))
-
-                restAPI.message.sendMessage(null, Number.parseInt(document.getElementById("phoneNumber").value), document.getElementById("messageText").value)
+                restAPI.message.sendMessage(`${document.getElementById("phoneNumber").value}@c.us`, null, document.getElementById("messageText").value)
                 .then((data) => {
                     console.log(data);
                     document.getElementById("resultText").innerHTML = "Message was sent successfully. Message id: " + data.idMessage;
@@ -88,7 +87,7 @@
                     if (data.receiptId) {
                         restAPI.webhookService.deleteNotification(data.receiptId)
                         .then(() => {
-                            document.getElementById("resultText").innerHTML = "Message was received successfully. Message text: " + data.messageData.textMessageData.textMessage;
+                            document.getElementById("resultText").innerHTML = "Message was received successfully. Message text: " + JSON.stringify(data.body);
                         }).catch(reason => {
                             console.error(reason);
                             document.getElementById("resultText").innerHTML = "Message was not confirmed. Reason: " + reason + ". See logs for details";

@@ -30,6 +30,28 @@ For vanilla html-js website modify index.html:
 <script src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
 ```
 
+## Importing 
+
+There are several ways to import the library in a project
+
+Using common javascript 
+```
+const whatsAppClient = require("@green-api/whatsapp-api-client");
+```
+Using ES6 javascript 
+```
+import whatsAppClient from "@green-api/whatsapp-api-client";
+```
+Using typescript 
+```
+import * as whatsAppClient from "@green-api/whatsapp-api-client";
+```
+
+Using browser javascript 
+```
+<script src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
+```
+
 ## Authentification
 
 Sending WhatsApp message like any other call to the API requires account registered on [green-api.com](https://green-api.com) and authentication completed on mobile WhatsApp app. To register account you have to proceed to the [control panel](https://cabinet.green-api.com). After registering you wll get own unique pair of `ID_INSTANCE` and `API_TOKEN_INSTANCE` keys.
