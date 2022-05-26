@@ -94,12 +94,12 @@
 
             const ws = new WebSocket(`wss://api.green-api.com/waInstance${document.getElementById("idInstance").value}/scanqrcode/${document.getElementById("apiTokenIsntance").value}`);
 
-            ws.on('open', () => {
+            ws.onopen = () => {
                 console.log("websocket is open")
-            });
+            };
 
-            ws.on('message', (response) => {
-                const data = JSON.parse(response)
+            ws.onmessage= (response) => {
+                const data = JSON.parse(response.data)
                 console.log(data);
                 document.getElementById("resultText").innerHTML = "";
                 if (data.type === 'qrCode') {
@@ -111,16 +111,16 @@
                     isAuthed();
                     document.getElementById("resultText").innerHTML = data.message
                 }
-            });
+            };
 
-            ws.on('error', (response) => {
+            ws.onerror = (response) => {
                 console.error(reason);
                 document.getElementById("resultText").innerHTML = reason + ". See logs for details";
-            });
+            };
 
-            ws.on('close', () => {
+            ws.onclose = () => {
                 console.log(`websocket closed`)
-            });
+            };
         }
 
         function isAuthed() {
