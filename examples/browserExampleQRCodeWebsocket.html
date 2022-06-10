@@ -52,16 +52,13 @@
     </div>
     <script type="text/javascript" src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
     <script>
-        var intervalId = null
         const qrCodeElement = document.getElementById("img-qr-code")
         const qrTempalte = qrCodeElement.getAttribute('src');
         
         document.getElementById("getQrBtn").addEventListener("click", function () {
             try {
                 isAuthed();
-                clearInterval(intervalId)
                 updateQRCode()
-                intervalId = setInterval(updateQRCode, 5000);
                 
             } catch (reason) {
                 console.error(reason);
@@ -72,6 +69,7 @@
         document.getElementById("logoutQrBtn").addEventListener("click", function () {
             try {
                 const restAPI = whatsAppClient.restAPI(({
+                    host: 'http://lcoalhost:6001',
                     idInstance: document.getElementById("idInstance").value,
                     apiTokenInstance: document.getElementById("apiTokenIsntance").value
                 }))
@@ -91,14 +89,14 @@
         });
 
         function updateQRCode() {
-
-            const ws = new WebSocket(`wss://api.green-api.com/waInstance${document.getElementById("idInstance").value}/scanqrcode/${document.getElementById("apiTokenIsntance").value}`);
+            const ws = new WebSocket(`ws://localhost:6001/waInstance${document.getElementById("idInstance").value}/scanqrcode/${document.getElementById("apiTokenIsntance").value}`);
 
             ws.onopen = () => {
+                document.getElementById("getQrBtn").setAttribute('disabled', true)
                 console.log("websocket is open")
             };
 
-            ws.onmessage= (response) => {
+            ws.onmessage = (response) => { 
                 const data = JSON.parse(response.data)
                 console.log(data);
                 document.getElementById("resultText").innerHTML = "";
@@ -107,24 +105,26 @@
                     qrCodeElement.setAttribute('src', qrTempalte.replace("%QR_DATA%", data.message))
                 } else {
                     qrCodeElement.hidden = true;
-                    clearInterval(intervalId)
                     isAuthed();
+                    ws.close()
                     document.getElementById("resultText").innerHTML = data.message
                 }
             };
-
             ws.onerror = (response) => {
                 console.error(reason);
                 document.getElementById("resultText").innerHTML = reason + ". See logs for details";
+                ws.close()
             };
 
             ws.onclose = () => {
+                document.getElementById("getQrBtn").removeAttribute('disabled')
                 console.log(`websocket closed`)
             };
         }
 
         function isAuthed() {
             const restAPI = whatsAppClient.restAPI(({
+                    host: 'http://lcoalhost:6001',
                     idInstance: document.getElementById("idInstance").value,
                     apiTokenInstance: document.getElementById("apiTokenIsntance").value
                 }))
