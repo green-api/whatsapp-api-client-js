@@ -5,7 +5,7 @@
 [![GitHub release](https://img.shields.io/github/v/release/green-api/whatsapp-api-client.svg)](https://github.com/green-api/whatsapp-api-client/releases)
 [![npm version](https://badge.fury.io/js/%40green-api%2Fwhatsapp-api-client.svg)](https://www.npmjs.com/package/@green-api/whatsapp-api-client)
 
-This library helps you easily create a javascript application to connect the WhatsApp API using service [green-api.com](https://green-api.com). You need to get `ID_INSTANCE`and `API_TOKEN_INSTANCE` in the [control panel](https://console.green-api.com) in order to use this library.
+This library helps you easily create a javascript application to connect the WhatsApp API using service [green-api.com](https://green-api.com/en). You need to get `ID_INSTANCE`and `API_TOKEN_INSTANCE` in the [control panel](https://console.green-api.com) in order to use this library. It's free for developers.
 
 ## Документация на русском языке
 
@@ -13,7 +13,7 @@ This library helps you easily create a javascript application to connect the Wha
 
 ## API
 
-The API corresponds with [REST API](https://green-api.com/docs/api/) from green-api since the library wraps own methods as https calls to the service. Therefore using these [docs](https://green-api.com/docs/) is highly encouraged.
+The API corresponds with [REST API](https://green-api.com/en/docs/api/) from green-api since the library wraps own methods as https calls to the service. Therefore using these [docs](https://green-api.com/en/docs/) is highly encouraged.
 
 ## Installing
 
@@ -54,7 +54,7 @@ Using browser javascript
 
 ## Authentification
 
-Sending WhatsApp message like any other call to the API requires account registered on [green-api.com](https://green-api.com) and authentication completed on mobile WhatsApp app. To register account you have to proceed to the [control panel](https://cabinet.green-api.com). After registering you wll get own unique pair of `ID_INSTANCE` and `API_TOKEN_INSTANCE` keys.
+Sending WhatsApp message like any other call to the API requires account registered on [green-api.com](https://green-api.com/en) and authentication completed on mobile WhatsApp app. To register account you have to proceed to the [control panel](https://cabinet.green-api.com/en). After registering you wll get own unique pair of `ID_INSTANCE` and `API_TOKEN_INSTANCE` keys.
 
 WhatsApp mobile app authentication may be achived by using [control panel](https://cabinet.green-api.com). You need to scan QR-code generated within the control panel.
 
