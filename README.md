@@ -7,10 +7,6 @@
 
 This library helps you easily create a javascript application to connect the WhatsApp API using service [green-api.com](https://green-api.com/en). You need to get `ID_INSTANCE`and `API_TOKEN_INSTANCE` in the [control panel](https://console.green-api.com) in order to use this library. It's free for developers.
 
-## Документация на русском языке
-
-Смотрите readme на русском [здесь](README_RUS.md)
-
 ## API
 
 The API corresponds with [REST API](https://green-api.com/en/docs/api/) from green-api since the library wraps own methods as https calls to the service. Therefore using these [docs](https://green-api.com/en/docs/) is highly encouraged.
