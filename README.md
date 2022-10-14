@@ -56,6 +56,8 @@ WhatsApp mobile app authentication may be achived by using [control panel](https
 
 ## Examples
 
+Please do not use 'phoneNumber' parameter when calling methods. It is deprecated. Examples below are based on 'chatId' paramemeter
+
 ### Send WhatsApp message
 
 Use common javascript
@@ -68,7 +70,7 @@ const restAPI = whatsAppClient.restAPI({
   apiTokenInstance: "YOUR_API_TOKEN_INSTANCE",
 });
 
-restAPI.message.sendMessage(null, 79999999999, "hello world").then((data) => {
+restAPI.message.sendMessage("79999999999@c.us", null , "hello world").then((data) => {
   console.log(data);
 });
 ```
@@ -83,7 +85,7 @@ or use browser js script
     apiTokenInstance: "YOUR_API_TOKEN_INSTANCE",
   });
   restAPI.message
-    .sendMessage(null, 79999999999, "hello world")
+    .sendMessage("79999999999@c.us", null, "hello world")
     .then((data) => {
       console.log(data);
     })
@@ -104,8 +106,8 @@ import whatsAppClient from "@green-api/whatsapp-api-client";
     apiTokenInstance: "YOUR_API_TOKEN_INSTANCE",
   });
   const response = await restAPI.message.sendMessage(
+    "79999999999@c.us",
     null,
-    79999999999,
     "hello world"
   );
 })();
@@ -171,8 +173,8 @@ import whatsAppClient from "@green-api/whatsapp-api-client";
     apiTokenInstance: "YOUR_API_TOKEN_INSTANCE",
   });
   const response = await restAPI.file.sendFileByUrl(
+    "79999999999@c.us",
     null,
-    79999999999,
     "https://avatars.mds.yandex.net/get-pdb/477388/77f64197-87d2-42cf-9305-14f49c65f1da/s375",
     "horse.png",
     "horse"
@@ -218,8 +220,8 @@ import bodyParser from "body-parser";
       });
       // Send test message that triggers webhook
       const response = await restAPI.message.sendMessage(
+        "79999999999@c.us",
         null,
-        79999999999,
         "hello world"
       );
     });

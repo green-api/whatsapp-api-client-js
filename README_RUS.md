@@ -47,6 +47,8 @@ import * as whatsAppClient from "@green-api/whatsapp-api-client";
 
 ## Примеры
 
+Не испольуйте параметр 'phoneNumber' при вызове методов. Он устарел. Примеры ниже используют параметр 'chatId'
+
 ### Отправка сообщения на номер WhatsApp
 Используя common js
 ``` js
@@ -57,7 +59,7 @@ const restAPI = whatsAppClient.restAPI(({
     apiTokenInstance: YOUR_API_TOKEN_INSTANCE
 }))
 
-restAPI.message.sendMessage(null, 79999999999, "hello world")
+restAPI.message.sendMessage("79999999999@c.us", null, "hello world")
 .then((data) => {
     console.log(data);
 }) ;
@@ -71,7 +73,7 @@ restAPI.message.sendMessage(null, 79999999999, "hello world")
         idInstance: "YOUR_ID_INSTANCE",
         apiTokenInstance: "YOUR_API_TOKEN_INSTANCE"
     }))
-    restAPI.message.sendMessage(null, 79999999999, "hello world")
+    restAPI.message.sendMessage("79999999999@c.us", null, "hello world")
     .then((data) => {
         console.log(data);
     }).catch((reason) =>{
@@ -89,7 +91,7 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
         idInstance: YOUR_ID_INSTANCE, 
         apiTokenInstance: YOUR_API_TOKEN_INSTANCE
     }))
-    const response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
+    const response = await restAPI.message.sendMessage("79999999999@c.us", null, "hello world");
 })();
 ```
 
@@ -150,7 +152,7 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
         idInstance: YOUR_ID_INSTANCE,
         apiTokenInstance: YOUR_API_TOKEN_INSTANCE
     }))
-    const response = await restAPI.file.sendFileByUrl(null, 79999999999, 'https://avatars.mds.yandex.net/get-pdb/477388/77f64197-87d2-42cf-9305-14f49c65f1da/s375', 'horse.png', 'horse');
+    const response = await restAPI.file.sendFileByUrl("79999999999@c.us", null, 'https://avatars.mds.yandex.net/get-pdb/477388/77f64197-87d2-42cf-9305-14f49c65f1da/s375', 'horse.png', 'horse');
 })();
 ```
 
@@ -190,7 +192,7 @@ import bodyParser from 'body-parser';
                 apiTokenInstance: MY_API_TOKEN_INSTANCE
             }));
             // Отправляем тестовое сообщение, для того чтобы сработали события вебхуков
-            const response = await restAPI.message.sendMessage(null, 79999999999, "hello world");
+            const response = await restAPI.message.sendMessage("79999999999@c.us", null, "hello world");
     
         });
     } catch (error) {
