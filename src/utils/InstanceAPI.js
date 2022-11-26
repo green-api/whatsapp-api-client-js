@@ -72,8 +72,68 @@ class InstanceAPI {
         return response.data
     }
 
+    /**
+     * 
+     * @param {String} chatId 
+     */
+    async archiveChat(chatId) {
+        CommonUtils.validateChatIdPhoneNumber(chatId, undefined)
+
+        const method = 'archiveChat';
+        const postData = {
+
+        }
+
+        this.addChadIdParam(postData, chatId)
+
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
+        return response.data
+    }
+
+     /**
+     * 
+     * @param {String} chatId 
+     */
+    async unarchiveChat(chatId) {
+        CommonUtils.validateChatIdPhoneNumber(chatId, undefined)
+
+        const method = 'unarchiveChat';
+        const postData = {
+            
+        }
+
+        this.addChadIdParam(postData, chatId)
+
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
+        return response.data
+    }
+
+    /**
+     * 
+     * @param {String} chatId 
+     */
+    async getContactInfo(chatId) {
+        CommonUtils.validateChatIdPhoneNumber(chatId, undefined)
+
+        const method = 'getContactInfo';
+        const postData = {
+            
+        }
+
+        this.addChadIdParam(postData, chatId)
+
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
+        return response.data
+    }
+
     async getContacts() {
         const method = 'getContacts';
+        const response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method));
+        return response.data
+    }
+
+    async getChats() {
+        const method = 'getChats';
         const response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method));
         return response.data
     }

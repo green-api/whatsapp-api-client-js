@@ -47,17 +47,25 @@ class FileAPI {
         })
         return response.data; 
     }
+    
     /**
-     * 
+     * @param {String} chatId 
      * @param {String} messageId 
      */
-    async downloadFile(messageId) {
-        CommonUtils.validateString('messageId', messageId);
+    async downloadFile(chatId, idMessage) {
+        CommonUtils.validateChatIdPhoneNumber(chatId, undefined);
+        CommonUtils.validateString('message', message);
 
         const method = 'downloadFile';
-        const url = `${this._restAPI.params.host}/waInstance${this._restAPI.params.idInstance}/${method}/${messageId}`
-        const response = await axios.get(url);
-        return response.data;
+        
+        const postData = {
+            'idMessage': idMessage,
+        }
+
+        this.addChadIdParam(postData, chatId)
+
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
+        return response.data
     }
 
     addChadIdParam(postData, chatId) {

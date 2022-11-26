@@ -32,6 +32,103 @@ class MessageAPI {
         return response.data
     }
 
+    /** Send buttons message to chat. Method call adds message to sending queue
+     * 
+     * @param {String} chatId - chat id using Whatsapp format (17633123456@c.us - for private messages). 
+     *  Mandatory if phoneNumber is empty
+     * @param {String} message - text message
+     * @param {footer} footer - footer message
+     * @param {array} buttons - buttons, for example  [{"buttonId": "1", "buttonText": "green"}, {"buttonId": "2", "buttonText": "red"}, {"buttonId": "3", "buttonText": "blue"}]
+     */
+    async sendButtons(chatId, message, footer, buttons) {
+        CommonUtils.validateChatIdPhoneNumber(chatId, undefined);
+        CommonUtils.validateString('message', message);
+
+        const method = 'sendMessage';
+        
+        const postData = {
+            'message': message,
+            'footer': footer,
+            'buttons': buttons
+        }
+
+        this.addChadIdParam(postData, chatId)
+
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
+        return response.data
+    }
+
+    /** Send buttons message to chat. Method call adds message to sending queue
+     * 
+     * @param {String} chatId - chat id using Whatsapp format (17633123456@c.us - for private messages). 
+     * @param {String} message - text message
+     * @param {footer} footer - footer message
+     * @param {array} templateButtons - buttons, for example [
+            {"index": 1, "urlButton": {"displayText": "⭐ Star us on GitHub!", "url": "https://github.com/green-api/docs"}},
+            {"index": 2, "callButton": {"displayText": "Call us", "phoneNumber": "+1 (234) 5678-901"}},
+            {"index": 3, "quickReplyButton": {"displayText": "Plain button", "id": "plainButtonId"}}
+        ]
+     */
+    async sendTemplateButtons(chatId, message, footer, templateButtons) {
+        CommonUtils.validateChatIdPhoneNumber(chatId, undefined);
+        CommonUtils.validateString('message', message);
+
+        const method = 'sendTemplateButtons';
+        
+        const postData = {
+            'message': message,
+            'footer': footer,
+            'templateButtons': templateButtons
+        }
+
+        this.addChadIdParam(postData, chatId)
+
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
+        return response.data
+    }
+
+    /** Send buttons message to chat. Method call adds message to sending queue
+     * 
+     * @param {String} chatId - chat id using Whatsapp format (17633123456@c.us - for private messages). 
+     * @param {String} message - text message
+     * @param {String} buttonText - action list
+     * @param {String} title - title
+     * @param {array} sections - sections, for example  [
+        {
+            "title": "Секция 1",
+            "rows": [
+                {
+                    "title": "Вариант 1",
+                    "rowId": "option1"
+                },
+                {
+                    "title": "Вариант 2",
+                    "rowId": "option2",
+                    "description": "Пояснение"
+                }
+            ]
+        }
+     */
+    async sendListMessage(chatId, message, buttonText, title, footer, sections) {
+        CommonUtils.validateChatIdPhoneNumber(chatId, undefined);
+        CommonUtils.validateString('message', message);
+
+        const method = 'sendListMessage';
+        
+        const postData = {
+            'message': message,
+            'buttonText': buttonText,
+            'title': title,
+            'footer': footer,
+            'sections': sections,
+        }
+
+        this.addChadIdParam(postData, chatId)
+
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
+        return response.data
+    }
+
     /**
      * 
      * @param {String} chatId 
@@ -163,6 +260,24 @@ class MessageAPI {
         const method = 'lastOutgoingMessages';
         const response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method));
         return response.data.map((msg) => new Message(msg))
+    }
+
+    /**
+     * Returns history of chat
+     */
+    async getChatHistory(chatId) {
+        CommonUtils.validateChatIdPhoneNumber(chatId, undefined);
+
+        const method = 'getChatHistory';
+
+        const postData = {
+            'chatId': chatId,
+        }
+
+        this.addChadIdParam(postData, chatId)
+
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
+        return response.data
     }
 
     addChadIdParam(postData, chatId) {
