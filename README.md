@@ -5,6 +5,7 @@
 [![GitHub release](https://img.shields.io/github/v/release/green-api/whatsapp-api-client.svg)](https://github.com/green-api/whatsapp-api-client/releases)
 [![npm version](https://badge.fury.io/js/%40green-api%2Fwhatsapp-api-client.svg)](https://www.npmjs.com/package/@green-api/whatsapp-api-client)
 
+- [English documentation](README.md)
 - [Документация на русском языке](README_RUS.md)
 
 This library helps you easily create a javascript application to connect the WhatsApp API using service [green-api.com](https://green-api.com/en). You need to get `ID_INSTANCE`and `API_TOKEN_INSTANCE` in the [control panel](https://console.green-api.com) in order to use this library. It's free for developers.
