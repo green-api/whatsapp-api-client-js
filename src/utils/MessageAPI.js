@@ -280,6 +280,29 @@ class MessageAPI {
         return response.data
     }
 
+    /**
+     * The method is intended for forwarding messages to a personal or group chat
+     * @param {String} chatId
+     * @param {String} chatIdFrom
+     * @param {Array} messages
+     */
+    async forwardMessages (chatId, chatIdFrom, messages) {
+        CommonUtils.validateString('chatId', chatId)
+        CommonUtils.validateString('chatIdFrom', chatIdFrom)
+        CommonUtils.validateArray('messages', messages);
+
+        const method = 'ForwardMessages';
+
+        const postData = {
+            'chatId': chatId,
+            'chatIdFrom': chatIdFrom,
+            'messages': messages,
+        }
+
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
+        return response.data
+    }
+
     addChadIdParam(postData, chatId) {
         if (chatId) {
             postData.chatId = chatId
