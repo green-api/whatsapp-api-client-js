@@ -44,7 +44,7 @@ class MessageAPI {
         CommonUtils.validateChatIdPhoneNumber(chatId, undefined);
         CommonUtils.validateString('message', message);
 
-        const method = 'sendMessage';
+        const method = 'sendButtons';
         
         const postData = {
             'message': message,
