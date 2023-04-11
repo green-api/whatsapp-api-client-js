@@ -7,8 +7,9 @@ const bodyParser = require("body-parser");
     try {
 
         const app = express();
-        const webHookAPI = whatsAppClient.webhookAPI(app, '/')
         app.use(bodyParser.json());
+        
+        const webHookAPI = whatsAppClient.webhookAPI(app, '/')
 
         webHookAPI.onIncomingMessageText((data, idInstance, idMessage, sender, typeMessage, textMessage) => {
             console.log(`Incoming Notification data ${JSON.stringify(data)}`)
