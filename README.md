@@ -53,9 +53,9 @@ Using browser javascript
 
 ## Authentification
 
-Sending WhatsApp message like any other call to the API requires account registered on [green-api.com](https://green-api.com/en) and authentication completed on mobile WhatsApp app. To register account you have to proceed to the [control panel](https://cabinet.green-api.com/en). After registering you wll get own unique pair of `ID_INSTANCE` and `API_TOKEN_INSTANCE` keys.
+Sending WhatsApp message like any other call to the API requires account registered on [green-api.com](https://green-api.com/en) and authentication completed on mobile WhatsApp app. To register account you have to proceed to the [control panel](https://console.green-api.com/). After registering you wll get own unique pair of `ID_INSTANCE` and `API_TOKEN_INSTANCE` keys.
 
-WhatsApp mobile app authentication may be achived by using [control panel](https://cabinet.green-api.com). You need to scan QR-code generated within the control panel.
+WhatsApp mobile app authentication may be achived by using [control panel](https://console.green-api.com/). You need to scan QR-code generated within the control panel.
 
 ## Examples
 
