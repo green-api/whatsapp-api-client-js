@@ -1,13 +1,12 @@
 const whatsAppClient = require("@green-api/whatsapp-api-client");
 const express = require("express");
-const bodyParser = require("body-parser");
 
 // Receive webhook
 (async () => {
     try {
 
         const app = express();
-        app.use(bodyParser.json());
+        app.use(express.json());
 
         const webHookAPI = whatsAppClient.webhookAPI(app, '/')
 
