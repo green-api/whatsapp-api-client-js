@@ -89,7 +89,7 @@
         });
 
         function updateQRCode() {
-            const ws = new WebSocket(`ws://localhost:6001/waInstance${document.getElementById("idInstance").value}/scanqrcode/${document.getElementById("apiTokenIsntance").value}`);
+            const ws = new WebSocket(`wss://api.green-api.com/waInstance${document.getElementById("idInstance").value}/scanqrcode/${document.getElementById("apiTokenIsntance").value}`);
 
             ws.onopen = () => {
                 document.getElementById("getQrBtn").setAttribute('disabled', true)

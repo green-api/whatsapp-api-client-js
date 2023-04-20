@@ -1,9 +1,10 @@
 const WebSocket = require('ws');
-const dotenv = require("dotenv");
- 
-dotenv.config()
 
-const ws = new WebSocket(`wss://api.green-api.com/waInstance${process.env.ID_INSTANCE}/scanqrcode/${process.env.API_TOKEN_INSTANCE}`);
+// instance manager https://console.green-api.com
+const idInstance = ''; // your instance id
+const apiTokenInstance = ''; // your instance api token
+
+const ws = new WebSocket(`wss://api.green-api.com/waInstance${idInstance}/scanqrcode/${apiTokenInstance}`);
 
 ws.on('open', () => {
     console.log("websocket is open")
