@@ -64,7 +64,7 @@ class MessageAPI {
      * @param {String} message - text message
      * @param {footer} footer - footer message
      * @param {array} templateButtons - buttons, for example [
-            {"index": 1, "urlButton": {"displayText": "⭐ Star us on GitHub!", "url": "https://github.com/green-api/docs"}},
+            {"index": 1, "urlButton": {"displayText": "⭐ Star us on GitHub!", "url": "https://github.com/green-api"}},
             {"index": 2, "callButton": {"displayText": "Call us", "phoneNumber": "+1 (234) 5678-901"}},
             {"index": 3, "quickReplyButton": {"displayText": "Plain button", "id": "plainButtonId"}}
         ]
