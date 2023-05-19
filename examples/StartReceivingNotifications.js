@@ -15,7 +15,7 @@ const apiTokenInstance = ''; // your instance api token
         restAPI.webhookService.onReceivingMessageText((body) => {
             console.log('onReceivingMessageText', body)
             restAPI.webhookService.stopReceivingNotifications();
-            console.log("Notifications is about to stop in 20 sec if no messages will be queued...")
+            console.log("Notifications is about to stop in 5 sec if no messages will be queued...")
         })
         restAPI.webhookService.onReceivingDeviceStatus((body) => {
             console.log('onReceivingDeviceStatus', body)
