@@ -7,12 +7,12 @@ class FileAPI {
     constructor(restAPI) {
         this._restAPI = restAPI;
     }
+
     /**
-     * 
-     * @param {String} chatId 
-     * @param {Number} phoneNumber 
-     * @param {String} urlFile 
-     * @param {String} fileName 
+     * @param {String} chatId
+     * @param {Number} phoneNumber
+     * @param {String} urlFile
+     * @param {String} fileName
      * @param {String} caption Optional
      */
     async sendFileByUrl(chatId, phoneNumber, urlFile, fileName, caption = '') {
@@ -33,9 +33,23 @@ class FileAPI {
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data;
     }
+
     /**
-     * 
-     * @param {FormData} formData 
+     * @param {FormData} formData
+     */
+    async uploadFile(formData) {
+        const method = "uploadFile";
+        const response = await axios({
+            method: "post",
+            url: CommonUtils.generateMethodURL(this._restAPI.params, method),
+            data: formData,
+            headers: formData.getHeaders()
+        })
+        return response.data;
+    }
+
+    /**
+     * @param {FormData} formData
      */
     async sendFileByUpload(formData) {
         const method = 'sendFileByUpload';
@@ -45,19 +59,19 @@ class FileAPI {
             data: formData,
             headers: formData.getHeaders()
         })
-        return response.data; 
+        return response.data;
     }
-    
+
     /**
-     * @param {String} chatId 
-     * @param {String} messageId 
+     * @param {String} chatId
+     * @param {String} idMessage
      */
     async downloadFile(chatId, idMessage) {
         CommonUtils.validateChatIdPhoneNumber(chatId, undefined);
-        CommonUtils.validateString('message', message);
+        CommonUtils.validateString('message', idMessage);
 
         const method = 'downloadFile';
-        
+
         const postData = {
             'idMessage': idMessage,
         }
@@ -71,7 +85,7 @@ class FileAPI {
     addChadIdParam(postData, chatId) {
         if (chatId) {
             postData.chatId = chatId
-        } 
+        }
     }
 
     addPhoneParam(postData, phoneNumber) {
