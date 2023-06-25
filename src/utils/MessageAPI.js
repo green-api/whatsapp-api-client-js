@@ -70,7 +70,7 @@ class MessageAPI {
             {"index": 3, "quickReplyButton": {"displayText": "Plain button", "id": "plainButtonId"}}
         ]
      */
-    async sendTemplateButtons(chatId, message, footer, templateButtons) {
+    async sendTemplateButtons(chatId, message, footer = undefined, templateButtons) {
         CommonUtils.validateChatIdPhoneNumber(chatId, undefined);
         CommonUtils.validateString('message', message);
 
@@ -78,8 +78,11 @@ class MessageAPI {
 
         const postData = {
             'message': message,
-            'footer': footer,
             'templateButtons': templateButtons
+        }
+
+        if (typeof footer !== "undefined") {
+            postData.footer = footer
         }
 
         this.addChadIdParam(postData, chatId)
