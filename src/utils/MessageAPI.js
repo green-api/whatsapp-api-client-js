@@ -7,20 +7,21 @@ class MessageAPI {
     constructor(restAPI) {
         this._restAPI = restAPI;
     }
+
     /** Send text message to chat or phone. Method call adds message to sending queue
-     * 
-     * @param {String} chatId - chat id using Whatsapp format (17633123456@c.us - for private messages). 
-     *  Mandatory if phoneNumber is empty
-     * @param {Number} phoneNumber - receiver phone number using international format whithout + sign.
+     *
+     * @param {String} chatId - chat id using Whatsapp format (17633123456@c.us - for private messages).
+     * Mandatory if phoneNumber is empty
+     * @param {Number} phoneNumber - receiver phone number using international format without + sign.
      * Mandatory if chatId is empty
      * @param {String} message - text message
      */
-    async sendMessage (chatId, phoneNumber, message) {
+    async sendMessage(chatId, phoneNumber, message) {
         CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
         CommonUtils.validateString('message', message);
 
         const method = 'sendMessage';
-        
+
         const postData = {
             'message': message,
         }
@@ -33,9 +34,9 @@ class MessageAPI {
     }
 
     /** Send buttons message to chat. Method call adds message to sending queue
-     * 
-     * @param {String} chatId - chat id using Whatsapp format (17633123456@c.us - for private messages). 
-     *  Mandatory if phoneNumber is empty
+     *
+     * @param {String} chatId - chat id using Whatsapp format (17633123456@c.us - for private messages).
+     * Mandatory if phoneNumber is empty
      * @param {String} message - text message
      * @param {footer} footer - footer message
      * @param {array} buttons - buttons, for example  [{"buttonId": "1", "buttonText": "green"}, {"buttonId": "2", "buttonText": "red"}, {"buttonId": "3", "buttonText": "blue"}]
@@ -45,7 +46,7 @@ class MessageAPI {
         CommonUtils.validateString('message', message);
 
         const method = 'sendButtons';
-        
+
         const postData = {
             'message': message,
             'footer': footer,
@@ -59,8 +60,8 @@ class MessageAPI {
     }
 
     /** Send buttons message to chat. Method call adds message to sending queue
-     * 
-     * @param {String} chatId - chat id using Whatsapp format (17633123456@c.us - for private messages). 
+     *
+     * @param {String} chatId - chat id using Whatsapp format (17633123456@c.us - for private messages).
      * @param {String} message - text message
      * @param {footer} footer - footer message
      * @param {array} templateButtons - buttons, for example [
@@ -91,11 +92,12 @@ class MessageAPI {
     }
 
     /** Send buttons message to chat. Method call adds message to sending queue
-     * 
-     * @param {String} chatId - chat id using Whatsapp format (17633123456@c.us - for private messages). 
+     *
+     * @param {String} chatId - chat id using Whatsapp format (17633123456@c.us - for private messages).
      * @param {String} message - text message
      * @param {String} buttonText - action list
      * @param {String} title - title
+     * @param {footer} footer - footer message
      * @param {array} sections - sections, for example  [
         {
             "title": "Секция 1",
@@ -117,7 +119,7 @@ class MessageAPI {
         CommonUtils.validateString('message', message);
 
         const method = 'sendListMessage';
-        
+
         const postData = {
             'message': message,
             'buttonText': buttonText,
@@ -133,15 +135,14 @@ class MessageAPI {
     }
 
     /**
-     * 
-     * @param {String} chatId 
-     * @param {Number} phoneNumber 
-     * @param {String} nameLocation 
-     * @param {String} address 
-     * @param {Number} latitude 
-     * @param {Number} longitude 
+     * @param {String} chatId
+     * @param {Number} phoneNumber
+     * @param {String} nameLocation
+     * @param {String} address
+     * @param {Number} latitude
+     * @param {Number} longitude
      */
-    async sendLocation (chatId, phoneNumber, nameLocation, address, latitude, longitude) {
+    async sendLocation(chatId, phoneNumber, nameLocation, address, latitude, longitude) {
         CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
         CommonUtils.validateString('nameLocation', nameLocation);
         CommonUtils.validateString('address', address);
@@ -165,12 +166,11 @@ class MessageAPI {
     }
 
     /**
-     * 
-     * @param {String} chatId 
-     * @param {Number} phoneNumber 
+     * @param {String} chatId
+     * @param {Number} phoneNumber
      * @param {Object} contact - object with one or more fields
      */
-    async sendContact (chatId, phoneNumber, contact) {
+    async sendContact(chatId, phoneNumber, contact) {
         CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
         CommonUtils.validateObject('contact', contact);
 
@@ -188,12 +188,11 @@ class MessageAPI {
     }
 
     /**
-     * 
-     * @param {String} chatId 
-     * @param {Number} phoneNumber 
+     * @param {String} chatId
+     * @param {Number} phoneNumber
      * @param {String} urlLink
      */
-    async sendLink (chatId, phoneNumber, urlLink) {
+    async sendLink(chatId, phoneNumber, urlLink) {
         CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
         CommonUtils.validateString('urlLink', urlLink);
 
@@ -211,18 +210,17 @@ class MessageAPI {
     }
 
     /**
-     * 
-     * @param {String} chatId 
-     * @param {Number} phoneNumber 
-     * @param {String} idMessage 
+     * @param {String} chatId
+     * @param {Number} phoneNumber
+     * @param {String} idMessage
      */
-    async readChat (chatId, phoneNumber, idMessage = null) {
+    async readChat(chatId, phoneNumber, idMessage = null) {
         CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
 
         const method = 'readChat';
 
         const postData = {
-            'idMessage': idMessage ,
+            'idMessage': idMessage,
         }
 
         this.addChadIdParam(postData, chatId)
@@ -232,7 +230,7 @@ class MessageAPI {
         return response.data
     }
 
-      /**
+    /**
      * Returns array of QueueMessage objects
      */
     async showMessagesQueue() {
@@ -284,12 +282,35 @@ class MessageAPI {
     }
 
     /**
+     * The method returns the chat message.
+     *
+     * @param {String} chatId
+     * @param {String} idMessage
+     *
+     */
+    async getMessage(chatId, idMessage) {
+        CommonUtils.validateChatIdPhoneNumber(chatId, undefined);
+        CommonUtils.validateString("idMessage", idMessage)
+
+        const method = "getMessage";
+
+        const postData = {
+            "idMessage": idMessage,
+        }
+
+        this.addChadIdParam(postData, chatId)
+
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
+        return response.data
+    }
+
+    /**
      * The method is intended for forwarding messages to a personal or group chat
      * @param {String} chatId
      * @param {String} chatIdFrom
      * @param {Array} messages
      */
-    async forwardMessages (chatId, chatIdFrom, messages) {
+    async forwardMessages(chatId, chatIdFrom, messages) {
         CommonUtils.validateString('chatId', chatId)
         CommonUtils.validateString('chatIdFrom', chatIdFrom)
         CommonUtils.validateArray('messages', messages);
@@ -309,7 +330,7 @@ class MessageAPI {
     addChadIdParam(postData, chatId) {
         if (chatId) {
             postData.chatId = chatId
-        } 
+        }
     }
 
     addPhoneParam(postData, phoneNumber) {
