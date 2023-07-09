@@ -11,13 +11,19 @@ function checkInitParams(params = {}) {
     } else {
         params.host = configuration.defaultHost
     }
+
+    if (params.media) {
+        commonUtils.validateString("media", params.media)
+    } else {
+        params.media = configuration.defaultMediaHost
+    }
+
     if (params.credentialsPath) {
         commonUtils.validatePath("credentialsPath", params.credentialsPath)
     } else {
         commonUtils.validateString("idInstance", params.idInstance)
         commonUtils.validateString("apiTokenInstance", params.apiTokenInstance)
     }
-    
 }
 
 const restAPI = (params = {}) => {

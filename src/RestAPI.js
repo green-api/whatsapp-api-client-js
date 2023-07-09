@@ -10,12 +10,13 @@ import * as fs from 'fs'
 
 class RestAPI {
 
-    constructor (params) {
-        
+    constructor(params) {
+
         this.params = {
-            host: '',
-            idInstance: '',
-            apiTokenInstance: '',
+            host: "",
+            media: "",
+            idInstance: "",
+            apiTokenInstance: "",
             credentialsPath: null,
         };
 
@@ -23,16 +24,16 @@ class RestAPI {
 
         if (params.credentialsPath) {
             fs.readFileSync(params.credentialsPath)
-            .toString('utf8')
-            .split('\n')
-            .map(item => item.split(" ").join("")) // replaceAll equivualent
-            .forEach(item => {
-                if (item.startsWith('API_TOKEN_INSTANCE=')) {
-                    this.params.apiTokenInstance = item.replace('API_TOKEN_INSTANCE=', '').trim()
-                } else if (item.startsWith('ID_INSTANCE=')) {
-                    this.params.idInstance = item.replace('ID_INSTANCE=', '').trim()
-                }
-            })
+                .toString('utf8')
+                .split('\n')
+                .map(item => item.split(" ").join("")) // replaceAll equivalent
+                .forEach(item => {
+                    if (item.startsWith('API_TOKEN_INSTANCE=')) {
+                        this.params.apiTokenInstance = item.replace('API_TOKEN_INSTANCE=', '').trim()
+                    } else if (item.startsWith('ID_INSTANCE=')) {
+                        this.params.idInstance = item.replace('ID_INSTANCE=', '').trim()
+                    }
+                })
         }
 
         this.message = new MessageAPI(this);
