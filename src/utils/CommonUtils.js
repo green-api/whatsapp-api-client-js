@@ -3,27 +3,32 @@
 import * as fs from 'fs'
 
 class CommonUtils {
-    static validateString (name, val) {
+    static validateString(name, val) {
         if (!val || Object.prototype.toString.call(val) !== '[object String]')
             throw new Error(`${name} must be a String!`)
     }
+
     static validateInteger(name, val) {
-        if(!Number.isInteger(val)) 
+        if (!Number.isInteger(val))
             throw new Error(`${name} must be an integer!`)
     }
 
     static validateNumber(name, val) {
-        if(!val || !Number(val)) 
+        if (!val || !Number(val))
             throw new Error(`${name} must be a number!`)
     }
 
-    static validateObject (name, val) {
-        if(!val || Object.prototype.toString.call(val) !== '[object Object]') 
+    static validateObject(name, val) {
+        if (!val || Object.prototype.toString.call(val) !== '[object Object]')
             throw new Error(`${name} must be an Object!`)
     }
 
-    static generateMethodURL(params, method, messageId) {
-        return `${params.host}/waInstance${params.idInstance}/${method}/${params.apiTokenInstance}`
+    static generateMethodURL(params, method) {
+        if (method === "sendFileByUpload" || method === "uploadFile") {
+            return `${params.media}/waInstance${params.idInstance}/${method}/${params.apiTokenInstance}`
+        } else {
+            return `${params.host}/waInstance${params.idInstance}/${method}/${params.apiTokenInstance}`
+        }
     }
 
     static validateChatIdPhoneNumber(chatId, phoneNumber) {
@@ -40,7 +45,7 @@ class CommonUtils {
             throw new Error(`${name} must be an Array!`)
     }
 
-    static validatePath (name, val) {
+    static validatePath(name, val) {
         if (!val || !fs.existsSync(val))
             throw new Error(`${name} not found!`)
     }
