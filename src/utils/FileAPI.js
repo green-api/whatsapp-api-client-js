@@ -1,6 +1,9 @@
 'use strict'
-import axios from 'axios';
-import CommonUtils from './CommonUtils.js'
+import axios from "axios";
+import fs from "fs";
+import mime from "mime";
+
+import CommonUtils from "./CommonUtils.js"
 
 class FileAPI {
 
@@ -35,15 +38,20 @@ class FileAPI {
     }
 
     /**
-     * @param {FormData} formData
+     * @param {String} filePath
      */
-    async uploadFile(formData) {
+    async uploadFile(filePath) {
+        CommonUtils.validateString("filePath", filePath)
+
         const method = "uploadFile";
+
+        const fileData = fs.readFileSync(filePath)
+
         const response = await axios({
             method: "post",
             url: CommonUtils.generateMethodURL(this._restAPI.params, method),
-            data: formData,
-            headers: formData.getHeaders()
+            data: fileData,
+            headers: {"Content-Type": mime.getType(filePath)}
         })
         return response.data;
     }

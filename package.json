@@ -44,6 +44,7 @@
   "dependencies": {
     "axios": "0.21.2",
     "fs": "0.0.1-security",
+    "mime": "^3.0.0",
     "rollup": "^2.79.1"
   }
 }
