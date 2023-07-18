@@ -70,7 +70,7 @@ class MessageAPI {
             {"index": 3, "quickReplyButton": {"displayText": "Plain button", "id": "plainButtonId"}}
         ]
      */
-    async sendTemplateButtons(chatId, message, footer = undefined, templateButtons) {
+    async sendTemplateButtons(chatId, message, footer = null, templateButtons) {
         CommonUtils.validateChatIdPhoneNumber(chatId, undefined);
         CommonUtils.validateString('message', message);
 
@@ -81,7 +81,7 @@ class MessageAPI {
             'templateButtons': templateButtons
         }
 
-        if (typeof footer !== "undefined") {
+        if (footer !== null) {
             postData.footer = footer
         }
 
