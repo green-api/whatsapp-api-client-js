@@ -1,7 +1,7 @@
-import { terser } from "rollup-plugin-terser";
+import terser from "@rollup/plugin-terser";
 import progress from "rollup-plugin-progress";
 import resolve from "@rollup/plugin-node-resolve";
-import commonJS from "rollup-plugin-commonjs";
+import commonjs from "@rollup/plugin-commonjs";
 import pluginJson from "@rollup/plugin-json";
 
 module.exports = {
@@ -14,8 +14,9 @@ module.exports = {
       name: "whatsAppClient",
       plugins: [terser()],
       globals: {
-        fs: "fs",
         axios: "axios",
+        fs: "fs",
+        mime: "mime"
       },
     },
   ],
@@ -26,10 +27,10 @@ module.exports = {
     resolve({
       browser: true,
     }),
-    commonJS({
+    commonjs({
       include: "node_modules/**",
     }),
     pluginJson(),
   ],
-  external: ["fs"],
+  external: ["axios", "fs", "mime"],
 };

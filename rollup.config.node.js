@@ -8,8 +8,9 @@ module.exports = {
       format: "cjs",
       exports: "default",
       globals: {
-        fs: "fs",
         axios: "axios",
+        fs: "fs",
+        mime: "mime"
       },
     },
   ],
@@ -18,5 +19,5 @@ module.exports = {
       clearLine: true,
     }),
   ],
-  external: ["fs", "axios"],
+  external: ["axios", "fs", "mime"],
 };
