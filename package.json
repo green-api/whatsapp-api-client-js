@@ -46,5 +46,6 @@
     "fs": "0.0.1-security",
     "mime": "^3.0.0",
     "rollup": "^3.26.3"
-  }
+  },
+  "type": "module"
 }
