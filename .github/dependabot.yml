@@ -6,11 +6,9 @@ updates:
       interval: "daily"
     allow:
       - dependency-type: "all"
-    open-pull-requests-limit: 32
   - package-ecosystem: "npm"
     directory: "/examples"
     schedule:
       interval: "daily"
     allow:
       - dependency-type: "all"
-    open-pull-requests-limit: 32
