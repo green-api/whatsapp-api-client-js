@@ -33,16 +33,20 @@ class MessageAPI {
         return response.data
     }
 
-        /** Send text message to chat or phone. Method call adds message to sending queue
+    /** Send text message to chat or phone. Method call adds message to sending queue
      *
      * @param {String} chatId - chat id using Whatsapp format (17633123456@c.us - for private messages).
-     * @param {string} message - text message
+     * @param {String} phoneNumber - number (77077771515@c.us - for private messages).
+     * @param {String} message - text message
      * @param {array} options - array of objects
+     * @param {boolean} multipleAnswers - allow answers
+     * @param {String} quotedMessageId - id of message 
      */
 
-    async sendPoll(chatId, message,options,multipleAnswers = false,quotedMessageId = null) {
-        CommonUtils.validateChatIdPhoneNumber(chatId);
+    async sendPoll(chatId, phoneNumber, message, options, multipleAnswers, quotedMessageId) {
+        CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
         CommonUtils.validateString('message', message);
+        CommonUtils.validateArray('options' , options);
 
         const method = 'sendPoll';
 
@@ -50,15 +54,15 @@ class MessageAPI {
             'message': message,
             'options' : options,
             'multipleAnswers' : multipleAnswers, 
+            'quotedMessageId' : quotedMessageId,
         };
 
         this.addChadIdParam(postData, chatId);
+        this.addPhoneParam(postData, phoneNumber);
 
         const response = await axios__default["default"].post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data
     }
-
-
 
     /** Send buttons message to chat. Method call adds message to sending queue
      *
