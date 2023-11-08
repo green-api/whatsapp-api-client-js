@@ -41,7 +41,7 @@ class MessageAPI {
      * @param {String} message - text message
      * @param {array} options - array of objects
      * @param {boolean} multipleAnswers - allow answers
-     * @param {String} quotedMessageId - id of message 
+     * @param {String} quotedMessageId - id of message
      */
 
     async sendPoll(chatId, phoneNumber, message, options, multipleAnswers, quotedMessageId) {
@@ -59,9 +59,8 @@ class MessageAPI {
         if (multipleAnswers !== null) {
             postData['multipleAnswers'] = multipleAnswers;
         }
-
         if (quotedMessageId !== null) {
-            postData['qotedMessageId' = quotedMessageId];
+            postData['quotedMessageId'] = quotedMessageId;
         }
 
         this.addChadIdParam(postData, chatId);
