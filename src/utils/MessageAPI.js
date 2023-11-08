@@ -44,10 +44,10 @@ class MessageAPI {
      * @param {String} quotedMessageId - id of message
      */
 
-    async sendPoll(chatId, phoneNumber, message, options, multipleAnswers, quotedMessageId) {
+    async sendPoll(chatId, phoneNumber, message, options, multipleAnswers = null, quotedMessageId = null) {
         CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
         CommonUtils.validateString('message', message);
-        CommonUtils.validateArray('options' , options);
+        CommonUtils.validateArray('options', options);
 
         const method = 'sendPoll';
 
