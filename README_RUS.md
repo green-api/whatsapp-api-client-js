@@ -23,7 +23,7 @@ npm i @green-api/whatsapp-api-client
 <script type="text/javascript" src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
 ```
 
-## ИМпорт 
+## Импорт 
 
 Есть несколько способов импортировать библиотеку в проект
 
