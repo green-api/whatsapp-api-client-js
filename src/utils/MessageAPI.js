@@ -54,9 +54,15 @@ class MessageAPI {
         const postData = {
             'message': message,
             'options': options,
-            'multipleAnswers': multipleAnswers, 
-            'quotedMessageId': quotedMessageId,
         };
+
+        if (multipleAnswers !== null) {
+            postData['multipleAnswers'] = multipleAnswers;
+        }
+
+        if (quotedMessageId !== null) {
+            postData['qotedMessageId' = quotedMessageId];
+        }
 
         this.addChadIdParam(postData, chatId);
         this.addPhoneParam(postData, phoneNumber);
