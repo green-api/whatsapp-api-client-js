@@ -66,8 +66,13 @@
 <body>
     <div class="container">
         <h1>WhatsApp client browser example</h1>
-
-        <!-- Данные инстанса -->
+<!-- Instance Date 
+            To send a message or to execute some other Green-API method, 
+            you have to have the WhatsApp account in the phone application 
+            to be authorized. To authorize your account please go to the personal 
+            area and scan a QR-code using the WhatsApp application. 
+            https://console.green-api.com/instanceList/
+-->
         <form class="form-wrapper">
             <div class="date-container">
                 <h2 class="section-title">Instance data</h2>
@@ -75,9 +80,14 @@
                 <input required type="text" id="idInstance" name="idInstance">
                 <label for="apiTokenIsntance">API Token:</label>
                 <input required type="text" id="apiTokenIsntance" name="apiTokenIsntance" placeholder="c40205cffda74409be1f66819b47116...">
+                <a href="https://console.green-api.com/instanceList">To authorize your account please go to the personal area and scan a QR-code using the WhatsApp application</a>
             </div>
         </form>
-<!-- отправка сообщений -->
+
+<!-- Send message 
+    You can read more about this metods here
+    https://green-api.com/en/docs/api/sending/SendMessage/
+-->
         <form class="form-wrapper">
             <div class="date-container">
                 <h2 class="section-title">Send Message</h2>
@@ -86,14 +96,18 @@
                 <span>if you sending on mobile phone use @c.us or if you sending in group @g.us</span>
                 <label for="messageText">Message:</label>
                 <input required type="text" id="messageText" name="messageText" value="Hello world!">
-                <span>Enter idInstance,API Token,phoneNumber and message in the fields your Data and press button Send Message</span>
+                <a href="https://green-api.com/en/docs/api/sending/SendMessage/"> You can read more about this metods here</a>
             </div>
             <div class="date-container">
                 <button id="SendWhatsAppBtn" type="button" class="button buttonGreen">Send Message</button>
             </div>
             <div class="date-container"><p id="result-text-sendMessage"></p></div>
         </form>
-<!-- отправка файла с локалки -->
+
+<!-- Send file from local 
+    You can read more about this metods here
+    https://green-api.com/en/docs/api/sending/UploadFile/
+-->
         <form class="form-wrapper" id="upload-form">
             <div class="date-container">
                 <h2 class="section-title">Upload file</h2>
@@ -103,14 +117,17 @@
                 <input required type="tel" id="phoneNumber-upload" name="phoneNumber" value="" placeholder="77076665544">
                 <label for="messageText">Message:</label>
                 <input required type="text" id="messageText-upload" name="messageText" value="Hello world!">
-                <span>Enter idInstance,API Token,phoneNumber and file in the fields your Data and press button Send File</span>
-            </div>
+                <a href="https://green-api.com/en/docs/api/sending/UploadFile/"> You can read more about this metods here</a>            </div>
             <div class="date-container">
                 <button id="SendFileWhatsAppBtn" type="button" class="button buttonGreen">Send File</button>
             </div>
             <div class="date-container"><p id="result-text-uploadFile"></p></div>
         </form>
-<!-- отправка файла по url -->
+
+<!-- Send file by URL 
+    You can read more about this metods here    
+    https://green-api.com/en/docs/api/sending/SendFileByUrl/
+-->
         <form class="form-wrapper" id="sendFileByUrl">
             <div class="date-container">
                 <h2 class="section-title">Upload file by url</h2>
@@ -121,16 +138,18 @@
                 <input required type="tel" id="phoneNumber-uploadByUrl" name="phoneNumber" value="" placeholder="77076665544">
                 <label for="messageText">Message:</label>
                 <input required type="text" id="messageText-uploadByUrl" name="messageText" value="Hello world!">
-                <span>Enter idInstance,API Token,phoneNumber and url in the fields your Data and press button Send File by URL</span>
+                <a href="https://green-api.com/en/docs/api/sending/SendFileByUrl/"> You can read more about this metods here</a>
             </div>
-
             <div class="date-container">
                 <button id="SendFileByUrlWhatsAppBtn" type="button" class="button buttonGreen">Send File by URL</button>
             </div>
             <div class="date-container"><p id="result-text-sendFileByUrl"></p></div>
-
         </form>
-<!-- создание группы -->
+
+<!-- Create group 
+    You can read more about this metods here    
+    https://green-api.com/en/docs/api/groups/CreateGroup/
+-->
         <form class="form-wrapper" id="createGroup">
             <div class="date-container">
                 <h2 class="section-title">Create group</h2>
@@ -138,17 +157,20 @@
                 <input type="text" id="groupName" name="groupName" placeholder="Write your group name">
                 <input type="text" id="chatIds" name="chatIds" placeholder="Enter group member numbers ">
                 <button id="chatPlus" type="button" class="btn buttonGreen btn-sm">Добавить чат</button>
-                <span>Enter idInstance,API Token in the fields your Data and press button Create group</span>
+                <a href="https://green-api.com/en/docs/api/groups/CreateGroup/"> You can read more about this metods here</a>
             </div>
-
             <div class="date-container">
                 <button id="create-group" class="button buttonGreen">Create Group</button>
             </div>
-
             <div class="date-container"><p id="result-text-createGroup"></p></div>
-
         </form>
-<!-- Остальные методы -->
+
+<!-- Instance and account section 
+    You can read more about this metods here    
+    https://green-api.com/en/docs/api/account/QR/  --About QR code
+    https://green-api.com/en/docs/api/account/GetSettings/ --About acount settings
+    https://green-api.com/en/docs/api/account/GetStateInstance/  --About acount state
+-->
         <h2 class="section-title">Information output</h2>
 
         <p id="result-text"></p>
@@ -167,10 +189,19 @@
 
 
 <script>
-        const link = 'https://api.green-api.com/waInstance';
-        const chatIds = [];
 
+// Here is the code for processing data and subsequent sending
+        const link = 'https://api.green-api.com/waInstance'; //string
+        const chatIds = []; //array
+
+// Send message method
         document.getElementById("SendWhatsAppBtn").addEventListener("click", function () {
+        /** 
+         * @param {String} apiTokenInstance
+         * @param {String} idInstance
+         * @param {String} chatId
+         * @param {String} message
+         */
             const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
             const idInstance = document.getElementById("idInstance").value;
             const chatId = `${document.getElementById("phoneNumber").value}`;
@@ -194,8 +225,12 @@
                     resultText.textContent = `There was a problem sending message: ${error}`;
                 });
         });
-
+// Send receive notification method
         document.getElementById("ReceiveWhatsAppBtn").addEventListener("click", function () {
+        /** 
+         * @param {String} apiTokenInstance
+         * @param {String} idInstance
+         */
             try {
                 const restAPI = whatsAppClient.restAPI(({
                     idInstance: document.getElementById("idInstance").value,
@@ -223,13 +258,23 @@
                 document.getElementById("resultText").innerHTML = "Message was not received. Reason: " + reason + " See logs for details";
             }
         });
-
+// Send file by upload method
         document.getElementById("SendFileWhatsAppBtn").addEventListener("click", function () {
+        /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         * @param {String} chatId
+         * @param {String} fileInput
+         * @param {String} caption
+         */
+                const idInstance = document.getElementById("idInstance").value
+                const apiTokenInstance = document.getElementById("apiTokenIsntance").value
                 const form = document.querySelector("#upload-form");
                 const resultText = document.querySelector("#result-text-uploadFile");
                 const fileInput = form.querySelector('input[type="file"]');
                 const chatId = `${document.getElementById("phoneNumber-upload").value}@c.us`;
                 const caption = document.getElementById("messageText-upload").value;
+
 
                 const formData = new FormData();
                 formData.append("chatId", chatId);
@@ -238,7 +283,7 @@
 
                 fetch(
                     // Specify your IdInstance and ApiTokenInstance in the request
-                    link + document.getElementById("idInstance").value + "/sendFileByUpload/" + document.getElementById("apiTokenIsntance").value,
+                    link + idInstance + "/sendFileByUpload/" + apiTokenInstance,
                     {
                     method: "POST",
                     body: formData,
@@ -263,8 +308,17 @@
                     resultText.style.color = 'red'
                   });
         });
-
+// Send file by URL method
         document.getElementById("SendFileByUrlWhatsAppBtn").addEventListener("click", () => {
+        /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         * @param {String} chatId
+         * @param {String} Url
+         * @param {String} caption
+         * @param {String} fileName
+         */
+
             const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
             const idInstance = document.getElementById("idInstance").value
             const chatId = `${document.getElementById("phoneNumber-uploadByUrl").value}@c.us`;
@@ -289,8 +343,12 @@
             })
 
         })
-
+// Recive qr method
         document.getElementById('recive-qr').addEventListener('click', () => {
+        /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         */
             const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
             const idInstance = document.getElementById("idInstance").value
 
@@ -310,13 +368,18 @@
             })
 
         })
-
+// This function for saving your phone numbers when you creating a group
         document.getElementById('chatPlus').addEventListener('click',function () {
             const num = `${(document.getElementById('chatIds').value)}@c.us` ;
             return chatIds.push(num);
         })
-
+// Create group method
         document.getElementById('create-group').addEventListener('click',() => {
+                    /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         * @param {String} chatName
+         */
             const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
             const idInstance = document.getElementById("idInstance").value
             const chatName = document.getElementById('groupName').value
@@ -342,8 +405,12 @@
             })
 
         })
-
+// Get settings method
         document.getElementById('getSettings').addEventListener('click',() => {
+        /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         */
             const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
             const idInstance = document.getElementById("idInstance").value
             const reult = document.getElementById("reult");
@@ -371,8 +438,12 @@
             })
 
         })
-
+// Get state instance method
         document.getElementById('getStateInstance').addEventListener('click',() => {
+        /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         */
             const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
             const idInstance = document.getElementById("idInstance").value
 
