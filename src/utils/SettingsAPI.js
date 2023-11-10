@@ -38,6 +38,13 @@ class SettingsAPI {
     }
 
 
+    async getWaSettings () {
+        const method = 'getWaSettings'
+        const response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method))
+        return response.data
+    }
+
+
 }
 
 export default SettingsAPI;
