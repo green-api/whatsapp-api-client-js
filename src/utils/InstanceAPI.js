@@ -55,6 +55,21 @@ class InstanceAPI {
 
     /**
      * 
+     * @param {Number} phoneNumber 
+     */
+    async getAuthorizationCode(phoneNumber) {
+        CommonUtils.validateInteger('phoneNumber', phoneNumber);
+
+        const method = 'getAuthorizationCode';
+        const postData = {
+            'phoneNumber': phoneNumber,
+        }
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
+        return response.data
+    }
+    
+    /**
+     * 
      * @param {String} chatId 
      * @param {Number} phoneNumber 
      */
