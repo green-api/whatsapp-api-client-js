@@ -8,7 +8,7 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
     crossorigin="anonymous">
     <script defer type="text/javascript" src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>    
     <title>API HTML5</title>
     <style>
         .button {
@@ -110,7 +110,7 @@
 -->
         <form class="form-wrapper" id="upload-form">
             <div class="date-container">
-                <h2 class="section-title">Upload file</h2>
+                <h2 class="section-title">Upload file,  method not work</h2>
                 <label for="file-input">Choose a file to upload:</label>
                 <input type="file" id="file-input" name="file"/>
                 <label for="phoneNumber">Phone Number:</label>
@@ -146,47 +146,245 @@
             <div class="date-container"><p id="result-text-sendFileByUrl"></p></div>
         </form>
 
+<!-- Send file by Upload    Not working!
+    You can read more about this metods here    
+    https://green-api.com/en/docs/api/sending/SendFileByUpload/
+-->
+<form class="form-wrapper" id="sendFileByUpload">
+    <div class="date-container">
+        <h2 class="section-title">Upload file by upload</h2>
+        <label for="file-input">Enter the file path:</label>
+        <input type="text" id="file-input-upload" name="filePath-upload" placeholder="C://ProgramFiles/{file}"/>
+        <a href="https://green-api.com/en/docs/api/sending/SendFileByUrl/"> You can read more about this metods here</a>
+    </div>
+    <div class="date-container">
+        <button id="SendFileByUploadWhatsAppBtn" type="button" class="button buttonGreen">Send File by upload</button>
+    </div>
+    <div class="date-container"><p id="result-text-sendFileByUpload"></p></div>
+</form>
+
 <!-- Create group 
     You can read more about this metods here    
     https://green-api.com/en/docs/api/groups/CreateGroup/
 -->
-        <form class="form-wrapper" id="createGroup">
-            <div class="date-container">
-                <h2 class="section-title">Create group</h2>
-                <label for="fileByUrl">Write name of your group</label>
-                <input type="text" id="groupName" name="groupName" placeholder="Write your group name">
-                <input type="text" id="chatIds" name="chatIds" placeholder="Enter group member numbers ">
-                <button id="chatPlus" type="button" class="btn buttonGreen btn-sm">Добавить чат</button>
-                <a href="https://green-api.com/en/docs/api/groups/CreateGroup/"> You can read more about this metods here</a>
-            </div>
-            <div class="date-container">
-                <button id="create-group" class="button buttonGreen">Create Group</button>
-            </div>
-            <div class="date-container"><p id="result-text-createGroup"></p></div>
-        </form>
+<form class="form-wrapper" id="createGroup">
+    <div class="date-container">
+        <h2 class="section-title">Create group</h2>
+        <label for="fileByUrl">Write name of your group</label>
+        <input type="text" id="groupName" name="groupName" placeholder="Write your group name">
+        <input type="text" id="chatIds" name="chatIds" placeholder="Enter group member numbers ">
+        <button id="chatPlus" type="button" class="btn buttonGreen btn-sm">Добавить чат</button>
+        <a href="https://green-api.com/en/docs/api/groups/CreateGroup/"> You can read more about this metods here</a>
+    </div>
+    <div class="date-container">
+        <button id="create-group" type="button" class="button buttonGreen">Create Group</button>
+    </div>
+    <div class="date-container"><p id="result-text-createGroup"></p></div>
+</form>
+<!-- Update group name 
+    You can read more about this metods here    
+    https://green-api.com/en/docs/api/groups/UpdateGroupName/
+-->
+<form class="form-wrapper" id="UpdateGroupName">
+    <div class="date-container">
+        <h2 class="section-title">Update group name</h2>
+        <label for="groupName">Write name of your group</label>
+        <input type="text" id="groupName-upadteName" name="groupName" placeholder="Write your group name">
+        <input type="text" id="groupId-updateName" name="chatId" placeholder="Enter group id ">
+        <a href="https://green-api.com/en/docs/api/groups/UpdateGroupName/"> You can read more about this metods here</a>
+    </div>
+    <div class="date-container">
+        <button id="updateGroupName" type="button" class="button buttonGreen">Update group name</button>
+    </div>
+    <div class="date-container"><p id="result-text-UpdateGroupName"></p></div>
+</form>
+<!-- Get Group Data method
+    You can read more about this metods here    
+    https://green-api.com/en/docs/api/groups/GetGroupData/
+-->
+<form class="form-wrapper" id="GetGroupData">
+    <div class="date-container">
+        <h2 class="section-title">Get group data</h2>
+        <label for="groupName">Write id of your group</label>
+        <input type="text" id="groupId-GetGroupData" name="groupName" placeholder="Write your group id">
+        <a href="https://green-api.com/en/docs/api/groups/GetGroupData/"> You can read more about this metods here</a>
+    </div>
+    <div class="date-container">
+        <button id="getGroupData" type="button" class="button buttonGreen">Get group data</button>
+    </div>
+    <div class="date-container"><p id="result-text-GetGroupData"></p></div>
+</form>
+<!-- Set group admin method
+    You can read more about this metods here    
+    https://green-api.com/en/docs/api/groups/SetGroupAdmin/
+-->
+<form class="form-wrapper" id="SetGroupAdmin">
+    <div class="date-container">
+        <h2 class="section-title">Set Group Admin</h2>
+        <label for="groupName">Write id of your group</label>
+        <input type="text" id="groupId-setAdmin" name="groupName" placeholder="Write your group id">
+        <input type="text" id="chatId-setAdmin" name="groupName" placeholder="Write your group id">
+        <a href="https://green-api.com/en/docs/api/groups/SetGroupAdmin/"> You can read more about this metods here</a>
+    </div>
+    <div class="date-container">
+        <button id="setGroupAdmin" type="button" class="button buttonGreen">Set Group Admin</button>
+    </div>
+    <div class="date-container"><p id="result-text-setGroupAdmin"></p></div>
+</form>
 
+<!-- Add Group Participant method
+    You can read more about this metods here    
+    https://green-api.com/en/docs/api/groups/AddGroupParticipant/
+-->
+<form class="form-wrapper" id="AddGroupParticipant">
+    <div class="date-container">
+        <h2 class="section-title">Add group participant</h2>
+        <input type="text" id="groupId-AddGroupParticipant" name="groupName" placeholder="Write your group id">
+        <input type="text" id="participantChatId-AddGroupParticipant" name="participantChatId" placeholder="Write your participant id">
+        <a href="https://green-api.com/en/docs/api/groups/AddGroupParticipant/"> You can read more about this metods here</a>
+    </div>
+    <div class="date-container">
+        <button id="addGroupParticipant" type="button" class="button buttonGreen">Add group participant</button>
+    </div>
+    <div class="date-container"><p id="result-text-AddGroupParticipant"></p></div>
+</form>
+<!-- Leave group method
+    You can read more about this metods here    
+    https://green-api.com/en/docs/api/groups/leaveGroup/
+-->
+<form class="form-wrapper" id="leaveGroup">
+    <div class="date-container">
+        <h2 class="section-title"> Leave group</h2>
+        <input type="text" id="groupId-leaveGroup" name="groupName" placeholder="Write your group id">
+        <a href="https://green-api.com/en/docs/api/groups/leaveGroup/"> You can read more about this metods here</a>
+    </div>
+    <div class="date-container">
+        <button id="addLeaveGroup" type="button" class="button buttonGreen"> Leave group</button>
+    </div>
+    <div class="date-container"><p id="result-text-leaveGroup"></p></div>
+</form>
+<!--log section 
+    You can read more about this metods here    
+    https://green-api.com/en/docs/api/journals/GetChatHistory/  --About chat history
+    https://green-api.com/en/docs/api/journals/GetMessage/ --About message in chat
+--> 
+<form class="form-wrapper" id="log" style="flex-wrap: wrap;">
+    <div class="date-container">
+        <h2 class="section-title">Information output</h2>
+        <input type="text" id="chatId-chatHistory" placeholder="77059998882@c.ca">
+    </div>
+    <div class="date-container">
+        <button id="GetChatHistory" type="button" class="button buttonGreen">GetChatHistory</button>
+    </div>
+    <div class="date-container-down">
+        <div id="result-log"></div>
+    </div>
+</form>
+<form class="form-wrapper" id="getMessage" style="flex-wrap: wrap;">
+    <div class="date-container">
+        <h2 class="section-title">Information output</h2>
+        <input type="text" id="chatId-getMessage" placeholder="77059998882@c.ca">
+        <input type="text" id="messageId-getMessage" placeholder="BAC23ZXC3R2">
+    </div>
+    <div class="date-container">
+        <button id="GetMessage" type="button" class="button buttonGreen">Get message</button>
+    </div>
+    <div class="date-container-down">
+        <div id="result-getMessage"></div>
+    </div>
+</form>
+<!--queue section 
+    You can read more about this metods here    
+    https://green-api.com/en/docs/api/journals/ShowMessagesQueue/  --About Show Messages Queue
+    https://green-api.com/en/docs/api/account/GetSettings/ --About Clear Messages Queue
+--> 
+<form class="form-wrapper" id="queue" style="flex-wrap: wrap;">
+    <div class="date-container">
+        <h2 class="section-title">Information output</h2>
+    </div>
+    <div class="date-container">
+        <button id="ShowMessageQueue" type="button" class="button buttonGreen">Show Messages Queue</button>
+        <button id="ClearMessageQueue" type="button" class="button buttonGreen">Show Messages Queue</button>
+    </div>
+    <div class="date-container-down">
+        <div id="result-queue"></div>
+    </div>
+</form>
+
+<!-- Check WhatsApp method
+    You can read more about this metods here    
+    https://green-api.com/en/docs/api/groups/checkWhatsapp/
+-->
+<form class="form-wrapper" id="CheckWhatsapp">
+    <div class="date-container">
+        <h2 class="section-title"> Check WhatsApp</h2>
+        <input type="text" id="chatNumber-checkWhatsapp" name="chatNumber" placeholder="Write your chat id">
+        <a href="https://green-api.com/en/docs/api/groups/checkWhatsapp/"> You can read more about this metods here</a>
+    </div>
+    <div class="date-container">
+        <button id="checkWhatsapp" type="button" class="button buttonGreen"> Check WhatsApp</button>
+    </div>
+    <div class="date-container"><p id="result-text-checkWhatsapp"></p></div>
+</form>
+<!-- Get avatar method
+    You can read more about this metods here    
+    https://green-api.com/en/docs/api/groups/GetAvatar/
+-->
+<form class="form-wrapper" id="GetAvatar">
+    <div class="date-container">
+        <h2 class="section-title"> Get avatar</h2>
+        <input type="text" id="chatNumber-GetAvatar" name="chatNumber" placeholder="Write your chat id">
+        <a href="https://green-api.com/en/docs/api/groups/GetAvatar/"> You can read more about this metods here</a>
+    </div>
+    <div class="date-container">
+        <button id="getAvatar" type="button" class="button buttonGreen"> Get avatar</button>
+    </div>
+    <div class="date-container"><p id="result-text-GetAvatar"></p></div>
+</form>
+<!-- Get Contacts method
+    You can read more about this metods here    
+    https://green-api.com/en/docs/api/groups/GetContacts/
+-->
+<form class="form-wrapper" id="GetContacts">
+    <div class="date-container">
+        <h2 class="section-title"> Get Contacts</h2>
+        <a href="https://green-api.com/en/docs/api/groups/GetContacts/"> You can read more about this metods here</a>
+    </div>
+    <div class="date-container">
+        <button id="getContacts" type="button" class="button buttonGreen"> Get Contacts</button>
+    </div>
+    <div class="date-container" id="result-text-GetContacts"></div>
+</form>
 <!-- Instance and account section 
     You can read more about this metods here    
     https://green-api.com/en/docs/api/account/QR/  --About QR code
     https://green-api.com/en/docs/api/account/GetSettings/ --About acount settings
     https://green-api.com/en/docs/api/account/GetStateInstance/  --About acount state
--->
-        <h2 class="section-title">Information output</h2>
+-->        
+        <form class="form-wrapper" id="info">
+            <div class="date-container">
+                <h2 class="section-title">Information output</h2>
 
-        <p id="result-text"></p>
-        <div id="reult"></div>
+                <p id="result-text"></p>
+                <div id="reult"></div>
+        
+                <p>To get API Token and ID Instance please visit <a href="https://green-api.com/#section-connect">green-api.com</a></p>
+                <p>Press Send Message button to dispatch hello world to phone</p>
+                <p style="color:blue" id="resultText"></p>
+            </div>
+            <div class="date-container">
+                <button id="ReceiveWhatsAppBtn" type="button" class="button buttonGreen">Receive message</button>
+                <button id="recive-qr" type="button" class="button buttonGreen">Recive QR</button>
+                <button id="getSettings" type="button" class="button buttonGreen">Get settings</button>
+                <button id="getStateInstance" type="button" class="button buttonGreen">Get State Instance</button>
+            </div>
+            <div class="date-container">
+                <button id="reboot" type="button" class="button buttonGreen">Reboot instance</button>
+                <button id="getWaSettings" type="button" class="button buttonGreen">Get WhatsApp settings</button>
 
-        <p>To get API Token and ID Instance please visit <a href="https://green-api.com/#section-connect">green-api.com</a></p>
-        <p>Press Send Message button to dispatch hello world to phone</p>
-        <p style="color:blue" id="resultText"></p>
-
-        <button id="ReceiveWhatsAppBtn" class="button buttonGreen">Receive message</button>
-        <button id="recive-qr" class="button buttonGreen">Recive QR</button>
-        <button id="getSettings" class="button buttonGreen">Get settings</button>
-        <button id="getStateInstance" class="button buttonGreen">Get State Instance</button>
+            </div>
+        </form>
     </div>
-
-
 
 <script>
 
@@ -280,16 +478,11 @@
                 formData.append("chatId", chatId);
                 formData.append("caption", caption);
                 formData.append("file", fileInput.files[0]);
-
-                fetch(
-                    // Specify your IdInstance and ApiTokenInstance in the request
-                    link + idInstance + "/sendFileByUpload/" + apiTokenInstance,
-                    {
-                    method: "POST",
-                    body: formData,
-                    }
-                )
-                    .then((response) => {
+                const restAPI = whatsAppClient.restAPI({
+                    idInstance: idInstance,
+                    apiTokenInstance: apiTokenInstance
+                })
+                restAPI.file.sendFileByUpload(formData).then((response) => {
                     if (!response.ok) {
                         throw new Error("Network response was not ok");
                     }
@@ -341,7 +534,62 @@
                 resultText.textContent = ''
                 resultText.textContent = `There was a problem sending message: ${error}`;
             })
+        })
+//Does not work from the browser because FS is used
+// Send file by upload method
+        document.getElementById("SendFileByUploadWhatsAppBtn").addEventListener("click", () => {
+        /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         * @param {String} caption
+         * @param {String} fileName
+         */
 
+            const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
+            const idInstance = document.getElementById("idInstance").value
+            const filePath = document.getElementById('file-input-upload').value
+            const resultText = document.querySelector("#result-text-sendFileByUpload");
+
+            const restAPI = whatsAppClient.restAPI({
+                idInstance: idInstance,
+                apiTokenInstance: apiTokenInstance
+            });
+
+            restAPI.file.uploadFile(filePath).then((data) => {
+                console.log(`File upload ${data}`);
+                resultText.textContent = ''
+                resultText.textContent = `File upload ${data}`;
+            }).catch((error) => {
+                console.error("There was a problem sending message:", error);
+                resultText.textContent = ''
+                resultText.textContent = `There was a problem sending message: ${error}`;
+            })
+        })
+//Reboot
+        document.getElementById("reboot").addEventListener("click", () => {
+        /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         */
+
+            const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
+            const idInstance = document.getElementById("idInstance").value
+            
+
+            const restAPI = whatsAppClient.restAPI({
+                idInstance: idInstance,
+                apiTokenInstance: apiTokenInstance
+            });
+
+            restAPI.instance.reboot().then((data) => {
+                console.log(`Instance reboot ${data.isReboot}`);
+                resultText.textContent = ''
+                resultText.textContent = `Instance reboot ${data.isReboot}`;
+            }).catch((error) => {
+                console.error("There was a problem with rebooting:", error);
+                resultText.textContent = ''
+                resultText.textContent = `There was a problem with rebooting: ${error}`;
+            })
         })
 // Recive qr method
         document.getElementById('recive-qr').addEventListener('click', () => {
@@ -374,8 +622,8 @@
             return chatIds.push(num);
         })
 // Create group method
-        document.getElementById('create-group').addEventListener('click',() => {
-                    /** 
+        document.getElementById('createGroup').addEventListener('click',() => {
+        /** 
          * @param {String} idInstance
          * @param {String} apiTokenInstance
          * @param {String} chatName
@@ -383,8 +631,7 @@
             const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
             const idInstance = document.getElementById("idInstance").value
             const chatName = document.getElementById('groupName').value
-
-            const restAPI = whatsAppClient.restAPI({
+            const restAPI = whatsAppClient.restAPI({   
                 idInstance: idInstance,
                 apiTokenInstance: apiTokenInstance
             });
@@ -403,8 +650,153 @@
                 resultText.textContent = ''
                 resultText.textContent = `Group not created ${error}`;
             })
-
         })
+// Update group name method
+        document.getElementById('updateGroupName').addEventListener('click',() => {
+        /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         * @param {String} chatName
+         * @param {String} groupId
+         */
+            const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
+            const idInstance = document.getElementById("idInstance").value
+            const chatName = document.getElementById('groupName-upadteName').value
+            const groupId = document.getElementById('groupId-updateName').value
+            const result = document.getElementById('result-text-UpdateGroupName')
+
+            const restAPI = whatsAppClient.restAPI({
+                idInstance: idInstance,
+                apiTokenInstance: apiTokenInstance
+            }); 
+
+            restAPI.group.updateGroupName(groupId, chatName).then((data) => {
+                console.log(`Group update ${data}`);
+                result.textContent = ''
+                for(const item in data) {
+                    result.textContent += `Group update ${item} `;
+                }
+            }).catch((error) => {
+                console.error(`Group not created ${error}`)
+                result.textContent = ''
+                result.textContent = `Group not created ${error}`;
+            })
+        })
+// Get group data method
+        document.getElementById('getGroupData').addEventListener('click',() => {
+        /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         * @param {String} groupId
+         */
+            const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
+            const idInstance = document.getElementById("idInstance").value
+            const groupId = document.getElementById('groupId-GetGroupData').value
+            const result = document.getElementById('result-text-GetGroupData')
+
+            const restAPI = whatsAppClient.restAPI({
+                idInstance: idInstance,
+                apiTokenInstance: apiTokenInstance
+            }); 
+
+            restAPI.group.getGroupData(groupId).then((data) => {
+                console.log(`${data}`);
+                result.textContent = ''
+                const newData = JSON.stringify(data);
+                result.textContent = `${newData}`
+            }).catch((error) => {
+                console.error(`Group not created ${error}`)
+                result.textContent = ''
+                result.textContent = `Group not created ${error}`;
+            })
+        })
+// Add Group Participant method
+        document.getElementById('addGroupParticipant').addEventListener('click',() => {
+        /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         * @param {String} groupId
+         * @param {String} participantChatId
+         */
+            const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
+            const idInstance = document.getElementById("idInstance").value
+            const groupId = document.getElementById('groupId-AddGroupParticipant').value
+            const participantChatId = document.getElementById('participantChatId-AddGroupParticipant').value
+            const result = document.getElementById('result-text-AddGroupParticipant')
+
+            const restAPI = whatsAppClient.restAPI({
+                idInstance: idInstance,
+                apiTokenInstance: apiTokenInstance
+            }); 
+
+            restAPI.group.addGroupParticipant(groupId, participantChatId, null).then((data) => {
+                console.log(`${data}`);
+                const newData = JSON.stringify(data)
+                result.textContent = ''
+                result.textContent = `${newData}`
+            }).catch((error) => {
+                console.error(`Group not created ${error}`)
+                result.textContent = ''
+                result.textContent = `Group not created ${error}`;
+            })
+        })
+//Set group admin
+         document.getElementById('setGroupAdmin').addEventListener('click',() => {
+         /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         * @param {String} groupId
+         */
+            const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
+            const idInstance = document.getElementById("idInstance").value
+            const chatId = document.getElementById('chatId-setAdmin')
+            const groupId = document.getElementById('groupId-setAdmin').value
+            const result = document.getElementById('result-text-setGroupAdmin')
+
+            const restAPI = whatsAppClient.restAPI({
+                idInstance: idInstance,
+                apiTokenInstance: apiTokenInstance
+            }); 
+
+            restAPI.group.setGroupAdmin(groupId, chatId, null).then((data) => {
+                console.log(`${data}`);
+                result.textContent = ''
+                const newData = JSON.stringify(data);
+                result.textContent = `${newData}`
+            }).catch((error) => {
+                console.error(`Group not created ${error}`)
+                result.textContent = ''
+                result.textContent = `Group not created ${error}`;
+            })
+        })
+//Leave group
+        document.getElementById('addLeaveGroup').addEventListener('click',() => {
+         /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         * @param {String} groupId
+         */
+            const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
+            const idInstance = document.getElementById("idInstance").value
+            const groupId = document.getElementById('groupId-leaveGroup').value
+            const result = document.getElementById('result-text-leaveGroup')
+
+            const restAPI = whatsAppClient.restAPI({
+                idInstance: idInstance,
+                apiTokenInstance: apiTokenInstance
+            }); 
+
+            restAPI.group.leaveGroup(groupId).then((data) => {
+                console.log(`${data}`);
+                result.textContent = ''
+                const newData = JSON.stringify(data);
+                result.textContent = `${newData}`
+            }).catch((error) => {
+                console.error(`Group not created ${error}`)
+                result.textContent = ''
+                result.textContent = `Group not created ${error}`;
+            })
+        })       
 // Get settings method
         document.getElementById('getSettings').addEventListener('click',() => {
         /** 
@@ -436,8 +828,101 @@
                 resultText.textContent = ''
                 resultText.textContent = `Problems with your settings ${error}`;
             })
-
         })
+// Check WhatsApp method
+        document.getElementById('checkWhatsapp').addEventListener('click',() => {
+        /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         */
+            const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
+            const idInstance = document.getElementById("idInstance").value
+            const number = Number(document.getElementById("chatNumber-checkWhatsapp").value)
+            const result = document.getElementById("result-text-checkWhatsapp");
+
+            const restAPI = whatsAppClient.restAPI({
+                idInstance: idInstance,
+                apiTokenInstance: apiTokenInstance
+            });
+
+            restAPI.instance.checkWhatsapp(number).then((data) => {
+                console.log(`existsWhatsapp ${data.existsWhatsapp}`);
+                result.textContent = ''
+                result.textContent += `existsWhatsapp: ${data.existsWhatsapp}`;
+            }).catch((error) => {
+                console.error(`Problems with your method ${error}`)
+                result.textContent = ''
+                result.textContent = `Problems with your method ${error}`;
+            })
+        })
+// Get avatar method
+        document.getElementById('getAvatar').addEventListener('click',() => {
+        /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         */
+            const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
+            const idInstance = document.getElementById("idInstance").value
+            const number = document.getElementById("chatNumber-GetAvatar").value
+            const result = document.getElementById("result-text-GetAvatar");
+
+            const restAPI = whatsAppClient.restAPI({
+                idInstance: idInstance,
+                apiTokenInstance: apiTokenInstance
+            });
+
+            restAPI.instance.getAvatar(number, null).then((data) => {
+                console.log(`Avatar ${data.urlAvatar}`);
+                result.textContent = ''
+                for (const item in data) {
+                    result.textContent += `Avatar: ${data.urlAvatar}`;
+                }
+
+            }).catch((error) => {
+                console.error(`Problems with your method ${error}`)
+                result.textContent = ''
+                result.textContent = `Problems with your method ${error}`;
+            })
+        })
+
+
+// Get avatar method
+        document.getElementById('getContacts').addEventListener('click',() => {
+        /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         */
+            const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
+            const idInstance = document.getElementById("idInstance").value
+            const result = document.getElementById("result-text-GetContacts");
+
+            const restAPI = whatsAppClient.restAPI({
+                idInstance: idInstance,
+                apiTokenInstance: apiTokenInstance
+            });
+
+            restAPI.instance.getContacts().then((data) => {
+                console.log(`Contact ${data}`);
+                result.textContent = ''
+                for (const key in data) {
+                    const container = document.createElement('div')
+                    const contact = data[key];
+                    container.textContent += `Contact Name: ${contact.id}, Contact Email: ${contact.name},Contact type: ${contact.type}\n`;
+                    result.appendChild(container)
+                }
+
+            }).catch((error) => {
+                console.error(`Problems with your method ${error}`)
+                result.textContent = ''
+                result.textContent = `Problems with your method ${error}`;
+            })
+        })
+
+
+
+
+
+
 // Get state instance method
         document.getElementById('getStateInstance').addEventListener('click',() => {
         /** 
@@ -463,7 +948,150 @@
             }).catch((error) => {
             })
         })
-</script>
+// Get WhatsApp status method
+        document.getElementById('getWaSettings').addEventListener('click',() => {
+        /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         */
+            const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
+            const idInstance = document.getElementById("idInstance").value
+
+            const restAPI = whatsAppClient.restAPI({
+                idInstance: idInstance,
+                apiTokenInstance: apiTokenInstance
+            });
+
+            restAPI.instance.getWaSettings().then((data) => {
+                console.log(`Yours status ${data}`);
+                resultText.textContent = ''
+                resultText.textContent = `Yours status ${data}`;
+            }).catch((error) => {
+                console.log(`Problems whith getting ${error}`);
+                resultText.textContent = ''
+                resultText.textContent = `Problems whith getting ${error}`;
+            }).catch((error) => {
+            })
+        })
+// Get chat history method
+        document.getElementById('GetChatHistory').addEventListener('click',() => {
+        /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         * @param {String} chatId
+         */
+            const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
+            const idInstance = document.getElementById("idInstance").value
+            const chatId = document.getElementById("chatId-chatHistory").value
+            const logs = document.getElementById("result-log")
+
+            const restAPI = whatsAppClient.restAPI({
+                idInstance: idInstance,
+                apiTokenInstance: apiTokenInstance
+            });
+
+            restAPI.message.getChatHistory(chatId).then((data) => {
+                logs.textContent = ''
+                console.log(data)
+                for (const dataItem of data) {
+                    const chat = document.createElement('div')
+                    console.log(`Yours chats ${JSON.stringify(dataItem)}`);
+                    chat.textContent += `Yours chats ${JSON.stringify(dataItem)}`;
+                    logs.appendChild(chat);
+                }
+            }).catch((error) => {
+                console.log(`Problems whith getting ${error}`);
+                logs.textContent = ''
+                logs.textContent = `Problems whith getting ${error}`;
+            }).catch((error) => {
+            })
+        })
+//Get message method
+        document.getElementById('GetMessage').addEventListener('click',() => {
+        /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         * @param {String} chatId
+         */
+            const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
+            const idInstance = document.getElementById("idInstance").value
+            const chatId = document.getElementById("chatId-getMessage").value
+            const logs = document.getElementById("result-getMessage")
+            const messageId = document.getElementById("messageId-getMessage").value
+
+            const restAPI = whatsAppClient.restAPI({
+                idInstance: idInstance,
+                apiTokenInstance: apiTokenInstance
+            });
+
+            restAPI.message.getMessage(chatId, messageId).then((data) => {
+                logs.textContent = ''
+                console.log(data)
+                for (const dataItem in data) {
+                    logs.textContent += `${dataItem}: `
+                    logs.textContent += `${data[dataItem]} \n`;
+                }
+            }).catch((error) => {
+                console.log(`Problems whith getting ${error}`);
+                logs.textContent = ''
+                logs.textContent = `Problems whith getting ${error}`;
+            }).catch((error) => {
+            })
+        })
+//Show Message Queue method
+        document.getElementById('ShowMessageQueue').addEventListener('click',() => {
+        /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         */
+            const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
+            const idInstance = document.getElementById("idInstance").value
+            const logs = document.getElementById('result-queue')
+            
+            const restAPI = whatsAppClient.restAPI({
+                idInstance: idInstance,
+                apiTokenInstance: apiTokenInstance
+            });
+
+            restAPI.message.showMessagesQueue().then((data) => {
+                console.log(`Queue ${JSON.stringify(data)}`);
+                logs.textContent = ''
+                logs.textContent = `Yours queue ${JSON.stringify(data)}`;
+            }).catch((error) => {
+                console.log(`Problems whith queue ${error}`);
+                logs.textContent = ''
+                logs.textContent = `Problems whith queue ${error}`;
+            }).catch((error) => {
+            })
+        })
+//Delete Message Queue method
+        document.getElementById('ClearMessageQueue').addEventListener('click',() => {
+        /** 
+         * @param {String} idInstance
+         * @param {String} apiTokenInstance
+         */
+            const apiTokenInstance = document.getElementById("apiTokenIsntance").value;
+            const idInstance = document.getElementById("idInstance").value
+            const logs = document.getElementById('result-queue')
+            
+            const restAPI = whatsAppClient.restAPI({
+                idInstance: idInstance,
+                apiTokenInstance: apiTokenInstance
+            });
+
+            restAPI.message.clearMessagesQueue().then((data) => {
+                console.log(`Queue ${JSON.stringify(data)}`);
+                logs.textContent = ''
+                logs.textContent = `Queue ${JSON.stringify(data)}`;
+            }).catch((error) => {
+                console.log(`Problems whith queue ${error}`);
+                logs.textContent = ''
+                logs.textContent = `Problems whith queue ${error}`;
+            }).catch((error) => {
+            })
+        })    
+    
+    </script>
 </body>
 
 </html>
