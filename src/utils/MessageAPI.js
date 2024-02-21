@@ -17,6 +17,10 @@ class MessageAPI {
      * @param {String} message - text message
      */
     async sendMessage(chatId, phoneNumber, message) {
+        return this.sendMessageExtended(chatId, phoneNumber, message, "", true)
+    }
+
+    async sendMessageExtended(chatId, phoneNumber, message, quotedMessageId, linkPreview) {
         CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
         CommonUtils.validateString('message', message);
 
@@ -24,6 +28,8 @@ class MessageAPI {
 
         const postData = {
             'message': message,
+            'quotedMessageId': quotedMessageId,
+            'linkPreview': linkPreview
         }
 
         this.addChadIdParam(postData, chatId)
