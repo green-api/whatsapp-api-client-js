@@ -23,6 +23,7 @@
   "author": "Green API team",
   "files": [
     "lib",
+    "src",
     "bundle.js",
     "whatsapp-api-client.min.js"
   ],
