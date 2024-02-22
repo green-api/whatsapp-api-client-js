@@ -1,14 +1,12 @@
 {
   "name": "@green-api/whatsapp-api-client",
-  "version": "1.0.0",
+  "version": "0.3.38",
   "description": "Library to integrate with WhatsApp API. For details have look at https://green-api.com",
   "license": "MIT",
   "main": "lib/bundle.js",
   "bugs": "https://github.com/green-api/whatsapp-api-client/issues",
   "homepage": "https://github.com/green-api/whatsapp-api-client",
-  "type": "module",
   "scripts": {
-    "start": "node --experimental-modules main.js",
     "buildBrowser": "rollup --config rollup.config.browser.js --environment BUILD:production",
     "buildNode": "rollup --config rollup.config.node.js --environment BUILD:production",
     "build": "npm run buildBrowser && npm run buildNode",
@@ -24,7 +22,6 @@
   "author": "Green API team",
   "files": [
     "lib",
-    "src",
     "bundle.js",
     "whatsapp-api-client.min.js"
   ],
