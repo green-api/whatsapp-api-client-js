@@ -2,6 +2,7 @@
 import axios from 'axios';
 import CommonUtils from './CommonUtils.js'
 import fs from "fs";
+import mime from "mime";
 
 class GroupAPI {
 
@@ -178,7 +179,7 @@ class GroupAPI {
             method: "post",
             url: CommonUtils.generateMethodURL(this._restAPI.params, method),
             data: formData,
-            headers: formData.getHeaders()
+            headers: {"Content-Type": "multipart/form-data"}
         })
         return response.data;
     }
