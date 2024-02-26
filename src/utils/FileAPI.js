@@ -50,8 +50,7 @@ class FileAPI {
         const response = await axios({
             method: "post",
             url: CommonUtils.generateMethodURL(this._restAPI.params, method),
-            data: fileData,
-            headers: {"Content-Type": mime.getType(filePath)}
+            data: fileData
         })
         return response.data;
     }
