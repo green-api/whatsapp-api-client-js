@@ -162,7 +162,7 @@ class GroupAPI {
 
         const method = "setGroupPicture";
 
-        const fileData = fs.readFileSync(filePath)
+        const fileData = fs.createReadStream(filePath)
         const formData = new FormData()
         formData.append("groupId", groupId)
         formData.append("file", fileData, "group_avatar.jpg")
