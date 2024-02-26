@@ -162,10 +162,10 @@ class GroupAPI {
 
         const method = "setGroupPicture";
 
-        const fileData = fs.readFileSync(filePath)
-        let formData = new FormData()
+        const fileStream = fs.createReadStream(filePath)
+        const formData = new FormData()
         formData.append("groupId", groupId)
-        formData.append("file", fileData)
+        formData.append("file", fileStream)
 
         const response = await axios({
             method: "post",
