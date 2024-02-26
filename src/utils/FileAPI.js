@@ -1,7 +1,6 @@
 'use strict'
 import axios from "axios";
 import fs from "fs";
-import mime from "mime";
 
 import CommonUtils from "./CommonUtils.js"
 
