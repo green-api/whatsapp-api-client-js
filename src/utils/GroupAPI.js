@@ -1,6 +1,8 @@
 'use strict'
 import axios from 'axios';
 import CommonUtils from './CommonUtils.js'
+import mime from "mime";
+import fs from "fs";
 
 class GroupAPI {
 
@@ -154,6 +156,25 @@ class GroupAPI {
         return response.data;
     }
 
+    /**
+     * @param {String} filePath
+     * @param {String} groupId
+     */
+    async setGroupPicture(groupId, filePath) {
+        CommonUtils.validateString("filePath", filePath)
+
+        const method = "setGroupPicture";
+
+        const fileData = fs.readFileSync(filePath)
+
+        const response = await axios({
+            method: "post",
+            url: CommonUtils.generateMethodURL(this._restAPI.params, method),
+            data: fileData,
+            headers: {"Content-Type": mime.getType(filePath)}
+        })
+        return response.data;
+    }
 }
 
 export default GroupAPI;
