@@ -164,13 +164,13 @@ class GroupAPI {
         const fileStream = fs.createReadStream(filePath)
         const formData = new FormData()
         formData.append('groupId', groupId)
-        formData.append('file', await fileStream.read())
+        formData.append('file', await fileStream.read(), "group_avatar.jpeg")
 
         const response = await axios({
             method: "post",
             url: CommonUtils.generateMethodURL(this._restAPI.params, method),
             data: formData,
-            headers: {'Content-Type': 'multipart/form-data'}
+            headers: formData.getHeaders()
         })
         return response.data;
     }
