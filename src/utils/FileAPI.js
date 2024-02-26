@@ -1,6 +1,7 @@
 'use strict'
 import axios from "axios";
 import fs from "fs";
+import mime from "mime";
 
 import CommonUtils from "./CommonUtils.js"
 
@@ -49,7 +50,8 @@ class FileAPI {
         const response = await axios({
             method: "post",
             url: CommonUtils.generateMethodURL(this._restAPI.params, method),
-            data: fileData
+            data: fileData,
+            headers: {"Content-Type": mime.getType(filePath)}
         })
         return response.data;
     }

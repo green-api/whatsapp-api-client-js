@@ -170,8 +170,7 @@ class GroupAPI {
         const response = await axios({
             method: "post",
             url: CommonUtils.generateMethodURL(this._restAPI.params, method),
-            data: formData,
-            headers: {"Content-Type": formData.getHeaders()}
+            data: formData
         })
         return response.data;
     }
