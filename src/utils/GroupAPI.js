@@ -171,7 +171,7 @@ class GroupAPI {
             method: "post",
             url: CommonUtils.generateMethodURL(this._restAPI.params, method),
             data: formData,
-            headers: formData.getHeaders()
+            headers: {"Content-Type": formData.getHeaders()}
         })
         return response.data;
     }
