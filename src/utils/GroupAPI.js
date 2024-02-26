@@ -162,15 +162,16 @@ class GroupAPI {
 
         const method = "setGroupPicture";
 
-        const fileStream = fs.createReadStream(filePath)
+        const fileData = fs.readFileSync(filePath)
         const formData = new FormData()
         formData.append("groupId", groupId)
-        formData.append("file", fileStream)
+        formData.append("file", fileData, "group_avatar.jpg")
 
         const response = await axios({
             method: "post",
             url: CommonUtils.generateMethodURL(this._restAPI.params, method),
-            data: formData
+            data: formData,
+            headers: {'Content-Type': 'multipart/form-data'}
         })
         return response.data;
     }
