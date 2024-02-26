@@ -163,12 +163,15 @@ class GroupAPI {
         const method = "setGroupPicture";
 
         const fileData = fs.readFileSync(filePath)
+        let formData = new FormData()
+        formData.append("groupId", groupId)
+        formData.append("file", fileData)
 
         const response = await axios({
             method: "post",
             url: CommonUtils.generateMethodURL(this._restAPI.params, method),
-            data: fileData,
-            headers: {"Content-Type": mime.getType(filePath)}
+            data: formData,
+            headers: formData.getHeaders()
         })
         return response.data;
     }
