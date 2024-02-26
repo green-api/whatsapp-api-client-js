@@ -164,7 +164,7 @@ class GroupAPI {
         const fileStream = fs.createReadStream(filePath)
         const formData = new FormData()
         formData.append('groupId', groupId)
-        formData.append('file', fileStream.read(), "group_avatar.jpg")
+        formData.append('file', await fileStream.read())
 
         const response = await axios({
             method: "post",
