@@ -1,7 +1,6 @@
 'use strict'
 import axios from 'axios';
 import CommonUtils from './CommonUtils.js'
-import mime from "mime";
 import fs from "fs";
 
 class GroupAPI {
@@ -162,10 +161,10 @@ class GroupAPI {
 
         const method = "setGroupPicture";
 
-        const fileData = fs.createReadStream(filePath)
+        const fileStream = fs.createReadStream(filePath)
         const formData = new FormData()
-        formData.append("groupId", groupId)
-        formData.append("file", fileData.data, "group_avatar.jpg")
+        formData.append('groupId', groupId)
+        formData.append('file', fileStream.read(), "group_avatar.jpg")
 
         const response = await axios({
             method: "post",
