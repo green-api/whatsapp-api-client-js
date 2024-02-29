@@ -159,6 +159,7 @@ class GroupAPI {
      */
     async setGroupPicture(groupId, filePath) {
         CommonUtils.validateString("filePath", filePath)
+        CommonUtils.validateString('groupId', groupId);
 
         const method = "setGroupPicture";
 
@@ -173,13 +174,13 @@ class GroupAPI {
 
         const formData = new FormData()
         formData.append('groupId', groupId)
-        formData.append('file', blob, "group_avatar.jpeg")
+        formData.append('file', blob, "group_avatar.jpg")
 
         const response = await axios({
             method: "post",
             url: CommonUtils.generateMethodURL(this._restAPI.params, method),
             data: formData,
-            headers: {"Content-Type": "multipart/form-data"}
+            headers: {"Content-Type": "image/jpeg"}
         })
         return response.data;
     }
