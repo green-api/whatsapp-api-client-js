@@ -312,7 +312,7 @@ class MessageAPI {
     /**
      * Returns history of chat
      */
-    async getChatHistory(chatId, count) {
+    async getChatHistory(chatId, count = null) {
         CommonUtils.validateChatIdPhoneNumber(chatId, undefined);
 
         const method = 'getChatHistory';
@@ -321,8 +321,8 @@ class MessageAPI {
             'chatId': chatId,
         }
 
-        if (count && count > 0) {
-            postData.count = count;
+        if (count !== null && count > 0) {
+            postData['count'] = count;
         }
 
         this.addChadIdParam(postData, chatId)
