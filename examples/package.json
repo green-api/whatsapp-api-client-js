@@ -10,6 +10,6 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "@green-api/whatsapp-api-client": "^0.3.36"
+    "@green-api/whatsapp-api-client": "^0.3.38"
   }
 }
