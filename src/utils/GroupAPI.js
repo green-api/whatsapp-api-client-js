@@ -1,6 +1,8 @@
 'use strict'
 import axios from 'axios';
 import CommonUtils from './CommonUtils.js'
+import fs from "fs";
+import mime from "mime";
 
 class GroupAPI {
 
@@ -10,19 +12,16 @@ class GroupAPI {
     /**
      * 
      * @param {String} groupName 
-     * @param {Array} chatIds 
-     * @param {Array} phones 
+     * @param {Array} chatIds
      */
-    async createGroup(groupName, chatIds, phones) {
+    async createGroup(groupName, chatIds) {
         CommonUtils.validateString('groupName', groupName);
         CommonUtils.validateArray('chatIds', chatIds);
-        CommonUtils.validateArray('phones', phones);
 
         const method = 'createGroup';
         const postData = {
             'groupName': groupName,
-            'chatIds': chatIds,
-            'phones': phones,
+            'chatIds': chatIds
         }
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data;
@@ -154,6 +153,37 @@ class GroupAPI {
         return response.data;
     }
 
+    /**
+     * @param {String} filePath
+     * @param {String} groupId
+     */
+    async setGroupPicture(groupId, filePath) {
+        CommonUtils.validateString("filePath", filePath)
+        CommonUtils.validateString('groupId', groupId);
+
+        const method = "setGroupPicture";
+
+        const fileStream = fs.createReadStream(filePath)
+        const fileData = [];
+
+        for await (const data of fileStream) {
+            fileData.push(data);
+        }
+
+        const blob = new Blob(fileData, { type: 'image/jpeg' });
+
+        const formData = new FormData()
+        formData.append('groupId', groupId)
+        formData.append('file', blob, "group_avatar.jpg")
+
+        const response = await axios({
+            method: "post",
+            url: CommonUtils.generateMethodURL(this._restAPI.params, method),
+            data: formData,
+            headers: {"Content-Type": "image/jpeg"}
+        })
+        return response.data;
+    }
 }
 
 export default GroupAPI;
