@@ -106,14 +106,13 @@ class GroupAPI {
      * @param {String} participantChatId 
      * @param {Number} participantPhone 
      */
-    async setGroupAdmin(groupId, participantChatId, participantPhone) {
+    async setGroupAdmin(groupId, participantChatId, participantPhone = null) {
         CommonUtils.validateString('groupId', groupId);
 
         const method = 'setGroupAdmin';
         const postData = {
             'groupId': groupId,
             'participantChatId': participantChatId,
-            'participantPhone': participantPhone,
         }
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data;
@@ -125,14 +124,13 @@ class GroupAPI {
      * @param {String} participantChatId 
      * @param {Number} participantPhone 
      */
-    async removeAdmin(groupId, participantChatId, participantPhone) {
+    async removeAdmin(groupId, participantChatId, participantPhone = null) {
         CommonUtils.validateString('groupId', groupId);
 
         const method = 'removeAdmin';
         const postData = {
             'groupId': groupId,
             'participantChatId': participantChatId,
-            'participantPhone': participantPhone,
         }
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data;
@@ -145,7 +143,7 @@ class GroupAPI {
     async leaveGroup(groupId) {
         CommonUtils.validateString('groupId', groupId);
 
-        const method = 'removeAdmin';
+        const method = 'leaveGroup';
         const postData = {
             'groupId': groupId,
         }
