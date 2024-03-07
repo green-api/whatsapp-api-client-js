@@ -15,8 +15,10 @@ class MessageAPI {
      * @param {Number} phoneNumber - receiver phone number using international format without + sign.
      * Mandatory if chatId is empty
      * @param {String} message - text message
+     * @param {boolean} linkPreview - allow preview
+     * @param {String} quotedMessageId - id of message
      */
-    async sendMessage(chatId, phoneNumber, message) {
+    async sendMessage(chatId, phoneNumber, message, quotedMessageId = null, linkPreview = null) {
         CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
         CommonUtils.validateString('message', message);
 
@@ -24,6 +26,13 @@ class MessageAPI {
 
         const postData = {
             'message': message,
+        }
+
+        if (quotedMessageId !== null) {
+            postData['quotedMessageId'] = quotedMessageId
+        }
+        if (linkPreview !== null) {
+            postData['linkPreview'] = linkPreview
         }
 
         this.addChadIdParam(postData, chatId)
@@ -303,13 +312,17 @@ class MessageAPI {
     /**
      * Returns history of chat
      */
-    async getChatHistory(chatId) {
+    async getChatHistory(chatId, count = null) {
         CommonUtils.validateChatIdPhoneNumber(chatId, undefined);
 
         const method = 'getChatHistory';
 
         const postData = {
             'chatId': chatId,
+        }
+
+        if (count !== null && count > 0) {
+            postData['count'] = count;
         }
 
         this.addChadIdParam(postData, chatId)
