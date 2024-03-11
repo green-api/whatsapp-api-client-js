@@ -265,10 +265,9 @@ class MessageAPI {
 
         const method = 'readChat';
 
-        const postData = {
-            'idMessage': idMessage,
-        }
+        const postData = {}
 
+        this.addMessageIdParam(postData, idMessage)
         this.addChadIdParam(postData, chatId)
         this.addPhoneParam(postData, phoneNumber)
 
@@ -386,6 +385,12 @@ class MessageAPI {
     addPhoneParam(postData, phoneNumber) {
         if (phoneNumber) {
             postData.chatId = `${phoneNumber}@c.us`
+        }
+    }
+
+    addMessageIdParam(postData, idMessage){
+        if (idMessage) {
+            postData.idMessage = idMessage
         }
     }
 }
