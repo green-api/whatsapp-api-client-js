@@ -1,59 +1,88 @@
 # whatsapp-api-client library for javascript
-* [![build](https://github.com/green-api/whatsapp-api-client/workflows/build_library/badge.svg)](https://github.com/green-api/whatsapp-api-client/actions/workflows/build_library.yml)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/green-api/whatsapp-api-client/blob/master/LICENSE)
-[![GitHub release](https://img.shields.io/github/v/release/green-api/whatsapp-api-client.svg)](https://github.com/green-api/whatsapp-api-client/releases)
 
-- [English documentation](README.md)
-- [Документация на русском языке](README_RUS.md)
+![](https://img.shields.io/badge/license-CC%20BY--ND%204.0-green)
+![](https://img.shields.io/npm/v/%40green-api%2Fwhatsapp-api-client)
+![](https://img.shields.io/github/actions/workflow/status/green-api/whatsapp-api-client-js/build.yml)
+![](https://img.shields.io/npm/dm/%40green-api%2Fwhatsapp-api-client)
 
-Javascript библиотека для интеграции с мессенджером WhatsAPP через API сервиса [green-api.com](https://green-api.com)ю Чтобы воспользоваться библиотекой нужно получить регистрационный токен и id аккаунта в [личном кабинете](https://console.green-api.com/). Есть бесплатный тариф аккаунта разработчика.
+## Поддержка
+
+[![Support](https://img.shields.io/badge/support@green--api.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:support@green-api.com)
+[![Support](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/greenapi_support_ru_bot)
+[![Support](https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/79993331223)
+
+## Руководства и новости
+
+[![Guides](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)](https://www.youtube.com/@green-api)
+[![News](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/green_api)
+[![News](https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://whatsapp.com/channel/0029VaHUM5TBA1f7cG29nO1C)
+
+Javascript библиотека для интеграции с мессенджером WhatsAPP через API сервиса [green-api.com](https://green-api.com).
+Чтобы воспользоваться библиотекой, нужно получить регистрационный токен и id аккаунта
+в [личном кабинете](https://console.green-api.com/). Есть бесплатный тариф аккаунта разработчика.
 
 ## API
 
-Документация к REST API находится по [ссылке](https://green-api.com/docs/api/). Библиотека является оберткой к REST API, поэтому документация по ссылке выше применима и к самой библиотеке.
+Документация к REST API находится по [ссылке](https://green-api.com/docs/api/). Библиотека является оберткой к REST API,
+поэтому документация по ссылке выше применима и к самой библиотеке.
 
 ## Установка
 
-Билиотека работает как на node >=10, так и на современных версиях браузеров chrome, firefox и др. Для приложений на webpack и npm установка выполняется через команду:
+Библиотека работает как на node >=10, так и на современных версиях браузеров chrome, firefox и др. Для приложений на
+webpack и npm установка выполняется через команду:
+
 ```
 npm i @green-api/whatsapp-api-client
 ```
-Для чистого html js сайта либу можно подключить в index.html
+
+Для чистого html js сайта библиотеку можно подключить в index.html
+
 ``` html
 <script type="text/javascript" src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
 ```
 
-## Импорт 
+## Импорт
 
 Есть несколько способов импортировать библиотеку в проект
 
-Используя классический javascript 
+Используя классический javascript
+
 ```
 const whatsAppClient = require("@green-api/whatsapp-api-client");
 ```
-Используя ES6 javascript 
+
+Используя ES6 javascript
+
 ```
 import whatsAppClient from "@green-api/whatsapp-api-client";
 ```
-Используя typescript 
+
+Используя typescript
+
 ```
 import * as whatsAppClient from "@green-api/whatsapp-api-client";
 ```
-Используя браузерный javascript 
+
+Используя браузерный javascript
+
 ```
 <script src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
 ```
 
-## Авторизация 
+## Авторизация
 
-Чтобы отправить сообщение или выполнить другой метод Green-API, аккаунт WhatsApp в приложении телефона должен быть в авторизованном состоянии. Для авторизации аккаунта перейдите в [личный кабинет](https://console.green-api.com/) и сканируйте QR-код с использованием прилоения WhatsApp.
+Чтобы отправить сообщение или выполнить другой метод Green-API, аккаунт WhatsApp в приложении телефона должен быть в
+авторизованном состоянии. Для авторизации аккаунта перейдите в [личный кабинет](https://console.green-api.com/) и
+сканируйте QR-код с использованием приложения WhatsApp.
 
 ## Примеры
 
-Не испольуйте параметр 'phoneNumber' при вызове методов. Он устарел. Примеры ниже используют параметр 'chatId'
+Не используйте параметр 'phoneNumber' при вызове методов. Он устарел. Примеры ниже используют параметр 'chatId'
 
 ### Отправка сообщения на номер WhatsApp
+
 Используя common js
+
 ``` js
 const whatsAppClient = require('@green-api/whatsapp-api-client')
 
@@ -68,7 +97,9 @@ restAPI.message.sendMessage("79999999999@c.us", null, "hello world")
 }) ;
 
 ```
+
 или используя js script
+
 ``` html
 <script src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
 <script>
@@ -84,7 +115,9 @@ restAPI.message.sendMessage("79999999999@c.us", null, "hello world")
     });
 </script>
 ```
-Или можно воспользоваться синтаксисом ES6. Для того, чтобы этот синтаксис сработал в приложении на nodejs, нужно в package.json прописать ключ ``"type": "module"``. Далее все примеры будут на ES6 синтаксисе.
+
+Или можно воспользоваться синтаксисом ES6. Для того чтобы этот синтаксис сработал в приложении на nodejs, нужно в
+package.json прописать ключ ``"type": "module"``. Далее все примеры будут на ES6 синтаксисе.
 
 ``` js
 import whatsAppClient from '@green-api/whatsapp-api-client'
@@ -100,12 +133,16 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
 
 ### Использование credentials файла для ключей `ID_INSTANCE` или `API_TOKEN_INSTANCE` (только для nodejs)
 
-Вы можете сохранить Ваши авторизационные данные отдельно от кода.. Библиотека позволяет создать  файл с произвольным именем и местом в следующем формате: 
+Вы можете сохранить Ваши авторизационные данные отдельно от кода. Библиотека позволяет создать файл с произвольным
+именем и местом в следующем формате:
+
 ```
 API_TOKEN_INSTANCE = "MY_API_TOKEN_INSTANCE"
 ID_INSTANCE = "MY_ID_INSTANCE"
 ```
+
 А затем Вы можете передать ключи как показано в коде ниже:
+
 ``` js
 const restAPI = whatsAppClient.restAPI(({
     credentialsPath: "examples\\credentials"
@@ -147,6 +184,7 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
 ```
 
 ### Отправка файла на номер WhatsApp
+
 ``` js
 import whatsAppClient from '@green-api/whatsapp-api-client'
 
@@ -159,9 +197,9 @@ import whatsAppClient from '@green-api/whatsapp-api-client'
 })();
 ```
 
-### Пример использования вебхука
+### Пример использования веб-хука
 
-Вебхуки работают только в node js с на базе express
+Веб-хуки работают только в node js на базе express
 
 ``` js
 import whatsAppClient from '@green-api/whatsapp-api-client'
@@ -171,7 +209,7 @@ import bodyParser from 'body-parser';
 (async () => {
     try {
 
-        // Устанавливаем http url ссылку, куда будут отправляться вебхуки. 
+        // Устанавливаем http url ссылку, куда будут отправляться веб-хуки. 
         // Ссылка должна иметь публичный адрес.
         await restAPI.settings.setSettings({
             webhookUrl: 'MY_HTTP_SERVER:3000/webhooks'
@@ -181,7 +219,7 @@ import bodyParser from 'body-parser';
         app.use(bodyParser.json());
         const webHookAPI = whatsAppClient.webhookAPI(app, '/webhooks')
 
-        // Подписываемся на событие вебхука при получении сообщения
+        // Подписываемся на событие веб-хука при получении сообщения
         webHookAPI.onIncomingMessageText((data, idInstance, idMessage, sender, typeMessage, textMessage) => {
             console.log(`outgoingMessageStatus data ${data.toString()}`)
         });
@@ -194,7 +232,7 @@ import bodyParser from 'body-parser';
                 idInstance: MY_ID_INSTANCE,
                 apiTokenInstance: MY_API_TOKEN_INSTANCE
             }));
-            // Отправляем тестовое сообщение, для того чтобы сработали события вебхуков
+            // Отправляем тестовое сообщение, для того чтобы сработали события веб-хуков
             const response = await restAPI.message.sendMessage("79999999999@c.us", null, "hello world");
     
         });
@@ -206,7 +244,7 @@ import bodyParser from 'body-parser';
 
 ```
 
-Полный список примеров [здесь](examples).
+Полный список примеров [здесь](../examples).
 
 ## Разворачивание окружения разработки
 
@@ -215,11 +253,14 @@ import bodyParser from 'body-parser';
 1. Склонируйте репозиторий через git clone
 2. Установите зависимости через npm install
 3. Установите глобально библиотеку ``rollup`` для сборки.
-4. Для вебхуков добавьте `express` как новую зависимость через npm
-5. Создайте файл `.env` в рутовом каталоге и пропишите переменные окружения. Образец переменных в файле [env.example](env.example)
+4. Для веб-хуков добавьте `express` как новую зависимость через npm
+5. Создайте файл `.env` в рутовом каталоге и пропишите переменные окружения. Образец переменных в
+   файле [env.example](../env.example)
 
 ## Сборка
-Скомпилировать как browser, так и node/webpack версии либы можно одной командой
+
+Скомпилировать как browser, так и node/webpack версии библиотеки можно одной командой
+
 ```
 npm run build
 ```
@@ -227,8 +268,8 @@ npm run build
 ## Сторонние продукты
 
 * [axios](https://github.com/axios/axios) - для http запросов
-* [express](https://www.npmjs.com/package/express) - сервер приложений для вебхуков
+* [express](https://www.npmjs.com/package/express) - сервер приложений для веб-хуков
 
 ## Лицензия
 
-Лицензировано на условиях MIT. Смотрите файл [LICENSE](LICENSE)
+Лицензировано на условиях MIT. Смотрите файл [LICENSE](../LICENSE)
