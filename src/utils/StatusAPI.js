@@ -8,6 +8,12 @@ class StatusAPI{
         this._restAPI = restAPI;
     }
 
+    /**
+     * @param {String} message
+     * @param {String} backgroundColor Optional
+     * @param {String} font Optional
+     * @param {Array} participants Optional
+     */
     async sendTextStatus(message, backgroundColor = null, font = null, participants = null){
         if (participants!==null){
             CommonUtils.validateArray('participants', participants)
@@ -37,6 +43,12 @@ class StatusAPI{
         return response.data
     }
 
+    /**
+     * @param {String} urlFile
+     * @param {String} fileName 
+     * @param {String} backgroundColor Optional
+     * @param {Array} participants Optional
+     */
     async sendVoiceStatus(urlFile, fileName, backgroundColor = null, participants = null){
         if (participants!==null){
             CommonUtils.validateArray('participants', participants)
@@ -65,6 +77,12 @@ class StatusAPI{
         return response.data
     }
 
+    /**
+     * @param {String} urlFile
+     * @param {String} fileName 
+     * @param {String} caption Optional
+     * @param {Array} participants Optional
+     */
     async sendMediaStatus(urlFile, fileName, caption = null, participants = null){
         if (participants!==null){
             CommonUtils.validateArray('participants', participants)
@@ -96,6 +114,9 @@ class StatusAPI{
         return response.data
     }
 
+    /**
+     * @param {number} minutes Optional
+     */
     async getOutgoingStatuses(minutes=null){
         const method = 'getOutgoingStatuses'
         let url = ""
@@ -111,6 +132,9 @@ class StatusAPI{
         return response.data;
     }
 
+    /**
+     * @param {number} minutes Optional
+     */
     async getIncomingStatuses(minutes=null){
         const method = 'getIncomingStatuses'
         let url = ""
@@ -126,6 +150,9 @@ class StatusAPI{
         return response.data;
     }
 
+    /**
+     * @param {String} idMessage
+     */
     async getStatusStatistic(idMessage){
         CommonUtils.validateString('idMessage', idMessage)
 
@@ -134,6 +161,9 @@ class StatusAPI{
         return response.data;
     }
 
+    /**
+     * @param {String} idMessage
+     */
     async deleteStatus(idMessage){
         CommonUtils.validateString('idMessage', idMessage)
 
