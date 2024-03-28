@@ -97,29 +97,31 @@ class StatusAPI{
     }
 
     async getOutgoingStatuses(minutes=null){
-        CommonUtils.validateInteger('minutes', minutes)
-
         const method = 'getOutgoingStatuses'
-        const url = ""
+        let url = ""
+
         if(minutes!==null){
+            CommonUtils.validateInteger('minutes', minutes)
             url = (CommonUtils.generateMethodURL(this._restAPI.params, method) + '?minutes=' + minutes)
         }else{
             url = (CommonUtils.generateMethodURL(this._restAPI.params, method))
         }
+
         const response = await axios.get(url);
         return response.data;
     }
 
     async getIncomingStatuses(minutes=null){
-        CommonUtils.validateInteger('minutes', minutes)
-
         const method = 'getIncomingStatuses'
-        const url = ""
+        let url = ""
+
         if(minutes!==null){
+            CommonUtils.validateInteger('minutes', minutes)
             url = (CommonUtils.generateMethodURL(this._restAPI.params, method) + '?minutes=' + minutes)
         }else{
             url = (CommonUtils.generateMethodURL(this._restAPI.params, method))
         }
+
         const response = await axios.get(url);
         return response.data;
     }
