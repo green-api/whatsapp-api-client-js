@@ -6,6 +6,7 @@
   "main": "lib/bundle.js",
   "bugs": "https://github.com/green-api/whatsapp-api-client/issues",
   "homepage": "https://github.com/green-api/whatsapp-api-client",
+  "types": "./src/index.d.ts",
   "scripts": {
     "buildBrowser": "rollup --config rollup.config.browser.js --environment BUILD:production",
     "buildNode": "rollup --config rollup.config.node.js --environment BUILD:production",
