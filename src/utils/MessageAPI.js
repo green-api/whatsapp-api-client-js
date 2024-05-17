@@ -409,6 +409,7 @@ class Message {
 class QueueMessage {
     constructor(data) {
         this.messageID = data.messageID;
+        this.messagesIDs = data.messagesIDs; // for forwarded messages
         this.type = data.type;
         this.body = data.body;
     }
