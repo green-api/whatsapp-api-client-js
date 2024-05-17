@@ -397,12 +397,29 @@ class MessageAPI {
 
 class Message {
     constructor(data) {
-        this.chatId = data.chatId;
+        this.type = data.type;
         this.idMessage = data.idMessage;
-        this.statusMessage = data.statusMessage;
-        this.textMessage = data.textMessage;
         this.timestamp = data.timestamp;
         this.typeMessage = data.typeMessage;
+        this.chatId = data.chatId;
+        this.senderId = data.senderId;
+        this.senderName = data.senderName;
+        this.senderContactName = data.senderContactName;
+        this.isForwarded = data.isForwarded;
+        this.forwardingScore = data.forwardingScore;
+        this.textMessage = data.textMessage;
+        this.downloadUrl = data.downloadUrl;
+        this.caption = data.caption;
+        this.fileName = data.fileName;
+        this.jpegThumbnail = data.jpegThumbnail;
+        this.mimeType = data.mimeType;
+        this.isAnimated = data.isAnimated;
+        this.chatState = data.chatState;
+        this.location = data.location;
+        this.contact = data.contact;
+        this.extendedTextMessageData = data.extendedTextMessageData;
+        this.pollMessageData = data.pollMessageData;
+        this.quotedMessage = data.quotedMessage;
     }
 }
 
