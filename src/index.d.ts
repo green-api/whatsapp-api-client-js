@@ -64,18 +64,18 @@ declare module "@green-api/whatsapp-api-client" {
         idMessage?: string,
       ): Promise<MessageResponse.ReadChat>;
 
-      showMessagesQueue(): Promise<MessageResponse.JournalResponse>;
+      showMessagesQueue(): Promise<any>;
 
       clearMessagesQueue(): Promise<MessageResponse.ClearMessagesQueue>;
 
-      lastIncomingMessages(): Promise<MessageResponse.JournalResponse>;
+      lastIncomingMessages(): Promise<any>;
 
-      lastOutgoingMessages(): Promise<MessageResponse.JournalResponse>;
+      lastOutgoingMessages(): Promise<any>;
 
       getChatHistory(
         chatId: string,
         count?: number,
-      ): Promise<MessageResponse.JournalResponse>;
+      ): Promise<any>;
 
       getMessage(
         chatId: string,
@@ -148,7 +148,7 @@ declare module "@green-api/whatsapp-api-client" {
         chatId: string
       ): Promise<InstanceResponse.GetContactInfo>;
 
-      getContacts(): Promise<InstanceResponse.GetContacts>;
+      getContacts(): Promise<any>;
 
     }
 
@@ -220,9 +220,6 @@ declare module "@green-api/whatsapp-api-client" {
       interface ClearMessagesQueue {
         isCleared: boolean;
       }
-      interface JournalResponse {
-        messages: Array<object>;
-      }
       interface GetMessage {
         message: object;
       }
@@ -290,9 +287,6 @@ declare module "@green-api/whatsapp-api-client" {
         messageExpiration: number;
         muteExpiration: number;
         isBusiness: boolean;
-      }
-      interface GetContacts {
-        contacts: Array<object>;
       }
     }
 

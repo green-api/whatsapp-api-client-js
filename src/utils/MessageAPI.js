@@ -408,9 +408,9 @@ class Message {
 
 class QueueMessage {
     constructor(data) {
-        this.chatId = data.chatId;
-        this.fileName = data.fileName;
-        this.typeMessage = data.typeMessage;
+        this.messageID = data.messageID;
+        this.type = data.type;
+        this.body = data.body;
     }
 }
 
