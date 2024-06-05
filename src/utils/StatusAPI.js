@@ -14,13 +14,7 @@ class StatusAPI{
      * @param {String} font Optional
      * @param {Array} participants Optional
      */
-    async sendTextStatus(message, backgroundColor = null, font = null, participants = null){
-        if (participants!==null){
-            CommonUtils.validateArray('participants', participants)
-            for (const number in participants){
-                CommonUtils.validateChatIdPhoneNumber(number);
-            }
-        }
+    async sendTextStatus(message, backgroundColor = null, font = null, participants = null) {
         CommonUtils.validateString('message', message);
 
         const method = 'sendTextStatus';
@@ -29,13 +23,19 @@ class StatusAPI{
             'message': message,
         }
 
-        if (backgroundColor!==null){
+        if (backgroundColor !== null) {
+            CommonUtils.validateString('backgroundColor', backgroundColor)
             postData['backgroundColor'] = backgroundColor
         }
-        if (font!=null){
+        if (font != null) {
+            CommonUtils.validateString('font', font)
             postData['font'] = font
         }
-        if (participants!==null){
+        if (participants !== null) {
+            CommonUtils.validateArray('participants', participants)
+            for (const number in participants){
+                CommonUtils.validateChatIdPhoneNumber(number);
+            }
             postData['participants'] = participants
         }
 
@@ -49,13 +49,7 @@ class StatusAPI{
      * @param {String} backgroundColor Optional
      * @param {Array} participants Optional
      */
-    async sendVoiceStatus(urlFile, fileName, backgroundColor = null, participants = null){
-        if (participants!==null){
-            CommonUtils.validateArray('participants', participants)
-            for (const number in participants){
-                CommonUtils.validateChatIdPhoneNumber(number);
-            }
-        }
+    async sendVoiceStatus(urlFile, fileName, backgroundColor = null, participants = null) {
         CommonUtils.validateString('urlFile', urlFile);
         CommonUtils.validateString('fileName', fileName);
 
@@ -66,10 +60,15 @@ class StatusAPI{
             'fileName': fileName,
         }
 
-        if (backgroundColor!==null){
+        if (backgroundColor !== null) {
+            CommonUtils.validateString('backgroundColor', backgroundColor)
             postData['backgroundColor'] = backgroundColor
         }
-        if (participants!==null){
+        if (participants !== null) {
+            CommonUtils.validateArray('participants', participants)
+            for (const number in participants){
+                CommonUtils.validateChatIdPhoneNumber(number);
+            }
             postData['participants'] = participants
         }
 
@@ -83,16 +82,7 @@ class StatusAPI{
      * @param {String} caption Optional
      * @param {Array} participants Optional
      */
-    async sendMediaStatus(urlFile, fileName, caption = null, participants = null){
-        if (participants!==null){
-            CommonUtils.validateArray('participants', participants)
-            for (const number in participants){
-                CommonUtils.validateChatIdPhoneNumber(number);
-            }
-        }
-        if (caption!==null){
-            CommonUtils.validateString('caption', caption);
-        }
+    async sendMediaStatus(urlFile, fileName, caption = null, participants = null) {
         CommonUtils.validateString('urlFile', urlFile);
         CommonUtils.validateString('fileName', fileName);
 
@@ -103,10 +93,15 @@ class StatusAPI{
             'fileName': fileName,
         }
 
-        if(caption!=null){
+        if (caption != null) {
+            CommonUtils.validateString('caption', caption);
             postData['caption'] = caption
         }
-        if(participants!=null){
+        if (participants != null) {
+            CommonUtils.validateArray('participants', participants)
+            for (const number in participants){
+                CommonUtils.validateChatIdPhoneNumber(number);
+            }
             postData['participants'] = participants
         }
 
@@ -115,16 +110,16 @@ class StatusAPI{
     }
 
     /**
-     * @param {number} minutes Optional
+     * @param {Number} minutes Optional
      */
-    async getOutgoingStatuses(minutes=null){
+    async getOutgoingStatuses(minutes = null) {
         const method = 'getOutgoingStatuses'
         let url = ""
 
-        if(minutes!==null){
+        if (minutes !== null) {
             CommonUtils.validateInteger('minutes', minutes)
             url = (CommonUtils.generateMethodURL(this._restAPI.params, method) + '?minutes=' + minutes)
-        }else{
+        } else {
             url = (CommonUtils.generateMethodURL(this._restAPI.params, method))
         }
 
@@ -133,16 +128,16 @@ class StatusAPI{
     }
 
     /**
-     * @param {number} minutes Optional
+     * @param {Number} minutes Optional
      */
-    async getIncomingStatuses(minutes=null){
+    async getIncomingStatuses(minutes = null) {
         const method = 'getIncomingStatuses'
         let url = ""
 
-        if(minutes!==null){
+        if (minutes !== null) {
             CommonUtils.validateInteger('minutes', minutes)
             url = (CommonUtils.generateMethodURL(this._restAPI.params, method) + '?minutes=' + minutes)
-        }else{
+        } else {
             url = (CommonUtils.generateMethodURL(this._restAPI.params, method))
         }
 
@@ -153,7 +148,7 @@ class StatusAPI{
     /**
      * @param {String} idMessage
      */
-    async getStatusStatistic(idMessage){
+    async getStatusStatistic(idMessage) {
         CommonUtils.validateString('idMessage', idMessage)
 
         const method = 'getStatusStatistic'
@@ -164,7 +159,7 @@ class StatusAPI{
     /**
      * @param {String} idMessage
      */
-    async deleteStatus(idMessage){
+    async deleteStatus(idMessage) {
         CommonUtils.validateString('idMessage', idMessage)
 
         const method = 'deleteStatus'
