@@ -118,7 +118,7 @@ class StatusAPI{
 
         if (minutes !== null) {
             CommonUtils.validateInteger('minutes', minutes)
-            url = (CommonUtils.generateMethodURL(this._restAPI.params, method) + '?minutes=' + minutes)
+            url = CommonUtils.generateMethodURLWithQuery(this._restAPI.params, method, `?minutes=${minutes}`)
         } else {
             url = (CommonUtils.generateMethodURL(this._restAPI.params, method))
         }
@@ -136,9 +136,9 @@ class StatusAPI{
 
         if (minutes !== null) {
             CommonUtils.validateInteger('minutes', minutes)
-            url = (CommonUtils.generateMethodURL(this._restAPI.params, method) + '?minutes=' + minutes)
+            url = CommonUtils.generateMethodURLWithQuery(this._restAPI.params, method, `?minutes=${minutes}`)
         } else {
-            url = (CommonUtils.generateMethodURL(this._restAPI.params, method))
+            url = CommonUtils.generateMethodURL(this._restAPI.params, method)
         }
 
         const response = await axios.get(url);
@@ -152,7 +152,7 @@ class StatusAPI{
         CommonUtils.validateString('idMessage', idMessage)
 
         const method = 'getStatusStatistic'
-        const response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method) + '?idMessage=' + idMessage);
+        const response = await axios.get(CommonUtils.generateMethodURLWithQuery(this._restAPI.params, method, `?idMessage=${idMessage}`));
         return response.data;
     }
 
@@ -170,6 +170,8 @@ class StatusAPI{
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data
     }
+
+
 }
 
 export default StatusAPI;
