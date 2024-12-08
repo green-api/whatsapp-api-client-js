@@ -55,6 +55,45 @@ class InstanceAPI {
 
     /**
      * 
+     * @param {String} chatId 
+     * @param {String} idMessage 
+     */
+    async deleteMessage(chatId, idMessage) {
+        CommonUtils.validateString('chatId', chatId)
+        CommonUtils.validateString('idMessage', idMessage)
+
+        const method = 'deleteMessage';
+        const postData = {
+            'chatId': chatId,
+            'idMessage': idMessage,
+        }
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
+        return response.data
+    }
+
+    /**
+     * 
+     * @param {String} chatId 
+     * @param {String} idMessage
+     * @param {String} message
+     */
+    async editMessage(chatId, idMessage, message) {
+        CommonUtils.validateString('chatId', chatId)
+        CommonUtils.validateString('idMessage', idMessage)
+        CommonUtils.validateString('message', message)
+
+        const method = 'editMessage';
+        const postData = {
+            'chatId': chatId,
+            'idMessage': idMessage,
+            'message': message,
+        }
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
+        return response.data
+    }
+
+    /**
+     * 
      * @param {Number} phoneNumber 
      */
     async getAuthorizationCode(phoneNumber) {

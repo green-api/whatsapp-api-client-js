@@ -27,6 +27,8 @@ class WebhookServiceAPI {
             onReceivingMessageTextURL: 'onReceivingMessageTextURL',
             onReceivingMessageContact: 'onReceivingMessageContact',
             onReceivingMessageLocation: 'onReceivingMessageLocation',
+            onReceivingEditedMessage: 'onReceivingEditedMessage',
+            onReceivingDeletedMessage: 'onReceivingDeletedMessage',
         }
         this._callbacks = new Map()
     }
@@ -101,6 +103,14 @@ class WebhookServiceAPI {
     onReceivingMessageLocation(callback)
     {
         this._callbacks.set(this.callbackTypes.onReceivingMessageLocation, callback)
+    }
+    onReceivingEditedMessage(callback)
+    {
+        this._callbacks.set(this.callbackTypes.onReceivingEditedMessage, callback)
+    }
+    onReceivingDeletedMessage(callback)
+    {
+        this._callbacks.set(this.callbackTypes.onReceivingDeletedMessage, callback)
     }
 }
 
