@@ -7,6 +7,7 @@ import SettingsAPI from './utils/SettingsAPI.js';
 import GroupAPI from './utils/GroupAPI.js';
 import WebhookServiceAPI from './utils/WebhookServiceAPI.js';
 import * as fs from 'fs'
+import StatusAPI from './utils/StatusAPI.js';
 
 class RestAPI {
 
@@ -42,6 +43,7 @@ class RestAPI {
         this.settings = new SettingsAPI(this);
         this.group = new GroupAPI(this);
         this.webhookService = new WebhookServiceAPI(this);
+        this.status = new StatusAPI(this);
     }
 }
 
