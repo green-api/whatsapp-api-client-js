@@ -119,8 +119,8 @@ class InstanceAPI {
         const postData = {
         }
 
-        this.addChadIdParam(postData, chatId)
-        this.addPhoneParam(postData, phoneNumber)
+        this.addParam(postData, 'chatId', chatId)
+        this.addParam(postData, 'phoneNumber', phoneNumber)
 
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data
@@ -138,7 +138,7 @@ class InstanceAPI {
 
         }
 
-        this.addChadIdParam(postData, chatId)
+        this.addParam(postData, 'chatId', chatId)
 
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data
@@ -156,7 +156,7 @@ class InstanceAPI {
             
         }
 
-        this.addChadIdParam(postData, chatId)
+        this.addParam(postData, 'chatId', chatId)
 
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data
@@ -174,7 +174,7 @@ class InstanceAPI {
             
         }
 
-        this.addChadIdParam(postData, chatId)
+        this.addParam(postData, 'chatId', chatId)
 
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data
@@ -192,15 +192,9 @@ class InstanceAPI {
         return response.data
     }
 
-    addChadIdParam(postData, chatId) {
-        if (chatId) {
-            postData.chatId = chatId
-        } 
-    }
-
-    addPhoneParam(postData, phoneNumber) {
-        if (phoneNumber) {
-            postData.phoneNumber = phoneNumber
+    addParam(postData, param, value) {
+        if (value && !postData.hasOwnProperty(param)) {
+            postData[param] = value
         }
     }
 

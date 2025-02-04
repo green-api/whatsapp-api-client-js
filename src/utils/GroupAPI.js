@@ -2,7 +2,6 @@
 import axios from 'axios';
 import CommonUtils from './CommonUtils.js'
 import fs from "fs";
-import mime from "mime";
 
 class GroupAPI {
 
