@@ -658,6 +658,8 @@ declare module "@green-api/whatsapp-api-client" {
 			pollMessageWebhook: YesOrNo;
 			incomingBlockWebhook: YesOrNo;
 			incomingCallWebhook: YesOrNo;
+			editedMessageWebhook: YesOrNo;
+			deletedMessageWebhook: YesOrNo;
 		}
 
 		type GetSettings = Settings;
