@@ -328,12 +328,48 @@ declare module "@green-api/whatsapp-api-client" {
 	class MessageApi {
 		sendMessage(
 			chatId: Optional<string>,
+			phoneNumber: null|undefined,
+			message: string,
+			quotedMessageId?: string,
+			linkPreview?: boolean,
+		): Promise<MessageResponse.Message>;
+		/**
+		 * @deprecated Please do not use 'phoneNumber' parameter when calling methods. It is deprecated. For examples see 'chatId' parameter.
+		 */
+		sendMessage(
+			chatId: Optional<string>,
+			phoneNumber: unknown,
+			message: string,
+			quotedMessageId?: string,
+			linkPreview?: boolean,
+		): Promise<MessageResponse.Message>;
+		sendMessage(
+			chatId: Optional<string>,
 			phoneNumber: Optional<number>,
 			message: string,
 			quotedMessageId?: string,
 			linkPreview?: boolean,
 		): Promise<MessageResponse.Message>;
 
+		sendPoll(
+			chatId: Optional<string>,
+			phoneNumber: null|undefined,
+			message: string,
+			options: Message.PollOption[],
+			multipleAnswers?: boolean,
+			quotedMessageId?: string,
+		): Promise<MessageResponse.Message>;
+		/**
+		 * @deprecated Please do not use 'phoneNumber' parameter when calling methods. It is deprecated. For examples see 'chatId' parameter.
+		 */
+		sendPoll(
+			chatId: Optional<string>,
+			phoneNumber: unknown,
+			message: string,
+			options: Message.PollOption[],
+			multipleAnswers?: boolean,
+			quotedMessageId?: string,
+		): Promise<MessageResponse.Message>;
 		sendPoll(
 			chatId: Optional<string>,
 			phoneNumber: Optional<number>,
@@ -345,6 +381,25 @@ declare module "@green-api/whatsapp-api-client" {
 
 		sendLocation(
 			chatId: Optional<string>,
+			phoneNumber: null|undefined,
+			nameLocation: Optional<string>,
+			address: Optional<string>,
+			latitude: number,
+			longitude: number,
+		): Promise<MessageResponse.Message>;
+		/**
+		 * @deprecated Please do not use 'phoneNumber' parameter when calling methods. It is deprecated. For examples see 'chatId' parameter.
+		 */
+		sendLocation(
+			chatId: Optional<string>,
+			phoneNumber: unknown,
+			nameLocation: Optional<string>,
+			address: Optional<string>,
+			latitude: number,
+			longitude: number,
+		): Promise<MessageResponse.Message>;
+		sendLocation(
+			chatId: Optional<string>,
 			phoneNumber: Optional<number>,
 			nameLocation: Optional<string>,
 			address: Optional<string>,
@@ -352,6 +407,31 @@ declare module "@green-api/whatsapp-api-client" {
 			longitude: number,
 		): Promise<MessageResponse.Message>;
 
+		sendContact(
+			chatId: Optional<string>,
+			phoneNumber: null|undefined,
+			contact: {
+				phoneContact: number,
+				firstName: Optional<string>,
+				middleName: Optional<string>,
+				lastName: Optional<string>,
+				company: Optional<string>
+			},
+		): Promise<MessageResponse.Message>;
+		/**
+		 * @deprecated Please do not use 'phoneNumber' parameter when calling methods. It is deprecated. For examples see 'chatId' parameter.
+		 */
+		sendContact(
+			chatId: Optional<string>,
+			phoneNumber: unknown,
+			contact: {
+				phoneContact: number,
+				firstName: Optional<string>,
+				middleName: Optional<string>,
+				lastName: Optional<string>,
+				company: Optional<string>
+			},
+		): Promise<MessageResponse.Message>;
 		sendContact(
 			chatId: Optional<string>,
 			phoneNumber: Optional<number>,
@@ -366,10 +446,36 @@ declare module "@green-api/whatsapp-api-client" {
 
 		sendLink(
 			chatId: Optional<string>,
+			phoneNumber: null|undefined,
+			urlLink: string,
+		): Promise<MessageResponse.Message>
+		/**
+		 * @deprecated Please do not use 'phoneNumber' parameter when calling methods. It is deprecated. For examples see 'chatId' parameter.
+		 */
+		sendLink(
+			chatId: Optional<string>,
+			phoneNumber: unknown,
+			urlLink: string,
+		): Promise<MessageResponse.Message>
+		sendLink(
+			chatId: Optional<string>,
 			phoneNumber: Optional<number>,
 			urlLink: string,
 		): Promise<MessageResponse.Message>
 
+		readChat(
+			chatId: Optional<string>,
+			phoneNumber: null|undefined,
+			idMessage?: string,
+		): Promise<MessageResponse.ReadChat>;
+		/**
+		 * @deprecated Please do not use 'phoneNumber' parameter when calling methods. It is deprecated. For examples see 'chatId' parameter.
+		 */
+		readChat(
+			chatId: Optional<string>,
+			phoneNumber: unknown,
+			idMessage?: string,
+		): Promise<MessageResponse.ReadChat>;
 		readChat(
 			chatId: Optional<string>,
 			phoneNumber: Optional<number>,
@@ -402,6 +508,23 @@ declare module "@green-api/whatsapp-api-client" {
 	}
 
 	class FileAPI {
+		sendFileByUrl(
+			chatId: Optional<string>,
+			phoneNumber: null|undefined,
+			urlFile: string,
+			fileName: string,
+			caption?: string,
+		): Promise<MessageResponse.Message>;
+		/**
+		 * @deprecated Please do not use 'phoneNumber' parameter when calling methods. It is deprecated. For examples see 'chatId' parameter.
+		 */
+		sendFileByUrl(
+			chatId: Optional<string>,
+			phoneNumber: unknown,
+			urlFile: string,
+			fileName: string,
+			caption?: string,
+		): Promise<MessageResponse.Message>;
 		sendFileByUrl(
 			chatId: Optional<string>,
 			phoneNumber: Optional<number>,
@@ -443,6 +566,17 @@ declare module "@green-api/whatsapp-api-client" {
 			phoneNumber: number,
 		): Promise<InstanceResponse.GetAuthorizationCode>;
 
+		getAvatar(
+			chatId: Optional<string>,
+			phoneNumber: null|undefined,
+		): Promise<InstanceResponse.GetAvatar>;
+		/**
+		 * @deprecated Please do not use 'phoneNumber' parameter when calling methods. It is deprecated. For examples see 'chatId' parameter.
+		 */
+		getAvatar(
+			chatId: Optional<string>,
+			phoneNumber: unknown,
+		): Promise<InstanceResponse.GetAvatar>;
 		getAvatar(
 			chatId: Optional<string>,
 			phoneNumber: Optional<number>,
