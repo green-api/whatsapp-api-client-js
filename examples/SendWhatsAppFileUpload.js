@@ -1,4 +1,4 @@
-const whatsAppClient = require('@green-api/whatsapp-api-client')
+import whatsAppClient from '@green-api/whatsapp-api-client'
 const FormData = require('form-data')
 const fs = require('fs')
 const Path = require("path");

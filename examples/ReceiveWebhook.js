@@ -1,4 +1,4 @@
-const whatsAppClient = require("@green-api/whatsapp-api-client");
+import whatsAppClient from "@green-api/whatsapp-api-client");
 const express = require("express");
 
 // Receive webhook

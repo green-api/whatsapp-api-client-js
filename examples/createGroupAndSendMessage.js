@@ -1,4 +1,4 @@
-const whatsAppClient = require("@green-api/whatsapp-api-client");
+import whatsAppClient from "@green-api/whatsapp-api-client");
 
 const idInstance = "1101000001";
 const apiTokenInstance = "d75b3a66374942c5b3c019c698abc2067e151558acbd412345";
