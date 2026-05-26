@@ -4,7 +4,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import pluginJson from "@rollup/plugin-json";
 
-module.exports = {
+export default {
   input: "src/index.js",
   output: [
     {
@@ -21,15 +21,9 @@ module.exports = {
     },
   ],
   plugins: [
-    progress({
-      clearLine: true,
-    }),
-    resolve({
-      browser: true,
-    }),
-    commonjs({
-      include: "node_modules/**",
-    }),
+    progress({ clearLine: true }),
+    resolve({ browser: true }),
+    commonjs({ include: "node_modules/**" }),
     pluginJson(),
   ],
   external: ["axios", "fs", "mime"],
