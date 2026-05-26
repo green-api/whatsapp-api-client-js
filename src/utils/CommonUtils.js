@@ -13,6 +13,11 @@ class CommonUtils {
             throw new Error(`${name} must be an integer!`)
     }
 
+    static validateBoolean(name, val){
+        if(Object.prototype.toString.call(val) !== '[object Boolean]')
+            throw new Error(`${name} must be an Boolean!`)
+    }
+
     static validateNumber(name, val) {
         if (!val || !Number(val))
             throw new Error(`${name} must be a number!`)
@@ -31,6 +36,10 @@ class CommonUtils {
         }
     }
 
+      static generateMethodURLWithQuery(params, method, queryParams) {
+            return `${params.host}/waInstance${params.idInstance}/${method}/${params.apiTokenInstance}${queryParams}`
+    }
+
     static validateChatIdPhoneNumber(chatId, phoneNumber) {
         if (!chatId) {
             CommonUtils.validateInteger('phoneNumber', phoneNumber)
@@ -41,8 +50,9 @@ class CommonUtils {
     }
 
     static validateArray(name, val) {
-        if (!val || !Array.isArray(val))
-            throw new Error(`${name} must be an Array!`)
+        if (!val || !Array.isArray(val)){
+            throw new Error(`${name} must be an Array! `)
+        }
     }
 
     static validatePath(name, val) {

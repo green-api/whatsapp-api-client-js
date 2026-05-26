@@ -29,9 +29,11 @@ class MessageAPI {
         }
 
         if (quotedMessageId !== null) {
+            CommonUtils.validateString('quotedMessageId', quotedMessageId)
             postData['quotedMessageId'] = quotedMessageId
         }
         if (linkPreview !== null) {
+            CommonUtils.validateBoolean('linkPreview', linkPreview)
             postData['linkPreview'] = linkPreview
         }
 
@@ -291,21 +293,38 @@ class MessageAPI {
     }
 
     /**
-     * Returns array of Message objects
-     */
-    async lastIncomingMessages() {
+     * @param {Number} minutes Optional
+    */
+
+    async lastIncomingMessages(minutes = null) {
         const method = 'lastIncomingMessages';
-        const response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method));
-        return response.data.map((msg) => new Message(msg))
+        let response;
+
+        if (minutes !== null) {
+            CommonUtils.validateInteger('minutes', minutes);
+            response = await axios.get(CommonUtils.generateMethodURLWithQuery(this._restAPI.params, method, `?minutes=${minutes}`));
+        } else {
+            response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method));
+        }
+
+        return response.data.map((msg) => new IncomingMessage(msg));
     }
 
     /**
      * Returns array of Message objects
      */
-    async lastOutgoingMessages() {
+    async lastOutgoingMessages(minutes = null) {
         const method = 'lastOutgoingMessages';
-        const response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method));
-        return response.data.map((msg) => new Message(msg))
+        let response;
+
+        if (minutes !== null) {
+            CommonUtils.validateInteger('minutes', minutes);
+            response = await axios.get(CommonUtils.generateMethodURLWithQuery(this._restAPI.params, method, `?minutes=${minutes}`));
+        } else {
+            response = await axios.get(CommonUtils.generateMethodURL(this._restAPI.params, method));
+        }
+        
+        return response.data.map((msg) => new OutgoingMessage(msg))
     }
 
     /**
@@ -403,6 +422,49 @@ class Message {
         this.textMessage = data.textMessage;
         this.timestamp = data.timestamp;
         this.typeMessage = data.typeMessage;
+    }
+}
+class OutgoingMessage{
+    constructor(data){
+        this.type = data.type
+        this.idMessage = data.idMessage
+        this.timestamp = data.timestamp
+        this.typeMessage = data.typeMessage
+        this.chatId = data.chatId
+        if(data["textMessage"] !== undefined){
+            this.textMessage = data.textMessage
+        }
+        if(data["extendedTextMessage"] !== undefined){
+            this.extendedTextMessage = data.extendedTextMessage
+        }
+        if(data["quotedMessage"]!== undefined) {
+            this.quotedMessage = data.quotedMessage
+        }
+        this.statusMessage = data.statusMessage
+        this.sendByApi = data.sendByApi
+      
+    }
+}
+
+class IncomingMessage {
+    constructor(data){ 
+        this.type = data.type
+        this.idMessage = data.idMessage
+        this.timestamp = data.timestamp
+        this.typeMessage = data.typeMessage
+        this.chatId = data.chatId
+        if(data["textMessage"] !== undefined){
+            this.textMessage = data.textMessage
+        }
+        if(data["extendedTextMessage"] !== undefined){
+            this.extendedTextMessage = data.extendedTextMessage
+        }
+        if(data["quotedMessage"]!== undefined) {
+            this.quotedMessage = data.quotedMessage
+        }
+        this.senderId = data.senderId
+        this.senderName = data.senderName
+        this.senderContactName = data.senderContactName
     }
 }
 
