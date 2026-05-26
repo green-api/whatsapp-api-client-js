@@ -1,11 +1,12 @@
 {
   "name": "@green-api/whatsapp-api-client",
-  "version": "0.3.39",
+  "version": "0.4.4",
   "description": "Library to integrate with WhatsApp API. For details have look at https://green-api.com",
   "license": "MIT",
   "main": "lib/bundle.js",
   "bugs": "https://github.com/green-api/whatsapp-api-client/issues",
   "homepage": "https://github.com/green-api/whatsapp-api-client",
+  "types": "./src/index.d.ts",
   "scripts": {
     "buildBrowser": "rollup --config rollup.config.browser.js --environment BUILD:production",
     "buildNode": "rollup --config rollup.config.node.js --environment BUILD:production",
@@ -23,7 +24,8 @@
   "files": [
     "lib",
     "bundle.js",
-    "whatsapp-api-client.min.js"
+    "whatsapp-api-client.min.js",
+    "src/index.d.ts"
   ],
   "keywords": [
     "whatsapp",
@@ -34,17 +36,18 @@
     "whatsapp-message-sender"
   ],
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-commonjs": "^29.0.2",
     "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-terser": "^0.4.4",
-    "dotenv": "16.4.5",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^1.0.0",
+    "dotenv": "17.4.2",
     "rollup-plugin-progress": "^1.1.2"
   },
   "dependencies": {
-    "axios": "^1.6.7",
+    "@green-api/whatsapp-api-client": "^0.4.4",
+    "axios": "^1.16.1",
     "fs": "0.0.1-security",
-    "mime": "^3.0.0",
-    "rollup": "^2.79.1"
+    "mime": "^4.1.0",
+    "rollup": "^4.60.4"
   }
 }

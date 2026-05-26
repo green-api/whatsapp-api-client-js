@@ -13,6 +13,11 @@ class CommonUtils {
             throw new Error(`${name} must be an integer!`)
     }
 
+    static validateBoolean(name, val){
+        if(Object.prototype.toString.call(val) !== '[object Boolean]')
+            throw new Error(`${name} must be an Boolean!`)
+    }
+
     static validateNumber(name, val) {
         if (!val || !Number(val))
             throw new Error(`${name} must be a number!`)
@@ -49,8 +54,9 @@ class CommonUtils {
     }
 
     static validateArray(name, val) {
-        if (!val || !Array.isArray(val))
-            throw new Error(`${name} must be an Array!`)
+        if (!val || !Array.isArray(val)){
+            throw new Error(`${name} must be an Array! `)
+        }
     }
 
     static validatePath(name, val) {

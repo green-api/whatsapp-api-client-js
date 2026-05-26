@@ -39,10 +39,12 @@ class GroupAPI {
 
         const method = 'addGroupParticipant';
         const postData = {
-            'groupId': groupId,
-            'participantChatId': participantChatId,
-            'participantPhone': participantPhone,
+            'groupId': groupId
         }
+
+        this.addChadIdParam(postData, participantChatId)
+        this.addPhoneParam(postData, participantPhone)
+
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data;
     }
@@ -74,10 +76,12 @@ class GroupAPI {
 
         const method = 'removeGroupParticipant';
         const postData = {
-            'groupId': groupId,
-            'participantChatId': participantChatId,
-            'participantPhone': participantPhone,
+            'groupId': groupId
         };
+
+        this.addChadIdParam(postData, participantChatId)
+        this.addPhoneParam(postData, participantPhone)
+        
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
         return response.data;
     }
@@ -181,6 +185,18 @@ class GroupAPI {
             headers: {"Content-Type": "image/jpeg"}
         })
         return response.data;
+    }
+
+    addChadIdParam(postData, participantChatId) {
+        if (participantChatId) {
+            postData.participantChatId = participantChatId
+        }
+    }
+
+    addPhoneParam(postData, participantNumber) {
+        if (participantNumber) {
+            postData.participantChatId = `${participantNumber}@c.us`
+        }
     }
 }
 
