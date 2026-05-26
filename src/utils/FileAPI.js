@@ -51,7 +51,10 @@ class FileAPI {
             method: "post",
             url: CommonUtils.generateMethodURL(this._restAPI.params, method),
             data: fileData,
-            headers: {"Content-Type": mime.getType(filePath)}
+            headers: {
+                "Content-Type": mime.getType(filePath),
+                "GA-Filename": filePath.split('/').pop().split('\\').pop()
+            }
         })
         return response.data;
     }
