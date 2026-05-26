@@ -1,7 +1,7 @@
-import whatsAppClient from '@green-api/whatsapp-api-client'
-const FormData = require('form-data')
-const fs = require('fs')
-const Path = require("path");
+import whatsAppClient from '@green-api/whatsapp-api-client';
+import FormData from 'form-data';
+import fs from 'fs';
+import Path from "path";
 
 // instance manager https://console.green-api.com
 const idInstance = ''; // your instance id

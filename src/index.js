@@ -1,8 +1,8 @@
 'use strict'
 import RestAPI from './RestAPI.js';
-import commonUtils from './utils/CommonUtils.js'
-import configuration from './utils/configuration.js'
-import WebhookCallBackAPI from './WebhooksCallbackAPI.js'
+import commonUtils from './utils/CommonUtils.js';
+import configuration from './utils/configuration.js';
+import WebhookCallBackAPI from './WebhooksCallbackAPI.js';
 
 function checkInitParams(params = {}) {
 
