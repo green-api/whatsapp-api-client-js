@@ -41,7 +41,7 @@ declare module "@green-api/whatsapp-api-client" {
 			| "authorized"
 			| "blocked"
 			| "starting"
-			| "yellowCard";
+			| "yellowCard"; // deprecated
 
 		type OutgoingMessageStatus =
 			| "sent"
@@ -50,7 +50,7 @@ declare module "@green-api/whatsapp-api-client" {
 			| "failed"
 			| "noAccount"
 			| "notInGroup"
-			| "yellowCard";
+			| "yellowCard"; // deprecated
 
 		interface InstanceData {
 			idInstance: number;
@@ -326,6 +326,14 @@ declare module "@green-api/whatsapp-api-client" {
 	}
 
 	class MessageApi {
+		/**
+		 * Sends a text message to a specific chat.
+		 * @param chatId - The ID of the target chat.
+		 * @param phoneNumber - @deprecated Use chatId instead.
+		 * @param message - The text content of the message.
+		 * @param quotedMessageId - ID of the message to reply to.
+		 * @param linkPreview - Generates a preview for links in the message if true.
+		 */
 		sendMessage(
 			chatId: Optional<string>,
 			phoneNumber: Optional<number>,
@@ -334,6 +342,15 @@ declare module "@green-api/whatsapp-api-client" {
 			linkPreview?: boolean,
 		): Promise<MessageResponse.Message>;
 
+		/**
+		 * Sends a poll to a specific chat.
+		 * @param chatId - The ID of the target chat.
+		 * @param phoneNumber - @deprecated Use chatId instead.
+		 * @param message - The poll question.
+		 * @param options - An array of available poll options.
+		 * @param multipleAnswers - Allows multiple option selection if true.
+		 * @param quotedMessageId - ID of the message to reply to.
+		 */
 		sendPoll(
 			chatId: Optional<string>,
 			phoneNumber: Optional<number>,
@@ -343,6 +360,15 @@ declare module "@green-api/whatsapp-api-client" {
 			quotedMessageId?: string,
 		): Promise<MessageResponse.Message>;
 
+		/**
+		 * Sends a location message to a specific chat.
+		 * @param chatId - The ID of the target chat.
+		 * @param phoneNumber - @deprecated Use chatId instead.
+		 * @param nameLocation - The name of the location.
+		 * @param address - The address of the location.
+		 * @param latitude - The latitude of the location.
+		 * @param longitude - The longitude of the location.
+		 */
 		sendLocation(
 			chatId: Optional<string>,
 			phoneNumber: Optional<number>,
@@ -352,6 +378,12 @@ declare module "@green-api/whatsapp-api-client" {
 			longitude: number,
 		): Promise<MessageResponse.Message>;
 
+		/**
+		 * Sends contact information.
+		 * @param chatId - The ID of the target chat.
+		 * @param phoneNumber - @deprecated Use chatId instead.
+		 * @param contact - Object containing contact details.
+		 */
 		sendContact(
 			chatId: Optional<string>,
 			phoneNumber: Optional<number>,
@@ -364,36 +396,77 @@ declare module "@green-api/whatsapp-api-client" {
 			},
 		): Promise<MessageResponse.Message>;
 
+		/**
+		 * Sends a URL link.
+		 * @deprecated This method is deprecated, use sendMessage with linkPreview parameter instead.
+		 * @param chatId - The ID of the target chat.
+		 * @param phoneNumber - @deprecated Use chatId instead.
+		 * @param urlLink - The URL to send.
+		 */
 		sendLink(
 			chatId: Optional<string>,
 			phoneNumber: Optional<number>,
 			urlLink: string,
 		): Promise<MessageResponse.Message>
 
+		/**
+		 * Marks a chat or specific message as read.
+		 * @param chatId - The ID of the target chat.
+		 * @param phoneNumber - @deprecated Use chatId instead.
+		 * @param idMessage - Optional ID of the specific message to mark as read.
+		 */
 		readChat(
 			chatId: Optional<string>,
 			phoneNumber: Optional<number>,
 			idMessage?: string,
 		): Promise<MessageResponse.ReadChat>;
 
+		/**
+		 * Retrieves the current queue of outbound messages.
+		 */
 		showMessagesQueue(): Promise<Queue.QueueMessage[]>;
 
+		/**
+		 * Clears all messages from the outbound queue.
+		 */
 		clearMessagesQueue(): Promise<MessageResponse.ClearMessagesQueue>;
 
+		/**
+		 * Retrieves the latest incoming messages from the journal.
+		 */
 		lastIncomingMessages(): Promise<Journal.IncomingJournalMessage[]>;
 
+		/**
+		 * Retrieves the latest outgoing messages from the journal.
+		 */
 		lastOutgoingMessages(): Promise<Journal.OutgoingJournalMessage[]>;
 
+		/**
+		 * Retrieves the message history for a specific chat.
+		 * @param chatId - The ID of the chat.
+		 * @param count - The number of messages to retrieve.
+		 */
 		getChatHistory(
 			chatId: string,
 			count?: number,
 		): Promise<Journal.JournalMessage[]>;
 
+		/**
+		 * Retrieves data of a specific message by its ID.
+		 * @param chatId - The ID of the chat.
+		 * @param idMessage - The ID of the message to retrieve.
+		 */
 		getMessage(
 			chatId: string,
 			idMessage: string,
 		): Promise<MessageResponse.GetMessage>;
 
+		/**
+		 * Forwards a list of messages from one chat to another.
+		 * @param chatId - The ID of the destination chat.
+		 * @param chatIdFrom - The ID of the source chat.
+		 * @param messages - An array of message IDs to forward.
+		 */
 		forwardMessages(
 			chatId: string,
 			chatIdFrom: string,
@@ -402,6 +475,14 @@ declare module "@green-api/whatsapp-api-client" {
 	}
 
 	class FileAPI {
+		/**
+		 * Sends a file from a specified URL to a chat.
+		 * @param chatId - The ID of the target chat.
+		 * @param phoneNumber - @deprecated Use chatId instead.
+		 * @param urlFile - The direct URL to the file.
+		 * @param fileName - The name to be assigned to the file.
+		 * @param caption - Optional text caption for the file.
+		 */
 		sendFileByUrl(
 			chatId: Optional<string>,
 			phoneNumber: Optional<number>,
@@ -410,14 +491,27 @@ declare module "@green-api/whatsapp-api-client" {
 			caption?: string,
 		): Promise<MessageResponse.Message>;
 
+		/**
+		 * Uploads a local file to the server and returns its URL.
+		 * @param filePath - The local system path to the file.
+		 */
 		uploadFile(
 			filePath: string,
 		): Promise<FileResponse.UrlFileResponse>;
 
+		/**
+		 * Sends a file using a multipart/form-data upload.
+		 * @param formData - The form data containing the file and message parameters.
+		 */
 		sendFileByUpload(
 			formData: FormData,
 		): Promise<FileResponse.SendFileByUpload>;
 
+		/**
+		 * Retrieves the download URL for a file from a specific message.
+		 * @param chatId - The ID of the chat.
+		 * @param idMessage - The ID of the message containing the file.
+		 */
 		downloadFile(
 			chatId: string,
 			idMessage: string,
@@ -425,96 +519,193 @@ declare module "@green-api/whatsapp-api-client" {
 	}
 
 	class InstanceAPI {
+		/**
+		 * Retrieves the QR code for instance authorization.
+		 */
 		qr(): Promise<InstanceResponse.Qr>;
 
+		/**
+		 * Logs out the current authorized account from the instance.
+		 */
 		logout(): Promise<InstanceResponse.Logout>;
 
+		/**
+		 * Reboots the instance system.
+		 */
 		reboot(): Promise<InstanceResponse.Reboot>;
 
+		/**
+		 * Retrieves the current authorization state of the instance.
+		 */
 		getStateInstance(): Promise<InstanceResponse.GetStateInstance>;
 
+		/**
+		 * Retrieves information about the connected device.
+		 */
 		getDeviceInfo(): Promise<InstanceResponse.GetDeviceInfo>;
 
+		/**
+		 * Checks if a specific phone number is registered on WhatsApp.
+		 * @param phoneNumber - The phone number to check.
+		 */
 		checkWhatsapp(
 			phoneNumber: number,
 		): Promise<InstanceResponse.CheckWhatsapp>;
 
+		/**
+		 * Generates an authorization pairing code for a phone number.
+		 * @param phoneNumber - The phone number to authorize.
+		 */
 		getAuthorizationCode(
 			phoneNumber: number,
 		): Promise<InstanceResponse.GetAuthorizationCode>;
 
+		/**
+		 * Retrieves the avatar URL for a specific chat or user.
+		 * @param chatId - The ID of the target chat.
+		 * @param phoneNumber - @deprecated Use chatId instead.
+		 */
 		getAvatar(
 			chatId: Optional<string>,
 			phoneNumber: Optional<number>,
 		): Promise<InstanceResponse.GetAvatar>;
 
+		/**
+		 * Moves a specific chat to the archive.
+		 * @param chatId - The ID of the chat to archive.
+		 */
 		archiveChat(
 			chatId: string,
 		): Promise<void>;
 
+		/**
+		 * Restores a specific chat from the archive.
+		 * @param chatId - The ID of the chat to unarchive.
+		 */
 		unarchiveChat(
 			chatId: string,
 		): Promise<void>
 
+		/**
+		 * Retrieves detailed information about a specific contact.
+		 * @param chatId - The ID of the contact's chat.
+		 */
 		getContactInfo(
 			chatId: string,
 		): Promise<InstanceResponse.GetContactInfo>;
 
+		/**
+		 * Retrieves the complete list of contacts.
+		 */
 		getContacts(): Promise<InstanceResponse.Contact[]>;
 
 	}
 
 	class SettingsAPI {
+		/**
+		 * Retrieves the current settings configuration of the instance.
+		 */
 		getSettings(): Promise<Settings.GetSettings>;
 
+		/**
+		 * Updates the instance settings.
+		 * @param settings - An object containing the settings to update.
+		 */
 		setSettings(
 			settings: Partial<Settings.Settings>,
 		): Promise<Settings.SetSettings>;
 	}
 
 	class GroupAPI {
+		/**
+		 * Creates a new group chat.
+		 * @param groupName - The name of the new group.
+		 * @param chatIds - An array of chat IDs to add as initial participants.
+		 */
 		createGroup(
 			groupName: string,
 			chatIds: Array<string>,
 		): Promise<GroupResponse.CreateGroup>;
 
+		/**
+		 * Adds a new participant to an existing group.
+		 * @param groupId - The ID of the group.
+		 * @param participantChatId - The chat ID of the user to add.
+		 * @param participantPhone - @deprecated Use participantChatId instead.
+		 */
 		addGroupParticipant(
 			groupId: string,
 			participantChatId: Optional<string>,
 			participantPhone: Optional<string>,
 		): Promise<GroupResponse.AddGroupParticipant>;
 
+		/**
+		 * Retrieves data and metadata for a specific group.
+		 * @param groupId - The ID of the group.
+		 */
 		getGroupData(
 			groupId: string,
 		): Promise<GroupResponse.GetGroupData>;
 
+		/**
+		 * Removes a participant from a group.
+		 * @param groupId - The ID of the group.
+		 * @param participantChatId - The chat ID of the user to remove.
+		 * @param participantPhone - @deprecated Use participantChatId instead.
+		 */
 		removeGroupParticipant(
 			groupId: string,
 			participantChatId: Optional<string>,
 			participantPhone: Optional<string>,
 		): Promise<GroupResponse.RemoveGroupParticipant>;
 
+		/**
+		 * Updates the name of an existing group.
+		 * @param groupId - The ID of the group.
+		 * @param groupName - The new name for the group.
+		 */
 		updateGroupName(
 			groupId: string,
 			groupName: string,
 		): Promise<GroupResponse.UpdateGroupName>;
 
+		/**
+		 * Promotes a group participant to administrator.
+		 * @param groupId - The ID of the group.
+		 * @param participantChatId - The chat ID of the user to promote.
+		 * @param participantPhone - @deprecated Use participantChatId instead.
+		 */
 		setGroupAdmin(
 			groupId: string,
 			participantChatId: Optional<string>,
 			participantPhone?: number,
 		): Promise<GroupResponse.SetGroupAdmin>;
 
+		/**
+		 * Demotes an administrator back to a regular participant.
+		 * @param groupId - The ID of the group.
+		 * @param participantChatId - The chat ID of the admin to demote.
+		 * @param participantPhone - @deprecated Use participantChatId instead.
+		 */
 		removeAdmin(
 			groupId: string,
 			participantChatId: Optional<string>,
 			participantPhone?: number,
 		): Promise<GroupResponse.RemoveAdmin>;
 
+		/**
+		 * Leaves a specific group chat.
+		 * @param groupId - The ID of the group to leave.
+		 */
 		leaveGroup(
 			groupId: string,
 		): Promise<GroupResponse.LeaveGroup>;
 
+		/**
+		 * Updates the profile picture of a group.
+		 * @param groupId - The ID of the group.
+		 * @param filePath - The local system path to the new image file.
+		 */
 		setGroupPicture(
 			groupId: string,
 			filePath: string,
