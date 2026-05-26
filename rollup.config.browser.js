@@ -27,4 +27,10 @@ export default {
     pluginJson(),
   ],
   external: ["axios", "fs", "mime"],
+  onwarn(warning, warn) {
+    if (warning.code === "MISSING_NODE_BUILTINS" && warning.message.includes('"fs"')) {
+      return;
+    }
+    warn(warning);
+  }
 };
