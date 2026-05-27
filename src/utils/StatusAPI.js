@@ -33,7 +33,7 @@ class StatusAPI{
         }
         if (participants !== null) {
             CommonUtils.validateArray('participants', participants)
-            for (const number in participants){
+            for (const number of participants){
                 CommonUtils.validateChatIdPhoneNumber(number);
             }
             postData['participants'] = participants
@@ -66,7 +66,7 @@ class StatusAPI{
         }
         if (participants !== null) {
             CommonUtils.validateArray('participants', participants)
-            for (const number in participants){
+            for (const number of participants){
                 CommonUtils.validateChatIdPhoneNumber(number);
             }
             postData['participants'] = participants
@@ -99,7 +99,7 @@ class StatusAPI{
         }
         if (participants != null) {
             CommonUtils.validateArray('participants', participants)
-            for (const number in participants){
+            for (const number of participants){
                 CommonUtils.validateChatIdPhoneNumber(number);
             }
             postData['participants'] = participants
