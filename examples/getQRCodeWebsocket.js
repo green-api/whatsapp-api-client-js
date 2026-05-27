@@ -1,4 +1,4 @@
-const WebSocket = require('ws');
+import WebSocket from 'ws';
 
 // instance manager https://console.green-api.com
 const idInstance = ''; // your instance id

@@ -18,6 +18,7 @@ declare module "@green-api/whatsapp-api-client" {
 		settings: SettingsAPI;
 		group: GroupAPI;
 		webhookService: WebhookServiceAPI;
+		status: StatusAPI;
 	}
 
 	namespace Common {
@@ -1040,5 +1041,44 @@ declare module "@green-api/whatsapp-api-client" {
 		onReceivingMessageLocation(callback: (data: WebhookResponse.MessageWebhook & {
 			messageData: { typeMessage: "locationMessage" }
 		}) => void): void;
+	}
+
+	class StatusAPI {
+		sendTextStatus(
+			message: string,
+			backgroundColor?: string,
+			font?: string,
+			participants?: string[]
+		): Promise<any>;
+
+		sendVoiceStatus(
+			urlFile: string,
+			fileName: string,
+			backgroundColor?: string,
+			participants?: string[]
+		): Promise<any>;
+
+		sendMediaStatus(
+			urlFile: string,
+			fileName: string,
+			caption?: string,
+			participants?: string[]
+		): Promise<any>;
+
+		getOutgoingStatuses(
+			minutes?: number
+		): Promise<any>;
+
+		getIncomingStatuses(
+			minutes?: number
+		): Promise<any>;
+
+		getStatusStatistic(
+			idMessage: string
+		): Promise<any>;
+
+		deleteStatus(
+			idMessage: string
+		): Promise<any>;
 	}
 }

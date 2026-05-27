@@ -1,5 +1,9 @@
-const whatsAppClient = require("@green-api/whatsapp-api-client");
-const express = require("express");
+import whatsAppClient from "@green-api/whatsapp-api-client";
+import express from "express";
+
+// instance manager https://console.green-api.com
+const idInstance = ""; // your instance id
+const apiTokenInstance = ""; // your instance api token
 
 // Receive webhook
 (async () => {
