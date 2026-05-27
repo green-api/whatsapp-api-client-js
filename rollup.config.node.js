@@ -1,6 +1,6 @@
 import progress from "rollup-plugin-progress";
 
-module.exports = {
+export default {
   input: "src/index.js",
   output: [
     {

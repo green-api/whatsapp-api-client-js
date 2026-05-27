@@ -48,7 +48,7 @@ npm i @green-api/whatsapp-api-client
 Используя классический javascript
 
 ```
-const whatsAppClient = require("@green-api/whatsapp-api-client");
+import whatsAppClient from "@green-api/whatsapp-api-client");
 ```
 
 Используя ES6 javascript
@@ -84,7 +84,7 @@ import * as whatsAppClient from "@green-api/whatsapp-api-client";
 Используя common js
 
 ``` js
-const whatsAppClient = require('@green-api/whatsapp-api-client')
+import whatsAppClient from '@green-api/whatsapp-api-client'
 
 const restAPI = whatsAppClient.restAPI(({
     idInstance: YOUR_ID_INSTANCE,

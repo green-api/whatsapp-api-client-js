@@ -1,4 +1,4 @@
-const whatsAppClient = require('@green-api/whatsapp-api-client')
+import whatsAppClient from '@green-api/whatsapp-api-client';
 
 // instance manager https://console.green-api.com
 const idInstance = ''; // your instance id

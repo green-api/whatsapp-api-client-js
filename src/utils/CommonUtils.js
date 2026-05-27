@@ -36,8 +36,12 @@ class CommonUtils {
         }
     }
 
-      static generateMethodURLWithQuery(params, method, queryParams) {
+    static generateMethodURLWithQuery(params, method, queryParams) {
+        if (method === "sendFileByUpload" || method === "uploadFile") {
+            return `${params.media}/waInstance${params.idInstance}/${method}/${params.apiTokenInstance}${queryParams}`
+        } else {
             return `${params.host}/waInstance${params.idInstance}/${method}/${params.apiTokenInstance}${queryParams}`
+        }
     }
 
     static validateChatIdPhoneNumber(chatId, phoneNumber) {
