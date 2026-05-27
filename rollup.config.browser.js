@@ -14,7 +14,6 @@ export default {
       name: "whatsAppClient",
       plugins: [terser()],
       globals: {
-        axios: "axios",
         fs: "fs",
         mime: "mime"
       },
@@ -26,7 +25,7 @@ export default {
     commonjs({ include: "node_modules/**" }),
     pluginJson(),
   ],
-  external: ["axios", "fs", "mime"],
+  external: ["fs", "mime"],
   onwarn(warning, warn) {
     if (warning.code === "MISSING_NODE_BUILTINS" && warning.message.includes('"fs"')) {
       return;

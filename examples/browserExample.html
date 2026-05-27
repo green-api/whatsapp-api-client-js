@@ -52,7 +52,7 @@
 
     <button id="SendWhatsAppBtn" class="button buttonGreen">Send Message</button>
     <button id="ReceiveWhatsAppBtn" class="button buttonGreen">Receive message</button>
-    <script type="text/javascript" src="https://unpkg.com/@green-api/whatsapp-api-client/lib/whatsapp-api-client.min.js"></script>
+    <script type="text/javascript" src="../lib/whatsapp-api-client.min.js"></script>
     <script>
         document.getElementById("SendWhatsAppBtn").addEventListener("click", function () {
             try {
@@ -84,7 +84,7 @@
                 restAPI.webhookService.receiveNotification()
                 .then((data) => {
                     console.log(data);
-                    if (data.receiptId) {
+                    if (data && data.receiptId) {
                         restAPI.webhookService.deleteNotification(data.receiptId)
                         .then(() => {
                             document.getElementById("resultText").innerHTML = "Message was received successfully. Message text: " + JSON.stringify(data.body);
@@ -92,6 +92,8 @@
                             console.error(reason);
                             document.getElementById("resultText").innerHTML = "Message was not confirmed. Reason: " + reason + ". See logs for details";
                         })
+                    } else {
+                        document.getElementById("resultText").innerHTML = "No notifications in the queue.";
                     }
                 }).catch((reason) =>{
                     console.error(reason);
