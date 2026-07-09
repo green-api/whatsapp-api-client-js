@@ -18,7 +18,18 @@ class MessageAPI {
      * @param {boolean} linkPreview - allow preview
      * @param {String} quotedMessageId - id of message
      */
-    async sendMessage(chatId, phoneNumber, message, quotedMessageId = null, linkPreview = null) {
+    /** Send text message to chat or phone. Method call adds message to sending queue
+     *
+     * @param {String} chatId - chat id using Whatsapp format (17633123456@c.us - for private messages).
+     * Mandatory if phoneNumber is empty
+     * @param {Number} phoneNumber - receiver phone number using international format without + sign.
+     * Mandatory if chatId is empty
+     * @param {String} message - text message
+     * @param {String} quotedMessageId - id of message to reply to
+     * @param {boolean} linkPreview - allow preview
+     * @param {Object} options - additional options: { typePreview, customPreview, typingTime }
+     */
+    async sendMessage(chatId, phoneNumber, message, quotedMessageId = null, linkPreview = null, options = null) {
         CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
         CommonUtils.validateString('message', message);
 
@@ -35,6 +46,15 @@ class MessageAPI {
         if (linkPreview !== null) {
             CommonUtils.validateBoolean('linkPreview', linkPreview)
             postData['linkPreview'] = linkPreview
+        }
+        if (options !== null) {
+            CommonUtils.validateObject('options', options);
+            if (options.typePreview !== undefined) postData['typePreview'] = options.typePreview;
+            if (options.customPreview !== undefined) postData['customPreview'] = options.customPreview;
+            if (options.typingTime !== undefined) {
+                CommonUtils.validateInteger('typingTime', options.typingTime);
+                postData['typingTime'] = options.typingTime;
+            }
         }
 
         this.addChadIdParam(postData, chatId)
@@ -389,6 +409,76 @@ class MessageAPI {
             'chatId': chatId,
             'chatIdFrom': chatIdFrom,
             'messages': messages,
+        }
+
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
+        return response.data
+    }
+
+    /** Send interactive buttons message to chat (Beta)
+     *
+     * @param {Object} params
+     * @param {String} params.chatId - chat id
+     * @param {String} params.body - message text (up to 20000 chars)
+     * @param {Array}  params.buttons - array of button objects (max 3), each with buttonId, buttonText, type (copy|call|url), and type-specific fields
+     * @param {String} params.header Optional
+     * @param {String} params.footer Optional
+     */
+    async sendInteractiveButtons({ chatId, body, buttons, header = null, footer = null }) {
+        CommonUtils.validateString('chatId', chatId);
+        CommonUtils.validateString('body', body);
+        CommonUtils.validateArray('buttons', buttons);
+
+        const method = 'sendInteractiveButtons';
+
+        const postData = {
+            'chatId': chatId,
+            'body': body,
+            'buttons': buttons,
+        }
+
+        if (header !== null) {
+            CommonUtils.validateString('header', header);
+            postData['header'] = header;
+        }
+        if (footer !== null) {
+            CommonUtils.validateString('footer', footer);
+            postData['footer'] = footer;
+        }
+
+        const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);
+        return response.data
+    }
+
+    /** Send interactive buttons reply message to chat (Beta)
+     *
+     * @param {Object} params
+     * @param {String} params.chatId - chat id
+     * @param {String} params.body - message text
+     * @param {Array}  params.buttons - array of { buttonId, buttonText } objects (max 3)
+     * @param {String} params.header Optional
+     * @param {String} params.footer Optional
+     */
+    async sendInteractiveButtonsReply({ chatId, body, buttons, header = null, footer = null }) {
+        CommonUtils.validateString('chatId', chatId);
+        CommonUtils.validateString('body', body);
+        CommonUtils.validateArray('buttons', buttons);
+
+        const method = 'sendInteractiveButtonsReply';
+
+        const postData = {
+            'chatId': chatId,
+            'body': body,
+            'buttons': buttons,
+        }
+
+        if (header !== null) {
+            CommonUtils.validateString('header', header);
+            postData['header'] = header;
+        }
+        if (footer !== null) {
+            CommonUtils.validateString('footer', footer);
+            postData['footer'] = footer;
         }
 
         const response = await axios.post(CommonUtils.generateMethodURL(this._restAPI.params, method), postData);

@@ -17,8 +17,11 @@ class FileAPI {
      * @param {String} urlFile
      * @param {String} fileName
      * @param {String} caption Optional
+     * @param {String} quotedMessageId Optional - id of message to reply to
+     * @param {Number} typingTime Optional - typing indicator duration in ms (1000–20000)
+     * @param {String} typingType Optional - use "recording" for audio recording indicator
      */
-    async sendFileByUrl(chatId, phoneNumber, urlFile, fileName, caption = '') {
+    async sendFileByUrl(chatId, phoneNumber, urlFile, fileName, caption = '', quotedMessageId = null, typingTime = null, typingType = null) {
         CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
         CommonUtils.validateString('urlFile', urlFile);
         CommonUtils.validateString('filename', fileName);
@@ -28,6 +31,19 @@ class FileAPI {
             'urlFile': urlFile,
             'fileName': fileName,
             'caption': caption,
+        }
+
+        if (quotedMessageId !== null) {
+            CommonUtils.validateString('quotedMessageId', quotedMessageId);
+            postData['quotedMessageId'] = quotedMessageId;
+        }
+        if (typingTime !== null) {
+            CommonUtils.validateInteger('typingTime', typingTime);
+            postData['typingTime'] = typingTime;
+        }
+        if (typingType !== null) {
+            CommonUtils.validateString('typingType', typingType);
+            postData['typingType'] = typingType;
         }
 
         this.addChadIdParam(postData, chatId)
