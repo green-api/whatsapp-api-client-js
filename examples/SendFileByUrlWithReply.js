@@ -10,16 +10,14 @@ const imageUrl = 'https://avatars.mds.yandex.net/get-pdb/477388/77f64197-87d2-42
     // First send a message to get its id to quote
     const original = await restAPI.message.sendMessage(chatId, null, 'Here comes a file!');
 
-    // Send file as a reply with audio recording indicator (2 seconds)
+    // Send file as a reply with typing indicator (2 seconds)
     const response = await restAPI.file.sendFileByUrl(
         chatId,
         null,
         imageUrl,
         'horse.png',
         'Look at this',
-        original.idMessage,
-        2000,
-        'recording',
+        { quotedMessageId: original.idMessage, typingTime: 2000 },
     );
     console.log('Sent:', response.idMessage);
 })();

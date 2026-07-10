@@ -332,6 +332,15 @@ declare module "@green-api/whatsapp-api-client" {
 		type JournalMessage = IncomingJournalMessage | OutgoingJournalMessage;
 	}
 
+	interface SendFileByUrlOptions {
+		/** ID of the message to reply to */
+		quotedMessageId?: string;
+		/** Duration to show typing indicator before sending, in ms (1000–20000) */
+		typingTime?: number;
+		/** Use "recording" to show audio recording indicator; omit for standard text indicator */
+		typingType?: "recording";
+	}
+
 	interface SendMessageOptions {
 		/** Controls preview size: "large" or "small" */
 		typePreview?: "large" | "small";
@@ -544,9 +553,7 @@ declare module "@green-api/whatsapp-api-client" {
 		 * @param urlFile - The direct URL to the file.
 		 * @param fileName - The name to be assigned to the file.
 		 * @param caption - Optional text caption for the file.
-		 * @param quotedMessageId - ID of the message to reply to.
-		 * @param typingTime - Duration to show typing indicator in ms (1000–20000).
-		 * @param typingType - Use "recording" to show audio recording indicator.
+		 * @param options - Optional extra parameters.
 		 */
 		sendFileByUrl(
 			chatId: Optional<string>,
@@ -554,9 +561,7 @@ declare module "@green-api/whatsapp-api-client" {
 			urlFile: string,
 			fileName: string,
 			caption?: string,
-			quotedMessageId?: string,
-			typingTime?: number,
-			typingType?: "recording",
+			options?: SendFileByUrlOptions,
 		): Promise<MessageResponse.Message>;
 
 		/**
