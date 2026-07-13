@@ -1,4 +1,4 @@
-'use strict'
+﻿'use strict'
 
 import MessageAPI from './utils/MessageAPI.js'
 import FileAPI from './utils/FileAPI.js'
@@ -8,6 +8,7 @@ import GroupAPI from './utils/GroupAPI.js';
 import WebhookServiceAPI from './utils/WebhookServiceAPI.js';
 import * as fs from 'fs'
 import StatusAPI from './utils/StatusAPI.js';
+import ContactsAPI from './utils/ContactsAPI.js';
 
 class RestAPI {
 
@@ -27,12 +28,12 @@ class RestAPI {
             fs.readFileSync(params.credentialsPath)
                 .toString('utf8')
                 .split('\n')
-                .map(item => item.split(" ").join("")) // replaceAll equivalent
+                .map(item => item.split(" ").join(""))
                 .forEach(item => {
                     if (item.startsWith('API_TOKEN_INSTANCE=')) {
-                        this.params.apiTokenInstance = item.replace('API_TOKEN_INSTANCE=', '').trim()
+                        this.params.apiTokenInstance = item.replace('API_TOKEN_INSTANCE=', '').trim().replace(/^["']|["']$/g, '')
                     } else if (item.startsWith('ID_INSTANCE=')) {
-                        this.params.idInstance = item.replace('ID_INSTANCE=', '').trim()
+                        this.params.idInstance = item.replace('ID_INSTANCE=', '').trim().replace(/^["']|["']$/g, '')
                     }
                 })
         }
@@ -44,6 +45,7 @@ class RestAPI {
         this.group = new GroupAPI(this);
         this.webhookService = new WebhookServiceAPI(this);
         this.status = new StatusAPI(this);
+        this.contacts = new ContactsAPI(this);
     }
 }
 

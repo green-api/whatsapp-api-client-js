@@ -19,6 +19,7 @@ declare module "@green-api/whatsapp-api-client" {
 		group: GroupAPI;
 		webhookService: WebhookServiceAPI;
 		status: StatusAPI;
+		contacts: ContactsAPI;
 	}
 
 	namespace Common {
@@ -42,6 +43,7 @@ declare module "@green-api/whatsapp-api-client" {
 			| "authorized"
 			| "blocked"
 			| "starting"
+			| "suspended"
 			| "yellowCard"; // deprecated
 
 		type OutgoingMessageStatus =
@@ -226,6 +228,10 @@ declare module "@green-api/whatsapp-api-client" {
 			chatId: string;
 			isForwarded: boolean;
 			forwardingScore: number;
+			isEdited?: boolean;
+			editedMessageId?: string;
+			isDeleted?: boolean;
+			deletedMessageId?: string;
 		}
 
 		interface IncomingFields {
@@ -326,6 +332,44 @@ declare module "@green-api/whatsapp-api-client" {
 		type JournalMessage = IncomingJournalMessage | OutgoingJournalMessage;
 	}
 
+	interface SendFileByUrlOptions {
+		/** ID of the message to reply to */
+		quotedMessageId?: string;
+		/** Duration to show typing indicator before sending, in ms (1000–20000) */
+		typingTime?: number;
+		/** Use "recording" to show audio recording indicator; omit for standard text indicator */
+		typingType?: "recording";
+	}
+
+	interface SendMessageOptions {
+		/** Controls preview size: "large" or "small" */
+		typePreview?: "large" | "small";
+		/** Custom link preview configuration */
+		customPreview?: {
+			title: string;
+			description?: string;
+			link?: string;
+			urlFile?: string;
+			jpegThumbnail?: string;
+		};
+		/** Duration to show typing indicator before sending, in ms (1000–20000) */
+		typingTime?: number;
+	}
+
+	interface InteractiveButton {
+		buttonId: string;
+		buttonText: string;
+		type: "copy" | "call" | "url";
+		copyCode?: string;
+		phoneNumber?: string;
+		url?: string;
+	}
+
+	interface SimpleButton {
+		buttonId: string;
+		buttonText: string;
+	}
+
 	class MessageApi {
 		/**
 		 * Sends a text message to a specific chat.
@@ -334,6 +378,7 @@ declare module "@green-api/whatsapp-api-client" {
 		 * @param message - The text content of the message.
 		 * @param quotedMessageId - ID of the message to reply to.
 		 * @param linkPreview - Generates a preview for links in the message if true.
+		 * @param options - Additional options: typePreview, customPreview, typingTime.
 		 */
 		sendMessage(
 			chatId: Optional<string>,
@@ -341,6 +386,7 @@ declare module "@green-api/whatsapp-api-client" {
 			message: string,
 			quotedMessageId?: string,
 			linkPreview?: boolean,
+			options?: SendMessageOptions,
 		): Promise<MessageResponse.Message>;
 
 		/**
@@ -473,6 +519,30 @@ declare module "@green-api/whatsapp-api-client" {
 			chatIdFrom: string,
 			messages: Array<string>,
 		): Promise<MessageResponse.ForwardMessages>;
+
+		/**
+		 * Sends an interactive buttons message (Beta).
+		 * Supports up to 3 buttons of types: copy, call, url.
+		 */
+		sendInteractiveButtons(params: {
+			chatId: string;
+			body: string;
+			buttons: InteractiveButton[];
+			header?: string;
+			footer?: string;
+		}): Promise<MessageResponse.Message>;
+
+		/**
+		 * Sends a reply-style interactive buttons message (Beta).
+		 * Supports up to 3 simple reply buttons.
+		 */
+		sendInteractiveButtonsReply(params: {
+			chatId: string;
+			body: string;
+			buttons: SimpleButton[];
+			header?: string;
+			footer?: string;
+		}): Promise<MessageResponse.Message>;
 	}
 
 	class FileAPI {
@@ -483,6 +553,7 @@ declare module "@green-api/whatsapp-api-client" {
 		 * @param urlFile - The direct URL to the file.
 		 * @param fileName - The name to be assigned to the file.
 		 * @param caption - Optional text caption for the file.
+		 * @param options - Optional extra parameters.
 		 */
 		sendFileByUrl(
 			chatId: Optional<string>,
@@ -490,6 +561,7 @@ declare module "@green-api/whatsapp-api-client" {
 			urlFile: string,
 			fileName: string,
 			caption?: string,
+			options?: SendFileByUrlOptions,
 		): Promise<MessageResponse.Message>;
 
 		/**
@@ -600,6 +672,79 @@ declare module "@green-api/whatsapp-api-client" {
 		 */
 		getContacts(): Promise<InstanceResponse.Contact[]>;
 
+		/**
+		 * Retrieves the list of chats, sorted by activity.
+		 * @param count - Optional number of chats to retrieve.
+		 */
+		getChats(count?: number): Promise<InstanceResponse.Chat[]>;
+
+		/**
+		 * Sends a typing or recording indicator to a chat.
+		 * @param chatId - The ID of the target chat.
+		 * @param typingTime - Duration in ms (1000–20000).
+		 * @param typingType - Use "recording" for audio recording indicator.
+		 */
+		sendTyping(
+			chatId: string,
+			typingTime?: number,
+			typingType?: "recording",
+		): Promise<void>;
+
+		/**
+		 * Deletes a message from a chat.
+		 * @param chatId - The ID of the chat.
+		 * @param idMessage - The ID of the message to delete.
+		 * @param onlySenderDelete - If true, deletes only for sender.
+		 */
+		deleteMessage(
+			chatId: string,
+			idMessage: string,
+			onlySenderDelete?: boolean,
+		): Promise<void>;
+
+		/**
+		 * Edits a previously sent text message (within 15 minutes of sending).
+		 * @param chatId - The ID of the chat.
+		 * @param idMessage - The ID of the message to edit.
+		 * @param message - The new message text.
+		 */
+		editMessage(
+			chatId: string,
+			idMessage: string,
+			message: string,
+		): Promise<MessageResponse.Message>;
+
+		/**
+		 * Configures disappearing messages for a chat.
+		 * @param chatId - The ID of the chat.
+		 * @param ephemeralExpiration - Lifetime in seconds: 0 (off), 86400 (1d), 604800 (7d), 7776000 (90d).
+		 */
+		setDisappearingChat(
+			chatId: string,
+			ephemeralExpiration: 0 | 86400 | 604800 | 7776000,
+		): Promise<InstanceResponse.SetDisappearingChat>;
+
+		/**
+		 * Sets a profile picture for the WhatsApp account.
+		 * @param filePath - Path to a JPG image file.
+		 */
+		setProfilePicture(filePath: string): Promise<InstanceResponse.SetProfilePicture>;
+
+		/**
+		 * Generates a new API token for the instance (Beta).
+		 */
+		updateApiToken(): Promise<InstanceResponse.UpdateApiToken>;
+
+		/**
+		 * Returns WhatsApp account information for the authorized instance.
+		 */
+		getWaSettings(): Promise<InstanceResponse.GetWaSettings>;
+
+		/**
+		 * Returns the authorization state history of the instance.
+		 * @param count - Number of records to retrieve (default 100).
+		 */
+		getStateInstanceHistory(count?: number): Promise<InstanceResponse.StateInstanceHistoryItem[]>;
 	}
 
 	class SettingsAPI {
@@ -711,6 +856,42 @@ declare module "@green-api/whatsapp-api-client" {
 			groupId: string,
 			filePath: string,
 		): Promise<GroupResponse.SetGroupPicture>;
+	}
+
+	class ContactsAPI {
+		/**
+		 * Adds a new contact.
+		 * @param chatId - Phone number in chat ID format (79876543210@c.us).
+		 * @param firstName - Contact first name.
+		 * @param lastName - Optional last name.
+		 * @param saveInAddressbook - Whether to save to device address book (default true).
+		 */
+		addContact(
+			chatId: string,
+			firstName: string,
+			lastName?: string,
+			saveInAddressbook?: boolean,
+		): Promise<ContactResponse.AddContact>;
+
+		/**
+		 * Edits an existing contact.
+		 * @param chatId - Phone number in chat ID format (79876543210@c.us).
+		 * @param firstName - New first name.
+		 * @param lastName - Optional new last name.
+		 * @param saveInAddressbook - Whether to save to device address book (default true).
+		 */
+		editContact(
+			chatId: string,
+			firstName: string,
+			lastName?: string,
+			saveInAddressbook?: boolean,
+		): Promise<ContactResponse.EditContact>;
+
+		/**
+		 * Deletes a contact.
+		 * @param chatId - Phone number in chat ID format (79876543210@c.us).
+		 */
+		deleteContact(chatId: string): Promise<ContactResponse.DeleteContact>;
 	}
 
 	namespace MessageResponse {
@@ -825,6 +1006,66 @@ declare module "@green-api/whatsapp-api-client" {
 			type: "user" | "group";
 			contactName: string;
 		}
+
+		interface Chat {
+			archive: boolean;
+			id: string;
+			name: string;
+			type: "user" | "group";
+			ephemeralExpiration: number;
+			ephemeralSettingTimestamp: number;
+		}
+
+		interface SetDisappearingChat {
+			chatId: string;
+			disappearingMessagesInChat: boolean;
+			ephemeralExpiration: number;
+		}
+
+		interface SetProfilePicture {
+			setProfilePicture: boolean;
+			urlAvatar: string;
+			reason: string | null;
+		}
+
+		interface UpdateApiToken {
+			apiTokenInstance: string;
+		}
+
+		interface GetWaSettings {
+			avatar: string;
+			base64Avatar: string;
+			chatId: string;
+			phone: number;
+			historySyncProgress: number;
+			stateInstance: Common.InstanceState;
+			suspendedUntil?: number;
+			deviceId: string;
+			logoutProcess: boolean;
+		}
+
+		interface StateInstanceHistoryItem {
+			stateInstance: "notAuthorized" | "authorized" | "blocked";
+			timestamp: number;
+			phoneNumber: number;
+		}
+	}
+
+	namespace ContactResponse {
+		interface AddContact {
+			addContact?: boolean;
+			message?: string;
+		}
+
+		interface EditContact {
+			editContact?: boolean;
+			message?: string;
+		}
+
+		interface DeleteContact {
+			deleteContact?: boolean;
+			message?: string;
+		}
 	}
 
 	namespace Settings {
@@ -852,6 +1093,9 @@ declare module "@green-api/whatsapp-api-client" {
 			incomingCallWebhook: YesOrNo;
 			editedMessageWebhook: YesOrNo;
 			deletedMessageWebhook: YesOrNo;
+			autoTyping?: number;
+			linkPreview?: YesOrNo;
+			enableLidMode?: YesOrNo;
 		}
 
 		type GetSettings = Settings;

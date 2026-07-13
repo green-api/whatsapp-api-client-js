@@ -17,8 +17,9 @@ class FileAPI {
      * @param {String} urlFile
      * @param {String} fileName
      * @param {String} caption Optional
+     * @param {Object} options Optional - { quotedMessageId, typingTime, typingType }
      */
-    async sendFileByUrl(chatId, phoneNumber, urlFile, fileName, caption = '') {
+    async sendFileByUrl(chatId, phoneNumber, urlFile, fileName, caption = '', options = null) {
         CommonUtils.validateChatIdPhoneNumber(chatId, phoneNumber);
         CommonUtils.validateString('urlFile', urlFile);
         CommonUtils.validateString('filename', fileName);
@@ -28,6 +29,22 @@ class FileAPI {
             'urlFile': urlFile,
             'fileName': fileName,
             'caption': caption,
+        }
+
+        if (options !== null) {
+            const { quotedMessageId = null, typingTime = null, typingType = null } = options;
+            if (quotedMessageId !== null) {
+                CommonUtils.validateString('quotedMessageId', quotedMessageId);
+                postData['quotedMessageId'] = quotedMessageId;
+            }
+            if (typingTime !== null) {
+                CommonUtils.validateInteger('typingTime', typingTime);
+                postData['typingTime'] = typingTime;
+            }
+            if (typingType !== null) {
+                CommonUtils.validateString('typingType', typingType);
+                postData['typingType'] = typingType;
+            }
         }
 
         this.addChadIdParam(postData, chatId)
