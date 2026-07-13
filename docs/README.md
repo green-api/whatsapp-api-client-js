@@ -1,5 +1,11 @@
 # whatsapp-api-client library for javascript
 
+> [!WARNING]
+Эта библиотека устарела.
+Пожалуйста, используйте [версию v2](https://github.com/green-api/whatsapp-api-client-js-v2).
+
+---
+
 ![](https://img.shields.io/badge/license-CC%20BY--ND%204.0-green)
 ![](https://img.shields.io/npm/v/%40green-api%2Fwhatsapp-api-client)
 ![](https://img.shields.io/github/actions/workflow/status/green-api/whatsapp-api-client-js/build.yml)

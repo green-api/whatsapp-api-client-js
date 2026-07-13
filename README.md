@@ -1,5 +1,12 @@
 # whatsapp-api-client library for javascript
 
+> [!WARNING]
+This package is deprecated.
+Please use [v2 version](https://github.com/green-api/whatsapp-api-client-js-v2) instead.
+
+---
+
+
 ![](https://img.shields.io/badge/license-CC%20BY--ND%204.0-green)
 ![](https://img.shields.io/npm/v/%40green-api%2Fwhatsapp-api-client)
 ![](https://img.shields.io/github/actions/workflow/status/green-api/whatsapp-api-client-js/build.yml)
